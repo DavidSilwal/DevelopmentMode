@@ -1,0 +1,71 @@
+
+@model List<Identity.IdentityUser>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+
+<form asp-controller="Users" asp-action="Search" method="get">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+
+
+<p><a asp-action="Create">Create New</a></p>
+<p>
+    <span>Total Users: @Model.Count</span>
+</p>
+<br/>
+
+<table class="table">
+    <tr>
+        <th>
+            <label>UserName</label>
+        </th>
+        <th>
+            <label>Email</label>
+        </th>
+        <th>
+            <label>Roles</label>
+        </th>
+        <th>
+            <label>User Type</label>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Roles):*@
+                @*@foreach (var role in item.Roles)
+                {
+                    @Html.DisplayFor(modelItem => role.Name)
+
+                }*@
+
+            </td>
+  
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
