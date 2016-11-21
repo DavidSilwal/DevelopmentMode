@@ -84,6 +84,17 @@ namespace WebApplication.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
+                    UserActivity activity = new UserActivity
+                    {
+                        Browser = Request.Headers["User-Agent"].ToString(),
+                        IpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString(),
+                        TimeStamp = DateTime.Now
+                    };
+
+                    _context.UserActivityCollection.InsertOne(activity);
+
+                  
+
                     _logger.LogInformation(1, "User logged in.");
                     return RedirectToLocal(returnUrl);
                 }

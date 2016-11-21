@@ -230,12 +230,15 @@ C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controller
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\DashboardController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\HomeController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\ManageController.cs
+C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\MessageTemplateController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\ProfileController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\RolesController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\UsersController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\ApplicationDbContext.cs
+C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\MessageTemplate.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\Role.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\User.cs
+C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\UserActivity.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\PaginationSet.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\RoleViewModel.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\SettingViewModel.cs

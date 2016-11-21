@@ -164,12 +164,13 @@ namespace WebApplication.Controllers
                 var parsedContentDisposition = ContentDispositionHeaderValue.Parse(image.ContentDisposition);
                 string FilePath = parsedContentDisposition.FileName.Trim('"');
                 string FileExtension = Path.GetExtension(FilePath);
-                var uploadDir = _environment.WebRootPath + $@"\Images\{image.FileName}\";
+                            
+                var uploadDir = _environment.WebRootPath + $@"\\Images";
                 if (!Directory.Exists(uploadDir))
                 {
                     Directory.CreateDirectory(uploadDir);
                 }
-                var imageUrl = uploadDir + image.FileName + FileExtension;
+                var imageUrl = uploadDir + image.FileName; //+ FileExtension;
                 FileStream fs = System.IO.File.Create(imageUrl);
                 image.CopyTo(fs);
             }
