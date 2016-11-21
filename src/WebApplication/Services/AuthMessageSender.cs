@@ -26,7 +26,7 @@ namespace WebApplication.Services
             {
                 client.Connect("smtp.live.com", 587, false);
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
-                client.Authenticate("de.davidsilwal@hotmail.com", "david123456");
+                client.Authenticate("example@hotmail.com", "password");
                 client.Send(message);
                 client.Disconnect(true);
             }
