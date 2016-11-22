@@ -1129,25 +1129,13 @@ namespace Identity
             return result.DeletedCount > 0;
         }
 
-        //public async void UpdateUser(string id, string body)
-        //{
-        //    var filter = Builders<TUser>.Filter.Eq(s => s.Id, id);
-        //    var update = Builders<TUser>.Update.Set(s => s.Body, body)
-        //                        .CurrentDate(s => s.UpdatedOn)
-        //                        ;
-        //    var result = await DatabaseContext.UserCollection.UpdateOneAsync(filter, update);
-        //}
 
         public void RemoveAllNotes()
         {
             DatabaseContext.UserCollection.DeleteManyAsync(new BsonDocument());
         }
 
-
-
         
-
-
         public string GetFirstName(TUser user)
         {
             if (user == null)
@@ -1226,8 +1214,79 @@ namespace Identity
             await Task.FromResult(0);
         }
 
+        //added
 
-          public virtual List<TUser> SearchByUserName(string normalizedUserName, CancellationToken cancellationToken = default(CancellationToken))
+        public virtual async Task SetLastNameAsync(TUser user, string lName, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
+
+            user.LastName = lName;
+
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
+
+        public virtual async Task SetBirthCountryAsync(TUser user, string birthCountry, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
+
+            user.BirthCountry = birthCountry;
+
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
+
+        public virtual async Task SetCurrentCountryAsync(TUser user, string currentCountry, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
+
+            user.CurrentCountry = currentCountry;
+
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
+
+        public virtual async Task SetPhoneNumAsync(TUser user, string phoneNumber, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
+
+            user.PhoneNumber = phoneNumber;
+
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
+
+        public virtual async Task DateOfBirthAsync(TUser user, DateTime dateOfBirth, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
+
+            user.DateOfBirth = dateOfBirth;
+
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
+        
+        public virtual List<TUser> SearchByUserName(string normalizedUserName, CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
@@ -1239,61 +1298,6 @@ namespace Identity
 
             return DatabaseContext.UserCollection.Find(filter, options).ToList();
         }
-
-
-        ////tracker
-
-        //public List<UserActivity> GetUserActivityById(UserActivity user)
-        //{
-
-        //}
-
-        //List<UserActivity> GetActiveUser()
-        //{
-        //    using ( Users user = new Users())
-        //        return UserActivity
-        //            }
-        //List<UserActivity> GetAllUsersActivity();
-
-        //UserActivity GetUserActivity(string userID);
-        //void UpdateUserActivity(UserActivity user);
-
-
-
-        //public virtual async Task AddToUserActivity(TUser user, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    // TODO: tests (case insensitive)
-        //    cancellationToken.ThrowIfCancellationRequested();
-        //    ThrowIfDisposed();
-        //    if (user == null) throw new ArgumentNullException(nameof(user));
-
-        //    // get activity details
-        //    var roleFilter = Builders<TRole>.Filter.Eq(x => x.NormalizedName, Normalize(normalizedRoleName));
-        //    var role = await DatabaseContext.UserActivityCollection.Find(roleFilter).SingleOrDefaultAsync(cancellationToken);
-
-        //    if (role == null)
-        //    {
-        //        throw new InvalidOperationException($"Role {normalizedRoleName} does not exist.");
-        //    }
-
-        //    // check if role already exists for user, no need to do anything else if its already on the user
-        //    EnsureRolesNotNull(user);
-        //    if (user.Roles.Any(r => ConvertIdToString(r.Id) == ConvertIdToString(role.Id))) return;
-
-        //    // add role to user
-        //    user.Roles.Add(role);
-        //    var update = Builders<TUser>.Update.Push(x => x.Roles, role);
-        //    await DoUserDetailsUpdate(user.Id, update, null, cancellationToken);
-        //}
-
-
-
-
-
-
-
-
-
 
         #endregion
 

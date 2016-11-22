@@ -16,7 +16,7 @@ using WebApplication.Models.ProfileViewModels;
 
 namespace WebApplication.Controllers
 {
-    public class ProfileController :Controller
+    public class ProfileController : Controller
     {
         private readonly IHostingEnvironment _environment;
         protected readonly UserStore<IdentityUser, IdentityRole> _users;
@@ -34,38 +34,12 @@ namespace WebApplication.Controllers
         {
             var user = await GetCurrentUserAsync();
 
+
+            //Mapper.Initialize(o => {
+            //    o.CreateMap<IdentityUser, ProfileViewModel>();
+            // });
+
             var model = new ProfileViewModel
-            {
-                Id = await _users.GetUserIdAsync(user),
-                UserName =  _users.GetUserNameAsync(user),
-                Email =  _users.GetEmailAsync(user),
-                PhoneNumber =  _users.GetPhoneNumberAsync(user),
-                FirstName =  _users.GetFirstName(user),
-                LastName = _users.GetLastName(user),
-                DateOfBirth = _users.GetDateOfBirth(user),
-                BirthCountry = _users.GetBirthCountry(user),
-                CurrentCountry = _users.GetCurrentCountry(user),
-                Image = _users.GetImage(user),
-                Roles =  _users.GetRolesAsync(user),
-            };
-
-            return View(model);
-
-        }
-
-        public async Task<ActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            var model = new EditProfileViewModel
             {
                 Id = await _users.GetUserIdAsync(user),
                 UserName = _users.GetUserNameAsync(user),
@@ -80,14 +54,47 @@ namespace WebApplication.Controllers
                 Roles = _users.GetRolesAsync(user),
             };
 
+            return View(model);
 
+        }
+
+        public async Task<ActionResult> Edit(string id)
+        {
+            var user = await GetCurrentUserAsync();
+
+            var model = new EditProfileViewModel
+            {
+                Id = await _users.GetUserIdAsync(user),
+                UserName = await _users.GetUserNameAsync(user),
+                Email = await _users.GetEmailAsync(user),
+                PhoneNumber = await _users.GetPhoneNumberAsync(user),
+                FirstName = _users.GetFirstName(user),
+                LastName = _users.GetLastName(user),
+                DateOfBirth = _users.GetDateOfBirth(user),
+                BirthCountry = _users.GetBirthCountry(user),
+                CurrentCountry = _users.GetCurrentCountry(user),
+                Image = _users.GetImage(user),
+               // Roles = _users.GetRolesAsync(user),
+            };
 
             return View(model);
+
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
+            //var user = await _userManager.FindByIdAsync(id);
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
+            //return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([FromBody] EditProfileViewModel editUser, params string[] selectedRole)
+      
+        public async Task<ActionResult> Edit(EditProfileViewModel editUser)
         {
             if (ModelState.IsValid)
             {
@@ -99,9 +106,19 @@ namespace WebApplication.Controllers
 
                 var userRoles = await _users.GetRolesAsync(user);
 
-                var result = await _users.UpdateAsync(user);
 
                 await _users.SetFirstNameAsync(user, editUser.FirstName);
+                await _users.SetLastNameAsync(user, editUser.LastName);
+                await _users.SetUserNameAsync(user, editUser.UserName);
+                await _users.SetEmailAsync(user, editUser.Email);
+                await _users.SetBirthCountryAsync(user, editUser.BirthCountry);
+                await _users.SetCurrentCountryAsync(user, editUser.CurrentCountry);
+                // await _users.SetUserPhoneNumberAsync(user, editUser.PhoneNumber);
+                //await _users.SetDateOfBirthAsync(user, editUser.DateOfBirth);
+
+                var result = await _users.UpdateAsync(user);
+
+
                 if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", "result.Errors.First()");
@@ -166,7 +183,7 @@ namespace WebApplication.Controllers
         //}
 
 
-            
+
 
 
         [HttpPost]
@@ -177,7 +194,7 @@ namespace WebApplication.Controllers
                 var parsedContentDisposition = ContentDispositionHeaderValue.Parse(image.ContentDisposition);
                 string FilePath = parsedContentDisposition.FileName.Trim('"');
                 string FileExtension = Path.GetExtension(FilePath);
-                            
+
                 var uploadDir = _environment.WebRootPath + $@"\\Images";
                 if (!Directory.Exists(uploadDir))
                 {
