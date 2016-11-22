@@ -34,11 +34,6 @@ namespace WebApplication.Controllers
         {
             var user = await GetCurrentUserAsync();
 
-
-            //Mapper.Initialize(o => {
-            //    o.CreateMap<IdentityUser, ProfileViewModel>();
-            // });
-
             var model = new ProfileViewModel
             {
                 Id = await _users.GetUserIdAsync(user),
@@ -64,12 +59,30 @@ namespace WebApplication.Controllers
             {
                 return NotFound();
             }
+
             var user = await _userManager.FindByIdAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
-            return View();
+            var model = new EditProfileViewModel
+            {
+                Id = await _users.GetUserIdAsync(user),
+                UserName = _users.GetUserNameAsync(user),
+                Email = _users.GetEmailAsync(user),
+                PhoneNumber = _users.GetPhoneNumberAsync(user),
+                FirstName = _users.GetFirstName(user),
+                LastName = _users.GetLastName(user),
+                DateOfBirth = _users.GetDateOfBirth(user),
+                BirthCountry = _users.GetBirthCountry(user),
+                CurrentCountry = _users.GetCurrentCountry(user),
+                Image = _users.GetImage(user),
+                Roles = _users.GetRolesAsync(user),
+            };
+
+
+
+            return View(model);
         }
 
         [HttpPost]

@@ -13,7 +13,7 @@ namespace WebApplication.Data
 
         public string MessageTemplateCollectionName { get; set; } = "MessageTemplates";
 
-        public string UserActivityCollectionName { get; set; } = "UserActivities";
+  
 
         public virtual IMongoCollection<MessageTemplate> MessageTemplateCollection
         {
@@ -29,22 +29,6 @@ namespace WebApplication.Data
             set { _messageTemplateCollection = value; }
         }
         private IMongoCollection<MessageTemplate> _messageTemplateCollection;
-
-
-        public virtual IMongoCollection<UserActivityModel> UserActivityCollection
-        {
-            get
-            {
-                if (_userActivityCollection == null)
-                {
-
-                    _userActivityCollection = Database.GetCollection<UserActivityModel>(UserActivityCollectionName, CollectionSettings);
-                }
-                return _userActivityCollection;
-            }
-            set { _userActivityCollection = value; }
-        }
-        private IMongoCollection<UserActivityModel> _userActivityCollection;
 
 
 

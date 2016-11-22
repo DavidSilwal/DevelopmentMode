@@ -1,0 +1,43 @@
+﻿@using WebApplication.Models
+@model ProfileViewModel
+@{
+    ViewData["Title"] = "Manage your account details";
+}
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <table class="table table-condensed table-responsive">
+        <tr>
+            <th>Basic Information</th>
+        </tr>
+        <tr>
+            <th>Username</th>
+            <td>@Model.UserName.Result </td>
+        </tr>
+        <tr>
+            <th>First Name</th>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>@Model.DateOfBirth</td>
+        </tr>
+        <tr>
+            <th>Current Country</th>
+            <td>@Model.CurrentCountry</td>
+        </tr>
+      
+        <tr>
+            <th>Email</th>
+            <td>@Model.Email.Result </td>
+        </tr>
+
+    </table>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+
+     
+</div>

@@ -1,14 +1,15 @@
-﻿-d:DEBUG
+﻿-d:RELEASE
 -d:TRACE
 -d:NETCOREAPP1_0
 -nowarn:CS1701
 -nowarn:CS1702
 -nowarn:CS1705
+-optimize
 -debug:full
 -nostdlib
 -nologo
-"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\obj\Debug\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
--out:"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\bin\Debug\netcoreapp1.0\WebApplication.dll"
+"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\obj\Release\netcoreapp1.0\dotnet-compile.assemblyinfo.cs"
+-out:"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\bin\Release\netcoreapp1.0\WebApplication.dll"
 -r:"C:\Users\DAVID SILWAL\.nuget\packages\AutoMapper\5.1.1\lib\netstandard1.3\AutoMapper.dll"
 -r:"C:\Users\DAVID SILWAL\.nuget\packages\MailKit\1.6.0\lib\netstandard1.3\MailKit.dll"
 -r:"C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Antiforgery\1.0.1\lib\netstandard1.3\Microsoft.AspNetCore.Antiforgery.dll"
@@ -218,8 +219,8 @@
 -r:"C:\Users\DAVID SILWAL\.nuget\packages\WebMarkupMin.AspNet.Common\2.1.0\lib\netstandard1.3\WebMarkupMin.AspNet.Common.dll"
 -r:"C:\Users\DAVID SILWAL\.nuget\packages\WebMarkupMin.AspNetCore1\2.1.0\lib\netstandard1.3\WebMarkupMin.AspNetCore1.dll"
 -r:"C:\Users\DAVID SILWAL\.nuget\packages\WebMarkupMin.Core\2.1.0\lib\netstandard1.3\WebMarkupMin.Core.dll"
--r:"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\Identity\bin\Debug\netstandard1.6\Identity.dll"
--resource:"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\obj\Debug\netcoreapp1.0\WebApplicationdotnet-compile.deps.json",WebApplication.deps.json
+-r:"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\Identity\bin\Release\netstandard1.6\Identity.dll"
+-resource:"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\obj\Release\netcoreapp1.0\WebApplicationdotnet-compile.deps.json",WebApplication.deps.json
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Program.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Startup.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\AccountController.cs"
