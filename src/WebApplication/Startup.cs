@@ -12,6 +12,7 @@ using WebApplication.Data;
 using WebApplication.Services;
 using Microsoft.AspNetCore.Identity;
 using WebMarkupMin.AspNetCore1;
+using Pioneer.Pagination;
 
 namespace WebApplication
 {
@@ -55,8 +56,9 @@ namespace WebApplication
 
             // Add framework services.
             services.AddMvc();
+            services.AddTransient<IPaginatedMetaService, PaginatedMetaService>();
 
-                services.AddWebMarkupMin(
+            services.AddWebMarkupMin(
         options =>
         {
             options.AllowMinificationInDevelopmentEnvironment = true;

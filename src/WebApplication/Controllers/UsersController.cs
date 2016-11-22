@@ -12,6 +12,7 @@ using WebApplication.Models;
 using WebApplication.Models.Extensions;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Pioneer.Pagination;
 
 namespace WebApplication.Controllers
 {
@@ -19,62 +20,41 @@ namespace WebApplication.Controllers
     {
         private readonly ILogger _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
-       
+
+        private readonly IPaginatedMetaService _paginatedMetaService;
+
         public UsersController(
             UserManager<IdentityUser> userManager,
             ILoggerFactory loggerFactory,
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context,
-            UserStore<IdentityUser,IdentityRole> users) : base(userManager,context, users)
+            UserStore<IdentityUser,IdentityRole> users,
+            IPaginatedMetaService paginatedMetaService) : base(userManager,context, users)
         {
             _roleManager = roleManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _paginatedMetaService = paginatedMetaService;
         }
 
        
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page =1)
         {
-            ////PaginationSet<UserViewModel> pagedSet = new PaginationSet<UserViewModel>();
-            //List<UserViewModel> model;
+            var user =  _userManager.Users;
 
-            //try
-            //{
-            //    int currentPage = page.Value;
-            //    int currentPageSize = pageSize.Value;
+            var totalNumberInCollection = user.Count();
+            var itemsPerPage = 4;
 
-            //    List<IdentityUser> _users = null;
-            //    int _totalUsers = new int();
-
-
-                //_users =  _userManager.Users
-                //    .OrderBy(a => a.UserName)
-                //    .Skip(currentPage * currentPageSize)
-                //    .Take(currentPageSize)
-                //    .ToList();
+            var _users = user
+                .OrderBy(a => a.UserName)
+               // .Skip(page * itemsPerPage)
+               // .Take(page)
+                .ToList();
 
 
-            //    _totalUsers = _userManager.Users.Count();
+            ViewBag.PaginatedMeta = _paginatedMetaService.GetMetaData(totalNumberInCollection, page, itemsPerPage);
 
-            //    IEnumerable<UserViewModel> _usersVM = Mapper.Map<IEnumerable<IdentityUser>, d<UserViewModel>>(_users).ToList();
 
-            //     model = _usersVM.ToList();
-            //    //pagedSet = new PaginationSet<UserViewModel>()
-            //    //{
-            //    //    Page = currentPage,
-            //    //    TotalCount = _totalUsers,
-            //    //    TotalPages = (int)Math.Ceiling((decimal)_totalUsers / currentPageSize),
-            //    //    Items = _usersVM
-            //    //};
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogInformation(" Message = ex.Message, StackTrace = ex.StackTrace, DateCreated = DateTime.Now ");
-               
-            //}
-            
-
-            return  View(_userManager.Users.ToList());
+            return View(_users.ToList());
         }
 
 
@@ -97,38 +77,13 @@ namespace WebApplication.Controllers
             return View(user);          
         }
 
-
-
-        public async Task<IActionResult> Search(string user,string searchString)
+        public async Task<IActionResult> Search(string searchString)
         {
+           var item =  _users.SearchByUserName(searchString);
 
-            IQueryable<string> userQuery = from u in _users.Users
-                                           orderby u.UserName
-                                           select u.UserName;
-
-            var users = from u in _users.Users
-                        select u;
-
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                users = users.Where(s => s.UserName.Contains(searchString));
-            }
-
-            if (!String.IsNullOrEmpty(user))
-            {
-                users = users.Where(x => x.UserName == user);
-            }
-
-            var userVM = new UserSearchViewModel();
-            userVM.selectList = new Microsoft.AspNetCore.Mvc.Rendering.SelectList(await userQuery.Distinct().ToListAsync());
-            userVM.Users = await users.ToListAsync();
-
-            return View(userVM);
+            return View(item);
         }
-
-
-
+        
 
         public async Task<IActionResult> Edit(string id)
         {
@@ -139,25 +94,18 @@ namespace WebApplication.Controllers
             }
             var user = await _userManager.FindByIdAsync(id);
 
-            //var user = await _userManager.Users.FindAll().ToList().Include(u => u.Roles).FirstOrDefaultAsync(u => u.Id == id);
-
-            if (user == null)
+               if (user == null)
             {
                 return NotFound();
             }
 
 
-            //ViewBag.Roles = _roleManager.Roles.ToList().ToListViewModel();
+            ViewBag.Roles = _roleManager.Roles.ToList().ToListViewModel();
 
             return View(user.ToViewModel());
         }
 
-
-
-
-
-
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserViewModel model)
@@ -166,8 +114,6 @@ namespace WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByIdAsync(model.Id);
-
-                //var user = await _userManager.Users.Include(u => u.Roles).FirstOrDefaultAsync(u => u.Id == model.Id);
 
                 if (user == null)
                 {
@@ -196,55 +142,55 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
-        //public async Task<IActionResult> ChangePassword(string id)
-        //{
+        public async Task<IActionResult> ChangePassword(string id)
+        {
 
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var user = await _userManager.Users.AsQueryable().FirstOrDefaultSync(u => u.Id == id);
+            var user = await _userManager.FindByIdAsync(id);
 
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-        //    return View();
-        //}
+            return View();
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ChangePassword(UserChangePasswordViewModel model)
-        //{
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(UserChangePasswordViewModel model)
+        {
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _userManager.Users.AsQueryable().FirstOrDefaultAsync(u => u.Id == model.Id);
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(model.Id);
 
-        //        if (user == null)
-        //        {
-        //            return NotFound();
-        //        }
+                if (user == null)
+                {
+                    return NotFound();
+                }
 
-        //        await _userManager.RemovePasswordAsync(user);
-        //        await _userManager.AddPasswordAsync(user, model.Password);
+                await _userManager.RemovePasswordAsync(user);
+                await _userManager.AddPasswordAsync(user, model.Password);
 
-        //        var result = await _userManager.UpdateAsync(user);
+                var result = await _userManager.UpdateAsync(user);
 
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //        else
-        //        {
-        //            AddErrors(result);
-        //        }
-        //    }
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    AddErrors(result);
+                }
+            }
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
         [ActionName("Delete")]
         public async Task<IActionResult> Delete(string id)

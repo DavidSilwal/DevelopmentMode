@@ -23,6 +23,7 @@ namespace WebApplication.Controllers
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
         protected readonly UserManager<IdentityUser> _userManager;
+        protected readonly UserStore<IdentityUser, IdentityRole> _userStore;
         protected ApplicationDbContext _context;
 
     
@@ -32,7 +33,8 @@ namespace WebApplication.Controllers
             SignInManager<IdentityUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory, ApplicationDbContext context) 
+            ILoggerFactory loggerFactory, ApplicationDbContext context, 
+            UserStore<IdentityUser, IdentityRole> userStore) 
         {
             _userManager = userManager;
             _context = context;
@@ -40,6 +42,7 @@ namespace WebApplication.Controllers
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _userStore = userStore;
         }
 
         //
@@ -70,6 +73,7 @@ namespace WebApplication.Controllers
                 //Required Email Confirmation before procceed to login
 
                 var user = await _userManager.FindByNameAsync(model.UserName);
+
                 if (user != null)
                 {
                     if (!await _userManager.IsEmailConfirmedAsync(user))
@@ -91,10 +95,14 @@ namespace WebApplication.Controllers
                         TimeStamp = DateTime.Now
                     };
 
-                    _context.UserActivityCollection.InsertOne(activity);
-
-                  
-
+                    await _userStore.AddUserActivities(user,activity);
+                    
+                    if(await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        _logger.LogInformation(1, "Admin User logged in.");
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                    
                     _logger.LogInformation(1, "User logged in.");
                     return RedirectToLocal(returnUrl);
                 }
@@ -144,7 +152,8 @@ namespace WebApplication.Controllers
                 
                 if (result.Succeeded)
                 {
-                    var roles = await _userManager.AddToRoleAsync(user, "Admin");
+                    var roles = _userStore.AddToRoleAsync(user, "Users");
+                  
                     //For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                     //Send an email with this link
 

@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using WebApplication.Data;
 
 namespace Identity
 {
@@ -174,9 +175,9 @@ namespace Identity
             if (await UserDetailsAlreadyExists(user, cancellationToken)) return IdentityResult.Failed(ErrorDescriber.DuplicateUserName(user.ToString()));
             ConfigureDefaults(user);
 
-            var filter = Builders<TUser>.Filter.Eq(x => x.Id, user.Id);
-            var updateOptions = new UpdateOptions { IsUpsert = true };
-            await DatabaseContext.UserCollection.ReplaceOneAsync(filter, user, updateOptions, cancellationToken);
+                var filter = Builders<TUser>.Filter.Eq(x => x.Id, user.Id);
+                var updateOptions = new UpdateOptions { IsUpsert = true };
+                await DatabaseContext.UserCollection.ReplaceOneAsync(filter, user, updateOptions, cancellationToken);
 
             return IdentityResult.Success;
         }
@@ -1112,6 +1113,9 @@ namespace Identity
         }
 
 
+
+
+
         public async void AddUser(TUser item)
         {
             await DatabaseContext.UserCollection.InsertOneAsync(item);
@@ -1208,14 +1212,32 @@ namespace Identity
 
 
 
-        public virtual Task SetFirstNameAsync(TUser user, string fName, CancellationToken cancellationToken = default(CancellationToken))
+        public virtual async Task SetFirstNameAsync(TUser user, string fName, CancellationToken cancellationToken = default(CancellationToken))
         {
             // TODO: tests
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null) throw new ArgumentNullException(nameof(user));
-            user.FirstName.Replace(user.FirstName, fName);
-            return Task.FromResult(0);
+
+            user.FirstName = fName;
+            
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
+
+
+          public virtual List<TUser> SearchByUserName(string normalizedUserName, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+
+            if (string.IsNullOrWhiteSpace(normalizedUserName)) return null;
+
+            var filter = Builders<TUser>.Filter.Eq(x => x.NormalizedUserName, Normalize(normalizedUserName));
+            var options = new FindOptions { AllowPartialResults = false };
+
+            return DatabaseContext.UserCollection.Find(filter, options).ToList();
         }
 
 
@@ -1391,5 +1413,24 @@ namespace Identity
         }
 
         #endregion
+
+
+
+        public virtual async Task AddUserActivities(TUser user, UserActivity userActivity, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
+            EnsureClaimsNotNull(user);
+
+            if (userActivity == null) return;
+
+            // find new activities
+            var newList = userActivity;
+
+            user.UserActivities.Add(newList);
+
+            await UpdateAsync(user);
+        }
+
     }
 }

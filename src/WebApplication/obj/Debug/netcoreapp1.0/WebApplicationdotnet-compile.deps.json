@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0/",
-    "signature": "c1f887613ede0fbe79c68eb1c2aeea22175b28d2"
+    "signature": "6ae768659b35e1fba9175d820d68d4792ce1e166"
   },
   "compilationOptions": {
     "defines": [
@@ -38,7 +38,8 @@
           "Microsoft.NETCore.App": "1.0.1",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
           "Ngonzalez.ImageProcessorCore": "0.0.1",
-          "AutoMapper": "5.1.1"
+          "AutoMapper": "5.1.1",
+          "Pioneer.Pagination": "1.0.2"
         },
         "compile": {
           "WebApplication.dll": {}
@@ -1446,6 +1447,15 @@
         },
         "compile": {
           "lib/netstandard1.1/Ngonzalez.ImageProcessorCore.dll": {}
+        }
+      },
+      "Pioneer.Pagination/1.0.2": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "1.0.1",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/Pioneer.Pagination.dll": {}
         }
       },
       "Portable.BouncyCastle/1.8.1.1": {
@@ -3033,7 +3043,8 @@
           "Microsoft.NETCore.App": "1.0.1",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
           "Ngonzalez.ImageProcessorCore": "0.0.1",
-          "AutoMapper": "5.1.1"
+          "AutoMapper": "5.1.1",
+          "Pioneer.Pagination": "1.0.2"
         },
         "runtime": {
           "WebApplication.dll": {}
@@ -4438,6 +4449,15 @@
         },
         "runtime": {
           "lib/netstandard1.1/Ngonzalez.ImageProcessorCore.dll": {}
+        }
+      },
+      "Pioneer.Pagination/1.0.2": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "1.0.1",
+          "NETStandard.Library": "1.6.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Pioneer.Pagination.dll": {}
         }
       },
       "Portable.BouncyCastle/1.8.1.1": {
@@ -6428,6 +6448,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-tSSBtrN5IsDRmCho6+3ZJyS0DXgMkQnimu8q9t5tm3hFxm8HO9+fbsL3AqZz08mm4J5zuE86HIILRp/NZhZqwA=="
+    },
+    "Pioneer.Pagination/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JJWSn/CrPVKnHJSTHUIwVEjUSfZVo8MQsPrYyUVbZweAckr3zy77bZikhGcK7VRGkwcGNYOT8OfHdIAJP+3L5A=="
     },
     "Portable.BouncyCastle/1.8.1.1": {
       "type": "package",

@@ -11,7 +11,7 @@ namespace WebApplication.Data
     {
 
         //public string UserID { get; set; }
-
+    
         //public string UserActivityID { get; set; }
 
         //public virtual ObjectId _Id { get; set; }

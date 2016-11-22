@@ -1,29 +1,14 @@
-﻿@model UserSearchViewModel
+﻿@model List<Identity.IdentityUser>
 
 @{
     ViewData["Title"] = "Search";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
-<form asp-controller="Profile" asp-action="Search" method="get">
-    <p>
-        <select asp-for="User" asp-items="Model.selectList">
-            <option value="">All</option>
-        </select>
-
-        Title: <input type="text" name="SearchString">
-        <input type="submit" value="Filter" />
-    </p>
-</form>
-
 
 <table class="table">
-    <tr>
+    @*<tr>
         <th>
-            @Html.DisplayNameFor(model => model.Users[0].Email)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Users[0].UserName)
@@ -35,9 +20,9 @@
             @Html.DisplayNameFor(model => model.Users[0].LastName)
         </th>
         <th></th>
-    </tr>
+    </tr>*@
     <tbody>
-        @foreach (var item in Model.Users)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>

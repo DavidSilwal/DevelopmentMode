@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "3a4fc68e21686a1eacb04f290db03901bf03a87e"
+    "signature": "df8f6e96570aad103685d90beac83dd1f5950da8"
   },
   "compilationOptions": {
     "defines": [
@@ -38,7 +38,8 @@
           "Microsoft.NETCore.App": "1.0.1",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
           "Ngonzalez.ImageProcessorCore": "0.0.1",
-          "AutoMapper": "5.1.1"
+          "AutoMapper": "5.1.1",
+          "Pioneer.Pagination": "1.0.2"
         },
         "runtime": {
           "WebApplication.dll": {}
@@ -1737,6 +1738,18 @@
         },
         "compile": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
+        }
+      },
+      "Pioneer.Pagination/1.0.2": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "1.0.1",
+          "NETStandard.Library": "1.6.0"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Pioneer.Pagination.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.6/Pioneer.Pagination.dll": {}
         }
       },
       "Portable.BouncyCastle/1.8.1.1": {
@@ -4286,6 +4299,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-Stok+SI5lWxOkTgZZM7jT4xuAZogm5+j85mKJeHSXb8o0OAbB+qDX9jkdM2wIEnjoR8R29J0nQYwk2Kl2lWFpA=="
+    },
+    "Pioneer.Pagination/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JJWSn/CrPVKnHJSTHUIwVEjUSfZVo8MQsPrYyUVbZweAckr3zy77bZikhGcK7VRGkwcGNYOT8OfHdIAJP+3L5A=="
     },
     "Portable.BouncyCastle/1.8.1.1": {
       "type": "package",

@@ -2156,6 +2156,19 @@
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
         }
       },
+      "Pioneer.Pagination/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "1.0.1",
+          "NETStandard.Library": "1.6.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/Pioneer.Pagination.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/Pioneer.Pagination.dll": {}
+        }
+      },
       "Portable.BouncyCastle/1.8.1.1": {
         "type": "package",
         "dependencies": {
@@ -6113,6 +6126,17 @@
         "lib/net45/NuGet.Versioning.xml",
         "lib/netstandard1.0/NuGet.Versioning.dll",
         "lib/netstandard1.0/NuGet.Versioning.xml"
+      ]
+    },
+    "Pioneer.Pagination/1.0.2": {
+      "sha512": "JJWSn/CrPVKnHJSTHUIwVEjUSfZVo8MQsPrYyUVbZweAckr3zy77bZikhGcK7VRGkwcGNYOT8OfHdIAJP+3L5A==",
+      "type": "package",
+      "path": "Pioneer.Pagination/1.0.2",
+      "files": [
+        "Pioneer.Pagination.1.0.2.nupkg.sha512",
+        "Pioneer.Pagination.nuspec",
+        "lib/net46/Pioneer.Pagination.dll",
+        "lib/netstandard1.6/Pioneer.Pagination.dll"
       ]
     },
     "Portable.BouncyCastle/1.8.1.1": {
@@ -11019,6 +11043,7 @@
       "Microsoft.NETCore.App >= 1.0.1",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
       "Ngonzalez.ImageProcessorCore >= 0.0.1",
+      "Pioneer.Pagination >= 1.0.2",
       "WebMarkupMin.AspNetCore1 >= 2.1.0"
     ],
     ".NETCoreApp,Version=v1.0": []

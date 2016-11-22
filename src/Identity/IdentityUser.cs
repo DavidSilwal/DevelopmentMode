@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
+using WebApplication.Data;
 
 namespace Identity
 {
@@ -145,6 +146,15 @@ namespace Identity
             set { _roles = value ?? new List<TRole>(); }
         }
         private IList<TRole> _roles = new List<TRole>();
+
+
+        [BsonIgnoreIfNull]
+        public virtual IList<UserActivity> UserActivities
+        {
+            get { return _userActivities; }
+            set { _userActivities = value ?? new List<UserActivity>(); }
+        }
+        private IList<UserActivity> _userActivities = new List<UserActivity>();
 
         
         /// <summary>

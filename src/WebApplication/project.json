@@ -29,7 +29,8 @@
         },
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
       "Ngonzalez.ImageProcessorCore": "0.0.1",
-      "AutoMapper": "5.1.1"
+      "AutoMapper": "5.1.1",
+      "Pioneer.Pagination": "1.0.2"
     },
 
     "tools": {

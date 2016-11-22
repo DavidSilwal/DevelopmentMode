@@ -37,12 +37,12 @@ namespace WebApplication.Controllers
         {
 
             var roles = _roleManager.Roles;
+
             return View(roles.ToList());
         }
 
         public IActionResult Create()
         {
-
 
             return View();
         }
@@ -65,9 +65,6 @@ namespace WebApplication.Controllers
 
             return View(role);
         }
-
-
-
 
 
         [HttpPost]
