@@ -60,16 +60,35 @@ namespace WebApplication.Controllers
 
         public async Task<ActionResult> Edit(string id)
         {
-            if (id == null)
+            var user = await GetCurrentUserAsync();
+
+            var model = new EditProfileViewModel
             {
-                return NotFound();
-            }
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View();
+                Id = await _users.GetUserIdAsync(user),
+                UserName = _users.GetUserNameAsync(user),
+                Email = _users.GetEmailAsync(user),
+                PhoneNumber = _users.GetPhoneNumberAsync(user),
+                FirstName = _users.GetFirstName(user),
+                LastName = _users.GetLastName(user),
+                DateOfBirth = _users.GetDateOfBirth(user),
+                BirthCountry = _users.GetBirthCountry(user),
+                CurrentCountry = _users.GetCurrentCountry(user),
+                Image = _users.GetImage(user),
+                Roles = _users.GetRolesAsync(user),
+            };
+
+            return View(model);
+
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
+            //var user = await _userManager.FindByIdAsync(id);
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
+            //return View();
         }
 
         [HttpPost]

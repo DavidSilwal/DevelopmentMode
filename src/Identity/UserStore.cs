@@ -175,9 +175,9 @@ namespace Identity
             if (await UserDetailsAlreadyExists(user, cancellationToken)) return IdentityResult.Failed(ErrorDescriber.DuplicateUserName(user.ToString()));
             ConfigureDefaults(user);
 
-                var filter = Builders<TUser>.Filter.Eq(x => x.Id, user.Id);
-                var updateOptions = new UpdateOptions { IsUpsert = true };
-                await DatabaseContext.UserCollection.ReplaceOneAsync(filter, user, updateOptions, cancellationToken);
+            var filter = Builders<TUser>.Filter.Eq(x => x.Id, user.Id);
+            var updateOptions = new UpdateOptions { IsUpsert = true };
+            await DatabaseContext.UserCollection.ReplaceOneAsync(filter, user, updateOptions, cancellationToken);
 
             return IdentityResult.Success;
         }
@@ -1226,8 +1226,77 @@ namespace Identity
             await Task.FromResult(0);
         }
 
+        //public virtual async Task SetLastNameAsync(TUser user, string lName, CancellationToken cancellationToken = default(CancellationToken))
+        //{
+        //    // TODO: tests
+        //    cancellationToken.ThrowIfCancellationRequested();
+        //    ThrowIfDisposed();
+        //    if (user == null) throw new ArgumentNullException(nameof(user));
 
-          public virtual List<TUser> SearchByUserName(string normalizedUserName, CancellationToken cancellationToken = default(CancellationToken))
+        //    user.LastName = lName;
+
+        //    await UpdateAsync(user);
+
+        //    await Task.FromResult(0);
+        //}
+
+        //public virtual async Task SetBirthCountryAsync(TUser user, string birthCountry, CancellationToken cancellationToken = default(CancellationToken))
+        //{
+        //    // TODO: tests
+        //    cancellationToken.ThrowIfCancellationRequested();
+        //    ThrowIfDisposed();
+        //    if (user == null) throw new ArgumentNullException(nameof(user));
+
+        //    user.BirthCountry= birthCountry;
+
+        //    await UpdateAsync(user);
+
+        //    await Task.FromResult(0);
+        //}
+
+        //public virtual async Task SetCurrentCountryAsync(TUser user, string currentCountry, CancellationToken cancellationToken = default(CancellationToken))
+        //{
+        //    // TODO: tests
+        //    cancellationToken.ThrowIfCancellationRequested();
+        //    ThrowIfDisposed();
+        //    if (user == null) throw new ArgumentNullException(nameof(user));
+
+        //    user.CurrentCountry = currentCountry;
+
+        //    await UpdateAsync(user);
+
+        //    await Task.FromResult(0);
+        //}
+
+        //public virtual async Task SetPhoneNumAsync(TUser user, string phoneNumber, CancellationToken cancellationToken = default(CancellationToken))
+        //{
+        //    // TODO: tests
+        //    cancellationToken.ThrowIfCancellationRequested();
+        //    ThrowIfDisposed();
+        //    if (user == null) throw new ArgumentNullException(nameof(user));
+
+        //    user.PhoneNumber = phoneNumber;
+
+        //    await UpdateAsync(user);
+
+        //    await Task.FromResult(0);
+        //}
+
+        //public virtual async Task DateOfBirthAsync(TUser user, DateTime dateOfBirth, CancellationToken cancellationToken = default(CancellationToken))
+        //{
+        //    // TODO: tests
+        //    cancellationToken.ThrowIfCancellationRequested();
+        //    ThrowIfDisposed();
+        //    if (user == null) throw new ArgumentNullException(nameof(user));
+
+        //    user.DateOfBirth= dateOfBirth;
+
+        //    await UpdateAsync(user);
+
+        //    await Task.FromResult(0);
+        //}
+
+        public virtual List<TUser> SearchByUserName(string normalizedUserName, CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();

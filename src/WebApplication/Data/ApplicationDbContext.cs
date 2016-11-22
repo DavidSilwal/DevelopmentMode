@@ -31,23 +31,20 @@ namespace WebApplication.Data
         private IMongoCollection<MessageTemplate> _messageTemplateCollection;
 
 
-        public virtual IMongoCollection<UserActivityModel> UserActivityCollection
-        {
-            get
-            {
-                if (_userActivityCollection == null)
-                {
+        //public virtual IMongoCollection<UserActivityModel> UserActivityCollection
+        //{
+        //    get
+        //    {
+        //        if (_userActivityCollection == null)
+        //        {
 
-                    _userActivityCollection = Database.GetCollection<UserActivityModel>(UserActivityCollectionName, CollectionSettings);
-                }
-                return _userActivityCollection;
-            }
-            set { _userActivityCollection = value; }
-        }
-        private IMongoCollection<UserActivityModel> _userActivityCollection;
-
-
-
+        //            _userActivityCollection = Database.GetCollection<UserActivityModel>(UserActivityCollectionName, CollectionSettings);
+        //        }
+        //        return _userActivityCollection;
+        //    }
+        //    set { _userActivityCollection = value; }
+        //}
+        //private IMongoCollection<UserActivityModel> _userActivityCollection;
 
     }
 }
