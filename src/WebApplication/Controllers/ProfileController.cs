@@ -65,7 +65,7 @@ namespace WebApplication.Controllers
             var model = new EditProfileViewModel
             {
                 Id = await _users.GetUserIdAsync(user),
-                UserName = _users.GetUserNameAsync(user),
+                UserName = await _users.GetUserNameAsync(user),
                 Email = _users.GetEmailAsync(user),
                 PhoneNumber = _users.GetPhoneNumberAsync(user),
                 FirstName = _users.GetFirstName(user),
@@ -108,6 +108,15 @@ namespace WebApplication.Controllers
                 var result = await _users.UpdateAsync(user);
 
                 await _users.SetFirstNameAsync(user, editUser.FirstName);
+                await _users.SetLastNameAsync(user, editUser.LastName);
+                await _users.SetUserNameAsync(user, editUser.UserName);
+                await _users.SetEmailAsync(user, editUser.Email);
+                await _users.SetBirthCountryAsync(user, editUser.BirthCountry);
+                await _users.SetCurrentCountryAsync(user, editUser.CurrentCountry);
+                await _users.SetUserPhoneNumberAsync(user, editUser.PhoneNumber);
+                await _users.SetDateOfBirthAsync(user, editUser.DateOfBirth);
+
+
                 if (!result.Succeeded)
                 {
                     ModelState.AddModelError("", "result.Errors.First()");

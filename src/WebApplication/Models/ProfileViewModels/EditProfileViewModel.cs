@@ -15,7 +15,7 @@ namespace WebApplication.Models.ProfileViewModels
         public string Id { get; set; }
 
         [Display(Name ="Username")]
-        public Task<string> UserName { get; set; }
+        public string UserName { get; set; }
 
         [Display(Name = "Email")]
         public Task<string> Email { get; set; }

@@ -83,26 +83,10 @@ namespace Identity
             ThrowIfDisposed();
             if (user == null) throw new ArgumentNullException(nameof(user));
 
-            return Task.FromResult(user.UserName);
+            return Task.FromResult(user.UserName.ToString());
         }
 
-        /// <summary>
-        /// Sets the given <paramref name="userName" /> for the specified <paramref name="user"/>, as an asynchronous operation.
-        /// </summary>
-        /// <param name="user">The user whose name should be set.</param>
-        /// <param name="userName">The user name to set.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be cancelled.</param>
-        /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public virtual Task SetUserNameAsync(TUser user, string userName, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            ThrowIfDisposed();
-            if (user == null) throw new ArgumentNullException(nameof(user));
-
-            user.UserName = userName;
-            return Task.FromResult(0);
-        }
-
+        
         /// <summary>
         /// Gets the normalized user name for the specified <paramref name="user"/>, as an asynchronous operation.
         /// </summary>
@@ -726,13 +710,13 @@ namespace Identity
         /// <param name="email">The email to set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be cancelled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public virtual Task SetEmailAsync(TUser user, string email, CancellationToken cancellationToken = default(CancellationToken))
+        public virtual Task SetEmailAsync(TUser user, Task<string> email, CancellationToken cancellationToken = default(CancellationToken))
         {
             // TODO: tests
             cancellationToken.ThrowIfCancellationRequested();
             ThrowIfDisposed();
             if (user == null) throw new ArgumentNullException(nameof(user));
-            user.Email = email;
+            user.Email = email.ToString();
             return Task.FromResult(0);
         }
 
@@ -967,23 +951,6 @@ namespace Identity
         #region IUserPhoneNumberStore<TUser>
 
         /// <summary>
-        /// Sets the telephone number for the specified <paramref name="user"/>, as an asynchronous operation.
-        /// </summary>
-        /// <param name="user">The user whose telephone number should be set.</param>
-        /// <param name="phoneNumber">The telephone number to set.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be cancelled.</param>
-        /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        public virtual Task SetPhoneNumberAsync(TUser user, string phoneNumber, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            // TODO: tests
-            cancellationToken.ThrowIfCancellationRequested();
-            ThrowIfDisposed();
-            if (user == null) throw new ArgumentNullException(nameof(user));
-            user.PhoneNumber = phoneNumber;
-            return Task.FromResult(0);
-        }
-
-        /// <summary>
         /// Gets the telephone number, if any, for the specified <paramref name="user"/>, as an asynchronous operation.
         /// </summary>
         /// <param name="user">The user whose telephone number should be retrieved.</param>
@@ -1210,7 +1177,40 @@ namespace Identity
             return user.Image;
         }
 
+        public virtual async Task SetUserNameAsync(TUser user, string userName, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
+            user.UserName = userName.ToString();
+
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
+
+        /// <summary>
+        /// Sets the <paramref name="email"/> address for a <paramref name="user"/>, as an asynchronous operation.
+        /// </summary>
+        /// <param name="user">The user whose email should be set.</param>
+        /// <param name="email">The email to set.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be cancelled.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public virtual async Task SetEmailAsync(TUser user, string email, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
+
+            user.Email = email;
+
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
 
         public virtual async Task SetFirstNameAsync(TUser user, string fName, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -1226,75 +1226,85 @@ namespace Identity
             await Task.FromResult(0);
         }
 
-        //public virtual async Task SetLastNameAsync(TUser user, string lName, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    // TODO: tests
-        //    cancellationToken.ThrowIfCancellationRequested();
-        //    ThrowIfDisposed();
-        //    if (user == null) throw new ArgumentNullException(nameof(user));
+        public virtual async Task SetLastNameAsync(TUser user, string lName, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
-        //    user.LastName = lName;
+            user.LastName = lName;
 
-        //    await UpdateAsync(user);
+            await UpdateAsync(user);
 
-        //    await Task.FromResult(0);
-        //}
+            await Task.FromResult(0);
+        }
 
-        //public virtual async Task SetBirthCountryAsync(TUser user, string birthCountry, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    // TODO: tests
-        //    cancellationToken.ThrowIfCancellationRequested();
-        //    ThrowIfDisposed();
-        //    if (user == null) throw new ArgumentNullException(nameof(user));
+        public virtual async Task SetBirthCountryAsync(TUser user, string birthCountry, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
-        //    user.BirthCountry= birthCountry;
+            user.BirthCountry = birthCountry;
 
-        //    await UpdateAsync(user);
+            await UpdateAsync(user);
 
-        //    await Task.FromResult(0);
-        //}
+            await Task.FromResult(0);
+        }
 
-        //public virtual async Task SetCurrentCountryAsync(TUser user, string currentCountry, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    // TODO: tests
-        //    cancellationToken.ThrowIfCancellationRequested();
-        //    ThrowIfDisposed();
-        //    if (user == null) throw new ArgumentNullException(nameof(user));
+        public virtual async Task SetCurrentCountryAsync(TUser user, string currentCountry, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
-        //    user.CurrentCountry = currentCountry;
+            user.CurrentCountry = currentCountry;
 
-        //    await UpdateAsync(user);
+            await UpdateAsync(user);
 
-        //    await Task.FromResult(0);
-        //}
+            await Task.FromResult(0);
+        }
 
-        //public virtual async Task SetPhoneNumAsync(TUser user, string phoneNumber, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    // TODO: tests
-        //    cancellationToken.ThrowIfCancellationRequested();
-        //    ThrowIfDisposed();
-        //    if (user == null) throw new ArgumentNullException(nameof(user));
 
-        //    user.PhoneNumber = phoneNumber;
+        /// <summary>
+        /// Sets the telephone number for the specified <paramref name="user"/>, as an asynchronous operation.
+        /// </summary>
+        /// <param name="user">The user whose telephone number should be set.</param>
+        /// <param name="phoneNumber">The telephone number to set.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be cancelled.</param>
+        /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
+        public virtual async Task SetUserPhoneNumberAsync(TUser user, Task<string> phoneNumber, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
-        //    await UpdateAsync(user);
+            user.PhoneNumber = phoneNumber.ToString();
 
-        //    await Task.FromResult(0);
-        //}
+            await UpdateAsync(user);
 
-        //public virtual async Task DateOfBirthAsync(TUser user, DateTime dateOfBirth, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    // TODO: tests
-        //    cancellationToken.ThrowIfCancellationRequested();
-        //    ThrowIfDisposed();
-        //    if (user == null) throw new ArgumentNullException(nameof(user));
+            await Task.FromResult(0);
+        }
 
-        //    user.DateOfBirth= dateOfBirth;
+        public virtual async Task SetDateOfBirthAsync(TUser user, DateTimeOffset? dateOfBirth, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
-        //    await UpdateAsync(user);
+            user.DateOfBirth = dateOfBirth;
 
-        //    await Task.FromResult(0);
-        //}
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
+
+
 
         public virtual List<TUser> SearchByUserName(string normalizedUserName, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -1501,5 +1511,9 @@ namespace Identity
             await UpdateAsync(user);
         }
 
+        public Task SetPhoneNumberAsync(TUser user, string phoneNumber, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
