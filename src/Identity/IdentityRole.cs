@@ -74,7 +74,7 @@ namespace Identity
             set { _claims = value ?? new List<IdentityClaim>(); }
         }
 
-        public string RoleId { get; set; }
+       // public string Id { get; set; }
 
 
         private IList<IdentityClaim> _claims = new List<IdentityClaim>();

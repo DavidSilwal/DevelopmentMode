@@ -21,7 +21,7 @@ namespace WebApplication.Models
 
         public ProfileViewModel()
         {
-            RoleIds = new List<string>();
+            Ids = new List<string>();
         }
 
         public string Id { get; set; }
@@ -46,7 +46,7 @@ namespace WebApplication.Models
 
         public Task<IList<string>> Roles { get; set; }
             
-        public List<string> RoleIds { get; set; }
+        public List<string> Ids { get; set; }
 
         public string Image { get; set; }
 

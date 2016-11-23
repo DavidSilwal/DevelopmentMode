@@ -22,23 +22,23 @@ namespace WebApplication.Models.Extensions
 
             foreach (var oldRole in oldRoles)
             {
-                if (!source.RoleIds.Contains(oldRole.RoleId))
+                if (!source.Ids.Contains(oldRole.Id))
                 {
                     destination.Roles.Remove(oldRole);
                 }
                 else
                 {
-                    source.RoleIds.Remove(oldRole.RoleId);
+                    source.Ids.Remove(oldRole.Id);
                 }
             }
 
-            if (source.RoleIds != null)
+            if (source.Ids != null)
             {
-                foreach (var roleId in source.RoleIds)
+                foreach (var Id in source.Ids)
                 {
                     var userRole = new IdentityRole<string>();
 
-                    userRole.RoleId = roleId;
+                    userRole.Id = Id;
 
                     destination.Roles.Add(userRole);
                 }
@@ -54,11 +54,11 @@ namespace WebApplication.Models.Extensions
             destination.Email = source.Email;
             destination.UserName = source.UserName;
 
-            if (source.RoleIds != null)
+            if (source.Ids != null)
             {
-                foreach (var roleId in source.RoleIds)
+                foreach (var Id in source.Ids)
                 {
-                    var userRole = new IdentityRole<string>() { RoleId = roleId };
+                    var userRole = new IdentityRole<string>() { Id = Id };
 
                     destination.Roles.Add(userRole);
                 }
@@ -77,9 +77,10 @@ namespace WebApplication.Models.Extensions
 
             if (source.Roles != null)
             {
+               
                 foreach (var userRole in source.Roles)
                 {
-                    destination.RoleIds.Add(userRole.RoleId);
+                    destination.Ids.Add(userRole.Id);
                 }
             }
 
@@ -96,7 +97,9 @@ namespace WebApplication.Models.Extensions
                 foreach (var item in source)
                 {
                     destination.Add(item.ToViewModel());
+            
                 }
+                
             }
 
             return destination;
