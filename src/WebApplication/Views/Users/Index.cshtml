@@ -1,5 +1,4 @@
-
-@model List<Identity.IdentityUser>
+@model List<WebApplication.Models.UserViewModel>
 
 @{
     ViewData["Title"] = "Users";
@@ -32,9 +31,7 @@
         <th>
             <label>Roles</label>
         </th>
-        <th>
-            <label>User Type</label>
-        </th>
+       
         <th></th>
     </tr>
 
@@ -51,7 +48,7 @@
 
             </td>
             <td>
-                @*@Html.DisplayFor(modelItem => item.Roles):*@
+                @Html.DisplayFor(modelItem => item.Roles):
                 @*@foreach (var role in item.Roles)
                 {
                     @Html.DisplayFor(modelItem => role.Name)

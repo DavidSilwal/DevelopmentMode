@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -16,6 +17,7 @@ using WebApplication.Models.ProfileViewModels;
 
 namespace WebApplication.Controllers
 {
+    [Authorize()]
     public class ProfileController : Controller
     {
         private readonly IHostingEnvironment _environment;
@@ -33,11 +35,6 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await GetCurrentUserAsync();
-
-
-            //Mapper.Initialize(o => {
-            //    o.CreateMap<IdentityUser, ProfileViewModel>();
-            // });
 
             var model = new ProfileViewModel
             {
@@ -60,7 +57,17 @@ namespace WebApplication.Controllers
 
         public async Task<ActionResult> Edit(string id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             var user = await GetCurrentUserAsync();
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             var model = new EditProfileViewModel
             {
@@ -79,17 +86,7 @@ namespace WebApplication.Controllers
 
             return View(model);
 
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-            //var user = await _userManager.FindByIdAsync(id);
-            //if (user == null)
-            //{
-            //    return NotFound();
-            //}
-            //return View();
-        }
+           }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -121,7 +118,7 @@ namespace WebApplication.Controllers
 
                 if (!result.Succeeded)
                 {
-                    ModelState.AddModelError("", "result.Errors.First()");
+                    ModelState.AddModelError("","result.Errors.First()");
                     return View();
                 }
                 return RedirectToAction("Index");
@@ -129,15 +126,13 @@ namespace WebApplication.Controllers
             ModelState.AddModelError("", "Something failed.");
             return View();
         }
-
-
-
-
+        
 
         protected async Task<IdentityUser> GetCurrentUserAsync()
         {
             return await _userManager.GetUserAsync(HttpContext.User);
         }
+
 
         public IActionResult Upload()
         {
@@ -146,48 +141,8 @@ namespace WebApplication.Controllers
 
 
 
-
-
-        //[HttpPost]
-        //public IActionResult Upload(IFormFile file)
-        //{
-        //    //long size = 0;
-
-        //    //var filename = ContentDispositionHeaderValue
-        //    //                    .Parse(file.ContentDisposition)
-        //    //                    .FileName
-        //    //                    .Trim('"');
-
-        //    //    filename = _environment.WebRootPath + $@"\Upload\{filename}";
-        //    //    size += file.Length;
-        //    //    using (FileStream fs = System.IO.File.Create(filename))
-        //    //    {
-        //    //        file.CopyTo(fs);
-        //    //        fs.Flush();
-        //    //    }
-
-
-        //    var uploads = Path.Combine(_environment.WebRootPath, "uploads");
-
-        //    if (file.Length > 0)
-        //    {
-        //        using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
-        //        {
-        //            file.CopyToAsync(fileStream);
-        //        }
-        //    }
-
-        //    ViewBag.Message = $"{file.FileName} file(s) / bytes uploaded successfully!";
-
-        //    return View();
-        //}
-
-
-
-
-
         [HttpPost]
-        public IActionResult Upload(IFormFile image)
+        public async Task<ActionResult> Upload(IFormFile image)
         {
             if (image != null && image.Length > 0)
             {
@@ -195,7 +150,7 @@ namespace WebApplication.Controllers
                 string FilePath = parsedContentDisposition.FileName.Trim('"');
                 string FileExtension = Path.GetExtension(FilePath);
 
-                var uploadDir = _environment.WebRootPath + $@"\\Images";
+                var uploadDir = _environment.WebRootPath + $@"\UploadImages\";
                 if (!Directory.Exists(uploadDir))
                 {
                     Directory.CreateDirectory(uploadDir);
@@ -203,12 +158,15 @@ namespace WebApplication.Controllers
                 var imageUrl = uploadDir + image.FileName; //+ FileExtension;
                 FileStream fs = System.IO.File.Create(imageUrl);
                 image.CopyTo(fs);
+
+                var user = await GetCurrentUserAsync();
+                await _users.SetImageAsync(user, imageUrl);
             }
 
             ViewBag.Message = $" Image uploaded successfully!";
 
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
     }

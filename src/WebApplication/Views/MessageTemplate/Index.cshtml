@@ -1,9 +1,14 @@
 ﻿@model IList<WebApplication.Data.MessageTemplate>
 
+<p><a asp-action="Create">Create New</a></p>
 
 @foreach (var item in Model)
 
 {
-    @item.Name
+   @item.Subject
+   @item.Body
+   @item.MailFrom
+   @item.AddedOn
+   @item.IsActive
 
 }

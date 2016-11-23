@@ -13,9 +13,13 @@ using WebApplication.Models.Extensions;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Pioneer.Pagination;
+using Microsoft.AspNetCore.Authorization;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace WebApplication.Controllers
 {
+    [Authorize(Roles ="Admin")]
+    [BsonIgnoreExtraElements]
     public class UsersController : BaseController
     {
         private readonly ILogger _logger;
@@ -28,8 +32,8 @@ namespace WebApplication.Controllers
             ILoggerFactory loggerFactory,
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context,
-            UserStore<IdentityUser,IdentityRole> users,
-            IPaginatedMetaService paginatedMetaService) : base(userManager,context, users)
+            UserStore<IdentityUser,IdentityRole> userStore,
+            IPaginatedMetaService paginatedMetaService) : base(userManager,context, userStore)
         {
             _roleManager = roleManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
@@ -39,22 +43,23 @@ namespace WebApplication.Controllers
        
         public async Task<IActionResult> Index(int page =1)
         {
-            var user =  _userManager.Users;
+
+            var user =  _userStore.Users;
 
             var totalNumberInCollection = user.Count();
             var itemsPerPage = 4;
+            var u = user.ToList().ToListViewModel();
 
-            var _users = user
-                .OrderBy(a => a.UserName)
-               // .Skip(page * itemsPerPage)
-               // .Take(page)
-                .ToList();
+            //var _users = u
+            //    .OrderBy(a => a.UserName)
+            //    // .Skip(page * itemsPerPage)
+            //    // .Take(page)
+            //    .ToList();
 
 
             ViewBag.PaginatedMeta = _paginatedMetaService.GetMetaData(totalNumberInCollection, page, itemsPerPage);
 
-
-            return View(_users.ToList());
+            return View(u);
         }
 
 
@@ -67,7 +72,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            IdentityUser user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(id);
 
             if (user == null)
             {
@@ -79,7 +84,7 @@ namespace WebApplication.Controllers
 
         public async Task<IActionResult> Search(string searchString)
         {
-           var item =  _users.SearchByUserName(searchString);
+           var item =  _userStore.SearchByUserName(searchString);
 
             return View(item);
         }
@@ -94,11 +99,10 @@ namespace WebApplication.Controllers
             }
             var user = await _userManager.FindByIdAsync(id);
 
-               if (user == null)
+            if (user == null)
             {
                 return NotFound();
             }
-
 
             ViewBag.Roles = _roleManager.Roles.ToList().ToListViewModel();
 

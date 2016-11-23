@@ -128,7 +128,7 @@ namespace Identity
              
         public virtual string CurrentCountry { get; set; }
               
-        public virtual IFormFile Image { get; set; }
+        public virtual string Image { get; set; }
               
         public virtual Occurrence CreatedOn { get; private set; }
         public virtual Occurrence DeletedOn { get; private set; }
@@ -188,7 +188,7 @@ namespace Identity
         /// Navigation property for users logins
         /// </summary>
         /// 
-        [BsonIgnore]
+      [BsonIgnore]
         public virtual IList<UserLoginInfo> Logins
         {
             get { return _logins; }

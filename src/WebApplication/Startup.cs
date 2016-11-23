@@ -47,11 +47,11 @@ namespace WebApplication
             });
 
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Admin", policy => policy.RequireClaim("Role", "Admin"));
-                options.AddPolicy("User", policy => policy.RequireClaim("Role", "User"));
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Admin", policy => policy.RequireClaim("Role", "Admin"));
+            //    options.AddPolicy("User", policy => policy.RequireClaim("Role", "User"));
+            //});
 
 
             // Add framework services.

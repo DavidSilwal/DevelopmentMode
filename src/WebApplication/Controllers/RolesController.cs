@@ -1,4 +1,5 @@
 ﻿using Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ using WebApplication.Models.Extensions;
 
 namespace WebApplication.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RolesController : BaseController
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -38,7 +40,7 @@ namespace WebApplication.Controllers
 
             var roles = _roleManager.Roles;
 
-            return View(roles.ToList());
+            return View(roles.ToList().ToListViewModel());
         }
 
         public IActionResult Create()
@@ -116,8 +118,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-
-
+            
             var role = await _roleManager.FindByIdAsync(id);
 
             await _roleManager.DeleteAsync(role);

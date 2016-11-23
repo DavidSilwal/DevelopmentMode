@@ -37,7 +37,7 @@ namespace WebApplication.Models.ProfileViewModels
         public IList<string> Roles { get; set; }
 
 
-        public IFormFile Image { get; set; }
+        public string Image { get; set; }
 
     }
 }

@@ -74,6 +74,8 @@ namespace WebApplication.Controllers
 
                 var user = await _userManager.FindByNameAsync(model.UserName);
 
+               // var role = _userStore.AddToRoleAsync(user, "Admin");
+
                 if (user != null)
                 {
                     if (!await _userManager.IsEmailConfirmedAsync(user))
@@ -161,6 +163,7 @@ namespace WebApplication.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                         $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
                     return RedirectToLocal(returnUrl);
@@ -215,6 +218,7 @@ namespace WebApplication.Controllers
 
             // Sign in the user with this external login provider if the user already has a login.
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+
             if (result.Succeeded)
             {
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
@@ -525,10 +529,6 @@ namespace WebApplication.Controllers
             return user.Id;
         }
 
-
-
-
-
-
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using Org.BouncyCastle.Asn1.Crmf;
 using System;
@@ -10,6 +11,7 @@ using WebApplication.Data;
 
 namespace WebApplication.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class MessageTemplateController : Controller
     {
         public MessageTemplateController(ApplicationDbContext context)
@@ -36,21 +38,31 @@ namespace WebApplication.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-
-            return View();
+            return View(); 
         }
 
         [HttpPost]
         public IActionResult Create(MessageTemplate model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
+                model.AddedOn = new DateTimeOffset().UtcDateTime;
+                model.IsActive = true;
                 _context.MessageTemplateCollection.InsertOne(model);
             }
+            else
+            {
+                return View();
+            };
 
-            return View();
+            return RedirectToAction("Index");
         }
 
+        public async Task<ActionResult> SendEmail()
+        {
+            
+            return View();
+        }
 
 
 

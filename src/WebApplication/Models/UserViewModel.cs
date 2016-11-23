@@ -32,7 +32,7 @@ namespace WebApplication.Models
         public List<IdentityRole> Roles { get; set; }
 
         public List<string> RoleIds { get; set; }
-     
+
     }
 
     public class UserChangePasswordViewModel

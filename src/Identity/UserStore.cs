@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace Identity
         public UserStore(IIdentityDatabaseContext<TUser, TRole, string> databaseContext, ILookupNormalizer normalizer = null, IdentityErrorDescriber describer = null) : base(databaseContext, normalizer, describer) { }
     }
 
+    
     public class UserStore<TUser, TRole, TKey> :
         IUserLoginStore<TUser>,
         IUserRoleStore<TUser>,
@@ -1188,7 +1190,7 @@ namespace Identity
             return user.CurrentCountry;
         }
 
-        public IFormFile GetImage(TUser user)
+        public string GetImage(TUser user)
         {
             if (user == null)
             {
@@ -1271,6 +1273,22 @@ namespace Identity
 
             await Task.FromResult(0);
         }
+
+
+        public virtual async Task SetImageAsync(TUser user, string imageUrl, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            // TODO: tests
+            cancellationToken.ThrowIfCancellationRequested();
+            ThrowIfDisposed();
+            if (user == null) throw new ArgumentNullException(nameof(user));
+
+            user.Image = imageUrl;
+
+            await UpdateAsync(user);
+
+            await Task.FromResult(0);
+        }
+
 
         public virtual async Task DateOfBirthAsync(TUser user, DateTime dateOfBirth, CancellationToken cancellationToken = default(CancellationToken))
         {

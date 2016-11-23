@@ -13,16 +13,17 @@ namespace WebApplication.Controllers
     public class BaseController : Controller
     {
         public BaseController(UserManager<IdentityUser> userManager
-           ,ApplicationDbContext context, UserStore<IdentityUser, IdentityRole> users)
+           ,ApplicationDbContext context, 
+            UserStore<IdentityUser, IdentityRole> userStore)
         {
             _userManager = userManager;
             _context = context;
-            _users = users;
+            _userStore = userStore;
         }
         protected readonly UserManager<IdentityUser> _userManager;
         protected ApplicationDbContext _context;
 
-        protected readonly UserStore<IdentityUser, IdentityRole> _users;
+        protected readonly UserStore<IdentityUser, IdentityRole> _userStore;
         protected void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

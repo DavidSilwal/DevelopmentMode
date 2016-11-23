@@ -12,7 +12,7 @@ namespace WebApplication.Models.Extensions
     {
         public static IdentityUser UpdateEntity(this UserViewModel source, IdentityUser destination)
         {
-            
+
             var oldRoles = new List<IdentityRole<string>>();
 
             foreach (var userRole in destination.Roles)
@@ -53,7 +53,7 @@ namespace WebApplication.Models.Extensions
 
             destination.Email = source.Email;
             destination.UserName = source.UserName;
-     
+
             if (source.RoleIds != null)
             {
                 foreach (var roleId in source.RoleIds)
@@ -74,16 +74,37 @@ namespace WebApplication.Models.Extensions
             destination.Id = source.Id;
             destination.Email = source.Email;
             destination.UserName = source.UserName;
-         
+
             if (source.Roles != null)
             {
                 foreach (var userRole in source.Roles)
                 {
-                    destination.RoleIds.Add(userRole.RoleId.ToString());
+                    destination.RoleIds.Add(userRole.RoleId);
                 }
             }
 
             return destination;
         }
+
+
+        public static List<UserViewModel> ToListViewModel(this List<IdentityUser> source)
+        {
+            var destination = new List<UserViewModel>();
+
+            if (source != null)
+            {
+                foreach (var item in source)
+                {
+                    destination.Add(item.ToViewModel());
+                }
+            }
+
+            return destination;
+        }
+
+
+
+
+
     }
 }
