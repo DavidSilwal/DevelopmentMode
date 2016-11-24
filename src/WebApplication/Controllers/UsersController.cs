@@ -48,7 +48,7 @@ namespace WebApplication.Controllers
 
             var totalNumberInCollection = user.Count();
             var itemsPerPage = 4;
-            var u = user.ToList().ToListViewModel();
+            var u = user.ToList();//.ToListViewModel();
 
             //var _users = u
             //    .OrderBy(a => a.UserName)
@@ -58,6 +58,7 @@ namespace WebApplication.Controllers
 
 
             ViewBag.PaginatedMeta = _paginatedMetaService.GetMetaData(totalNumberInCollection, page, itemsPerPage);
+
 
             return View(u);
         }
@@ -238,12 +239,13 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserViewModel model)
         {
-          
+
            if (ModelState.IsValid)
            {
                var user = model.ToEntity();
 
                var result = await _userManager.CreateAsync(user, model.Password);
+               //var roles = await _userManager.AddToRolesAsync(user,model.Roles);
 
                if (result.Succeeded)
                {

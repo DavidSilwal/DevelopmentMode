@@ -8,7 +8,9 @@
 <div>
     <h4>Change your account settings</h4>
     <hr />
-    
+    <div>
+        <img src="~/UploadImages/@Model.Image" alt="Loading Profile Picture " />
+    </div>
    
     <table class="table table-condensed table-responsive">
         <tr>
@@ -52,16 +54,6 @@
      
 </div>
 
-<a asp-controller="Profile" asp-action="Upload" title="Change Profile Image">Change Profile Image</a>
+<a asp-controller="Profile" asp-action="Upload" title="Change Profile Image">Change Profile Image</a><br/>
 <a asp-action="UserActivity">Show User Activities</a>
 
-<div>
-    Image Here
-    @*<img src="C:/Users/DAVID SILWAL/Source/Repos/DevelopmentMode/src/WebApplication/wwwroot/Images/hqdefault (1).jpg" />*@
-    @*<img src="~\UploadImages\htd.jpg" alt="mistakes "/>*@
-    @*<img src="@Model.Image" alt="image" />*@
-   <img src="C:/Users/DAVID SILWAL/Source/Repos/DevelopmentMode/src/WebApplication/wwwroot/UploadImages/htd.jpg" alt="image" />
-
-
-    <img src="@Model.Image" alt="couldnot get image" />
-</div>

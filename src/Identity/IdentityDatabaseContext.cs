@@ -22,7 +22,7 @@ namespace Identity
         where TKey : IEquatable<TKey>
     {
         public string ConnectionString { get; set; }
-        public string DatabaseName { get; set; } = "FinalizeWebApplication";
+        public string DatabaseName { get; set; } = "WebApplication";
         public string UserCollectionName { get; set; } = "Users";
         public string RoleCollectionName { get; set; } = "Roles";
 

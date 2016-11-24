@@ -79,6 +79,8 @@ namespace Identity
 
         private IList<IdentityClaim> _claims = new List<IdentityClaim>();
 
+
+
         /// <summary>
         /// Returns a friendly name
         /// </summary>

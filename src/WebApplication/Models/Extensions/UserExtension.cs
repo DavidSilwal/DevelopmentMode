@@ -70,6 +70,7 @@ namespace WebApplication.Models.Extensions
         public static UserViewModel ToViewModel(this IdentityUser source)
         {
             var destination = new UserViewModel();
+            //var destinationRole = new List<IdentityRole<string>>();
 
             destination.Id = source.Id;
             destination.Email = source.Email;
@@ -77,10 +78,13 @@ namespace WebApplication.Models.Extensions
 
             if (source.Roles != null)
             {
-               
+
                 foreach (var userRole in source.Roles)
                 {
+
                     destination.Ids.Add(userRole.Id);
+                 //   destination.Roles.AddRange(source.Roles);
+                    //destination.Roles.Add(userRole);
                 }
             }
 

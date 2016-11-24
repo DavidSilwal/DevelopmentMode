@@ -18,6 +18,11 @@ namespace WebApplication.Models
             Ids = new List<string>();
         }
 
+        //public UserViewModel()
+        //{
+        //    Roles = new List<IdentityRole>();
+        //}
+
         public string Id { get; set; }
 
       
@@ -30,8 +35,9 @@ namespace WebApplication.Models
 
         [Display(Name = "Password")]
         public string Password { get; set; }
-        public List<IdentityRole> Roles { get; set; }
-
+        //public List<RoleViewModel> Roles { get; set; }
+            
+        //public List<IdentityRole> Roles { get; set; }
         public List<string> Ids { get; set; }
 
 

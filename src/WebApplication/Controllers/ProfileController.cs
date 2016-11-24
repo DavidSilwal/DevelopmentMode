@@ -160,7 +160,7 @@ namespace WebApplication.Controllers
                 image.CopyTo(fs);
 
                 var user = await GetCurrentUserAsync();
-                await _users.SetImageAsync(user, imageUrl);
+                await _users.SetImageAsync(user, image.FileName);
             }
 
             ViewBag.Message = $" Image uploaded successfully!";

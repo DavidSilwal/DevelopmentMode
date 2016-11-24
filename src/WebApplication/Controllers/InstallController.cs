@@ -19,11 +19,13 @@ namespace WebApplication.Controllers
 
         public InstallController(
             UserStore<IdentityUser, IdentityRole> userStore,
+            UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context
             )
         {
             _userStore = userStore;
+            _userManager = userManager;
             _roleManager = roleManager;
             _context = context;
         }
@@ -42,9 +44,12 @@ namespace WebApplication.Controllers
                 //    }
                 //}
             };
-            var result = await _userStore.CreateAsync(user);
+
+
+            var result = await _userManager.CreateAsync(user, "DInfoSys123!@#");
+            //var result = await _userStore.CreateAsync(user);
           
-            await _userStore.SetPasswordHashAsync(user, "admin123");
+            //await _userStore.SetPasswordHashAsync(user, "DInfoSys123!@#");
 
             if(result.Succeeded)
             {
