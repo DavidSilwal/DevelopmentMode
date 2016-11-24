@@ -12,15 +12,22 @@ namespace WebApplication.Controllers
     public class DashboardController : Controller
     {
        
-        public DashboardController()
+        public DashboardController(UserStore<IdentityUser, IdentityRole> userStore)
         {
-
+            _userStore = userStore;
         }
 
-        public IActionResult Index()
+        protected readonly UserStore<IdentityUser, IdentityRole> _userStore;
+        public async Task<ActionResult> Index()
         {
-
+            ViewBag.TotalUser = _userStore.Users.Count();
+            var adminRole =  await _userStore.GetUsersInRoleAsync("Admin");
             
+            ViewBag.admin = adminRole.Count();
+
+            var userRole = await _userStore.GetUsersInRoleAsync("Registered User");
+            ViewBag.user = userRole.Count();
+
             return View();
         }
 
