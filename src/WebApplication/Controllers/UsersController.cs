@@ -63,7 +63,6 @@ namespace WebApplication.Controllers
         }
 
 
-
         public async Task<IActionResult> Details(string id)
         {
      

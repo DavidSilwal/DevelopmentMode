@@ -58,6 +58,91 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Details(string id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id.ToString(),id);
+
+            var queryresult = _context.MessageTemplateCollection.Find(filter);
+            if (queryresult == null)
+            {
+                return NotFound();
+            }
+
+            return View(queryresult);
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id.ToString(), id);
+
+            var queryresult = _context.MessageTemplateCollection.Find(filter);
+            if (queryresult == null)
+            {
+                return NotFound();
+            }
+
+            return View(queryresult);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MessageTemplate model)
+        {
+            if (model._id == null)
+            {
+                return NotFound();
+            }
+
+            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id, model._id);
+           
+            var queryresult = _context.MessageTemplateCollection.ReplaceOne(filter,model);
+            if (queryresult == null)
+            {
+                return NotFound();
+            }
+
+            return View(queryresult);
+        }
+
+
+
+        public async Task<IActionResult> Delete(string id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id.ToString(), id);
+           return View(filter);
+        }
+     
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+
+            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id.ToString(), id);
+            var queryresult = _context.MessageTemplateCollection.DeleteOne(filter);
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
         public async Task<ActionResult> SendEmail()
         {
             

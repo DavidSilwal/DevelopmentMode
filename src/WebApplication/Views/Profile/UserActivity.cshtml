@@ -1,0 +1,74 @@
+﻿@model IList<Identity.IdentityUser>
+
+@*@foreach(var item in Model)
+
+{
+   @item.UserActivities
+
+    @foreach(var u in item.UserActivities)
+    {
+        @u.Browser
+        @u.IpAddress
+
+    }
+}*@
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            <label>IP</label>
+        </th>
+        <th>
+            <label>Browser</label>
+        </th>
+        <th>
+            <label>Time Stamp</label>
+        </th>
+        <th>
+            <label>Last Activity</label>
+        </th>
+        <th>
+            <label>Is Online</label>
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var m in Model)
+    {
+        @foreach (var item in m.UserActivities)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => @item.IpAddress)
+
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Browser)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeStamp)
+
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.LastActivity)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOnline)
+
+            </td>
+
+
+
+        </tr>
+            }
+        }
+
+</table>
