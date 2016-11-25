@@ -15,19 +15,19 @@ namespace WebApplication.Controllers
         protected readonly UserStore<IdentityUser, IdentityRole> _userStore;
         protected readonly UserManager<IdentityUser> _userManager;
         protected readonly RoleManager<IdentityRole> _roleManager;
-        protected readonly ApplicationDbContext _context;
+        protected readonly IMessageRepository _messageRepository;
 
         public InstallController(
             UserStore<IdentityUser, IdentityRole> userStore,
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
-            ApplicationDbContext context
+            IMessageRepository messageRepository
             )
         {
             _userStore = userStore;
             _userManager = userManager;
             _roleManager = roleManager;
-            _context = context;
+            _messageRepository = messageRepository;
         }
 
        public async Task<ActionResult> Index()
@@ -37,21 +37,13 @@ namespace WebApplication.Controllers
                 Email = $"admin@admin.com",
                 UserName = $"admin",
                 EmailConfirmed = true
-                //Roles = new List<IdentityRole<string>>
-                //{
-                //    new IdentityRole{
-                //          Name = "Admin"
-                //    }
-                //}
+
             };
+            
 
+            var result = await _userManager.CreateAsync(user, "Admin123!@#");
 
-            var result = await _userManager.CreateAsync(user, "DInfoSys123!@#");
-            //var result = await _userStore.CreateAsync(user);
-          
-            //await _userStore.SetPasswordHashAsync(user, "DInfoSys123!@#");
-
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 var adminRole = new IdentityRole()
                 {
@@ -60,32 +52,41 @@ namespace WebApplication.Controllers
 
                 result = await _roleManager.CreateAsync(adminRole);
     
-                await _userStore.AddToRoleAsync(user,adminRole.Name);
-
-                await _roleManager.CreateAsync(new IdentityRole()
-                {
-                    Name="User"
-                });
-                await _roleManager.CreateAsync(new IdentityRole()
-                {
-                    Name = "SuperUser"
-                });
+                await _userManager.AddToRoleAsync(user,adminRole.Name);
+                
             }
 
-            var msg = new List<MessageTemplate>
+            await _roleManager.CreateAsync(new IdentityRole()
             {
-                  new MessageTemplate
-                  {
-                       Subject = $"Hello",
-                       Body = $"Welcome to this application",
-                       MailFrom = $"admin@admin.com"
+                Name = "Super User"
+            });
+            await _roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Registered User"
+            });
+            await _roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Country Manager"
+            });
+            await _roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Domain Expert"
+            });
+            await _roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "Moderator"
+            });
 
-                  }
-            };
+
+           var msg = new MessageTemplate
+            {
+                Subject = $"Hello",
+                Body = $"Welcome to this application",
+                MailFrom = $"admin@admin.com"
+
+            };         
+            await _messageRepository.Save(msg);
             
-
-            _context.MessageTemplateCollection.InsertMany(msg);
-
             return RedirectToAction("Index","Dashboard");
             
         }

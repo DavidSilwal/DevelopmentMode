@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +8,6 @@ using WebApplication.Data;
 using WebApplication.Services;
 using Microsoft.AspNetCore.Identity;
 using WebMarkupMin.AspNetCore1;
-using Pioneer.Pagination;
 
 namespace WebApplication
 {
@@ -40,24 +35,24 @@ namespace WebApplication
            .AddDefaultTokenProviders();
 
             services.AddSingleton <UserStore<IdentityUser, IdentityRole>>();
-            services.AddAuthentication(options =>
-            {
 
-                options.SignInScheme = new IdentityCookieOptions().ExternalCookieAuthenticationScheme;
-            });
-
-
-            //services.AddAuthorization(options =>
+            //services.AddAuthentication(options =>
             //{
-            //    options.AddPolicy("Admin", policy => policy.RequireClaim("Role", "Admin"));
-            //    options.AddPolicy("User", policy => policy.RequireClaim("Role", "User"));
+
+            //    options.SignInScheme = new IdentityCookieOptions().ExternalCookieAuthenticationScheme;
             //});
+
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Role", "Admin"));
+            });
 
 
             // Add framework services.
             services.AddMvc();
-            services.AddTransient<IPaginatedMetaService, PaginatedMetaService>();
-
+            services.AddScoped<IMessageRepository, MessageRepository>();
+ 
             services.AddWebMarkupMin(
         options =>
         {

@@ -29,17 +29,18 @@ namespace WebApplication.Models.Extensions
                 else
                 {
                     source.Ids.Remove(oldRole.Id);
+                    source.Roles.Remove(oldRole.Name);
                 }
             }
 
             if (source.Ids != null)
             {
-                foreach (var Id in source.Ids)
+                foreach (var Id in source.Roles)
                 {
                     var userRole = new IdentityRole<string>();
-
+               
                     userRole.Id = Id;
-
+                 
                     destination.Roles.Add(userRole);
                 }
             }
@@ -70,8 +71,7 @@ namespace WebApplication.Models.Extensions
         public static UserViewModel ToViewModel(this IdentityUser source)
         {
             var destination = new UserViewModel();
-            //var destinationRole = new List<IdentityRole<string>>();
-
+   
             destination.Id = source.Id;
             destination.Email = source.Email;
             destination.UserName = source.UserName;
@@ -83,8 +83,8 @@ namespace WebApplication.Models.Extensions
                 {
 
                     destination.Ids.Add(userRole.Id);
-                 //   destination.Roles.AddRange(source.Roles);
-                    //destination.Roles.Add(userRole);
+                    destination.Roles.Add(userRole.Name);
+                   
                 }
             }
 

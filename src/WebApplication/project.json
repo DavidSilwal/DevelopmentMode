@@ -5,6 +5,7 @@
         "Microsoft.AspNetCore.Authentication.Facebook": "1.0.0",
         "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
         "Microsoft.AspNetCore.Authentication.Twitter": "1.0.0",
+        "Microsoft.AspNet.Authentication.MicrosoftAccount":"1.0.0-rc1-final", 
         "Microsoft.AspNetCore.Diagnostics": "1.0.0",
         "Microsoft.AspNetCore.Mvc": "1.0.1",
         "Microsoft.AspNetCore.Razor.Tools": {
@@ -28,9 +29,7 @@
             "type": "platform"
         },
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-      "Ngonzalez.ImageProcessorCore": "0.0.1",
-      "AutoMapper": "5.1.1",
-      "Pioneer.Pagination": "1.0.2"
+        "Ngonzalez.ImageProcessorCore": "0.0.1"    
     },
 
     "tools": {

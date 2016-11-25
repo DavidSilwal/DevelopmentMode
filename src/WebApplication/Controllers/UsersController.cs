@@ -2,17 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
 using WebApplication.Models;
 using WebApplication.Models.Extensions;
-using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using Pioneer.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -25,19 +19,17 @@ namespace WebApplication.Controllers
         private readonly ILogger _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        private readonly IPaginatedMetaService _paginatedMetaService;
-
         public UsersController(
             UserManager<IdentityUser> userManager,
             ILoggerFactory loggerFactory,
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context,
-            UserStore<IdentityUser,IdentityRole> userStore,
-            IPaginatedMetaService paginatedMetaService) : base(userManager,context, userStore)
+            UserStore<IdentityUser,IdentityRole> userStore
+            ) : base(userManager,context, userStore)
         {
             _roleManager = roleManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
-            _paginatedMetaService = paginatedMetaService;
+   
         }
 
        
@@ -46,8 +38,6 @@ namespace WebApplication.Controllers
 
             var user =  _userStore.Users;
 
-            var totalNumberInCollection = user.Count();
-            var itemsPerPage = 4;
             var u = user.ToList();//.ToListViewModel();
 
             //var _users = u
@@ -56,8 +46,6 @@ namespace WebApplication.Controllers
             //    // .Take(page)
             //    .ToList();
 
-
-            ViewBag.PaginatedMeta = _paginatedMetaService.GetMetaData(totalNumberInCollection, page, itemsPerPage);
 
 
             return View(u);

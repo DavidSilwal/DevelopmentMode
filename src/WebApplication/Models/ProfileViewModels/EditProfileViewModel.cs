@@ -34,7 +34,7 @@ namespace WebApplication.Models.ProfileViewModels
         public string CurrentCountry { get; set; }
 
 
-        public IList<string> Roles { get; set; }
+        public List<string> Roles { get; set; }
 
 
         public string Image { get; set; }

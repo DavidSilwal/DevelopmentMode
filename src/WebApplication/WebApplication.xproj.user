@@ -2,6 +2,6 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ActiveDebugProfile>IIS Express</ActiveDebugProfile>
-    <NameOfLastUsedPublishProfile>davidsilwal - Web Deploy</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>davidsilwal - Web Deploy %282%29</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Org.BouncyCastle.Asn1.Crmf;
 using System;
@@ -14,27 +15,20 @@ namespace WebApplication.Controllers
     [Authorize(Roles = "Admin")]
     public class MessageTemplateController : Controller
     {
-        public MessageTemplateController(ApplicationDbContext context)
+        public MessageTemplateController(IMessageRepository messageRepository)
         {
-            _context = context;
+            _messageRepository = messageRepository;
         }
 
-        protected readonly ApplicationDbContext _context;
+        protected readonly IMessageRepository _messageRepository;
 
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
-           var item = AllMessageTemplate();
+            var item = await _messageRepository.FindAll();
 
             return View(item);
         }
-
-        public IList<MessageTemplate> AllMessageTemplate()
-        {
-            var msg = _context.Database.GetCollection<MessageTemplate>("MessageTemplates").Aggregate().ToList();
-            return msg;
-        }
         
-
         [HttpGet]
         public IActionResult Create()
         {
@@ -46,9 +40,7 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.AddedOn = new DateTimeOffset().UtcDateTime;
-                model.IsActive = true;
-                _context.MessageTemplateCollection.InsertOne(model);
+                _messageRepository.Save(model);
             }
             else
             {
@@ -66,9 +58,8 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id.ToString(),id);
+            var queryresult = await _messageRepository.Get(id);
 
-            var queryresult = _context.MessageTemplateCollection.Find(filter);
             if (queryresult == null)
             {
                 return NotFound();
@@ -83,10 +74,8 @@ namespace WebApplication.Controllers
             {
                 return NotFound();
             }
+            var queryresult = await _messageRepository.Get(id);
 
-            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id.ToString(), id);
-
-            var queryresult = _context.MessageTemplateCollection.Find(filter);
             if (queryresult == null)
             {
                 return NotFound();
@@ -102,16 +91,9 @@ namespace WebApplication.Controllers
             {
                 return NotFound();
             }
-
-            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id, model._id);
-           
-            var queryresult = _context.MessageTemplateCollection.ReplaceOne(filter,model);
-            if (queryresult == null)
-            {
-                return NotFound();
-            }
-
-            return View(queryresult);
+            await _messageRepository.Update(model);
+              
+            return View();
         }
 
 
@@ -123,35 +105,20 @@ namespace WebApplication.Controllers
             {
                 return NotFound();
             }
+            var queryresult = await _messageRepository.Get(id);
 
-            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id.ToString(), id);
-           return View(filter);
+           return View(queryresult);
         }
      
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(MessageTemplate model)
         {
 
-            var filter = Builders<MessageTemplate>.Filter.Eq(x => x._id.ToString(), id);
-            var queryresult = _context.MessageTemplateCollection.DeleteOne(filter);
-
+            await _messageRepository.Delete(model);
             return RedirectToAction("Index");
         }
-
-
-
-
-        public async Task<ActionResult> SendEmail()
-        {
-            
-            return View();
-        }
-
-
-
-
-
+        
     }
 }
