@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -29,19 +30,25 @@ namespace WebApplication.Controllers
             _roleManager = roleManager;
             _messageRepository = messageRepository;
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-       public async Task<ActionResult> Index()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+         public async Task<ActionResult> Index(InstallationViewModel model)
         {
             var user = new IdentityUser
             {
-                Email = $"admin@admin.com",
-                UserName = $"admin",
+                Email = model.UserName ,
+                UserName = model.UserName,
                 EmailConfirmed = true
 
             };
             
 
-            var result = await _userManager.CreateAsync(user, "Admin123!@#");
+            var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {

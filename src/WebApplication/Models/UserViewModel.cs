@@ -18,15 +18,11 @@ namespace WebApplication.Models
             Ids = new List<string>();
         }
 
-        //public UserViewModel()
-        //{
-        //    Roles = new List<IdentityRole>();
-        //}
 
         public string Id { get; set; }
 
       
-        [Display(Name = "Username")]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
      
@@ -35,12 +31,9 @@ namespace WebApplication.Models
 
         [Display(Name = "Password")]
         public string Password { get; set; }
-        public List<string> Roles { get; set; }
-            
-        //public List<IdentityRole> Roles { get; set; }
+        public List<IdentityRole> Roles { get; set; }
         public List<string> Ids { get; set; }
-
-
+        
     }
 
     public class UserChangePasswordViewModel

@@ -8,7 +8,8 @@ using WebApplication.Data;
 using WebApplication.Services;
 using Microsoft.AspNetCore.Identity;
 using WebMarkupMin.AspNetCore1;
-
+using WebApplication.Models;
+using WebApplication.Middlewares;
 namespace WebApplication
 {
     public class Startup
@@ -35,12 +36,12 @@ namespace WebApplication
            .AddDefaultTokenProviders();
 
             services.AddSingleton <UserStore<IdentityUser, IdentityRole>>();
+         
+                //services.AddAuthentication(options =>
+                //{
 
-            //services.AddAuthentication(options =>
-            //{
-
-            //    options.SignInScheme = new IdentityCookieOptions().ExternalCookieAuthenticationScheme;
-            //});
+                //    options.SignInScheme = new IdentityCookieOptions().ExternalCookieAuthenticationScheme;
+                //});
 
 
             services.AddAuthorization(options =>
@@ -51,8 +52,10 @@ namespace WebApplication
 
             // Add framework services.
             services.AddMvc();
-            services.AddScoped<IMessageRepository, MessageRepository>();
- 
+            services.AddSingleton<IMessageRepository, MessageRepository>();
+            services.AddSingleton<IViewModelService, ViewModelService>();
+            services.AddSingleton<IDashboardViewModel, DashboardViewModel>();
+
             services.AddWebMarkupMin(
         options =>
         {
@@ -70,6 +73,7 @@ namespace WebApplication
         
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IViewModelService, ViewModelService>();
          
         }
 
@@ -91,6 +95,9 @@ namespace WebApplication
 
             app.UseStaticFiles();
 
+            
+           
+                
             app.UseWebMarkupMin();
 
             
@@ -113,6 +120,8 @@ namespace WebApplication
                 });
 
 
+            app.UseInstaller();
+           
 
             app.UseMvc(routes =>
             {

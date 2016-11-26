@@ -156,10 +156,11 @@ namespace Identity
         }
         private IList<UserActivity> _userActivities = new List<UserActivity>();
 
-        
+
         /// <summary>
         /// Navigation property for users claims
         /// </summary>
+         [BsonIgnoreIfNull]
         public virtual IList<IdentityClaim> Claims
         {
             get { return _claims; }
@@ -170,7 +171,7 @@ namespace Identity
         /// <summary>
         /// Get a list of all user's claims combined with claims from role
         /// </summary>
-        [BsonElement]
+        [BsonIgnoreIfNull]
         public virtual IList<IdentityClaim> AllClaims
         {
             get
@@ -188,12 +189,16 @@ namespace Identity
         /// Navigation property for users logins
         /// </summary>
         /// 
-      [BsonIgnore]
-        public virtual IList<UserLoginInfo> Logins
+        [BsonIgnoreIfNull]      // if we didnt ingore this users/index will render but external login provider work
+        [BsonIgnore]    
+         public virtual IList<UserLoginInfo> Logins
         {
             get { return _logins; }
             set { _logins = value ?? new List<UserLoginInfo>(); }
         }
+        [BsonIgnoreIfNull]
+        [BsonIgnore]
+
         private IList<UserLoginInfo> _logins = new List<UserLoginInfo>();
 
         /// <summary>

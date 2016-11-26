@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Identity
 {
+   
     public static class UserLoginInfoExtensions
     {
         public static bool AreEqual(this UserLoginInfo thisObj, UserLoginInfo obj)

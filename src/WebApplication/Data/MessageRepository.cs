@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication.Models;
 
 namespace WebApplication.Data
 {
@@ -35,8 +36,11 @@ namespace WebApplication.Data
 
         public async Task Update(MessageTemplate MessageTemplate)
         {
+
             await _context.MessageTemplateCollection.ReplaceOneAsync(x => x._id == MessageTemplate._id, MessageTemplate);
+        
         }
+
 
         public async Task<List<MessageTemplate>> FindAll()
         {

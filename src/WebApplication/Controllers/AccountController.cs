@@ -333,6 +333,46 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResendEmailConfirmation()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> ResendEmailConfirmation(ResendEmailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var user = await _userManager.FindByNameAsync(model.Email);
+                if (user == null)
+                {
+                    return RedirectToAction(nameof(AccountController.ResendEmailConfirmation), "Account");
+                }
+
+
+
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+
+            }
+
+            return View(model);
+
+        }
+
+
+
+
+
+
         //
         // GET: /Account/ForgotPasswordConfirmation
         [HttpGet]

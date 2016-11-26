@@ -18,6 +18,8 @@
         "dependencies": {
           "Identity": "1.0.0",
           "MailKit": "1.6.0",
+          "Microsoft.AspNetCore.Authorization": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Facebook": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Twitter": "1.0.0",
@@ -3193,6 +3195,8 @@
         "dependencies": {
           "Identity": "1.0.0",
           "MailKit": "1.6.0",
+          "Microsoft.AspNetCore.Authorization": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Facebook": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
           "Microsoft.AspNetCore.Authentication.Twitter": "1.0.0",

@@ -32,6 +32,8 @@ namespace Identity
     /// Represents a Role entity
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
+    /// 
+    [BsonIgnoreExtraElements]
     public class IdentityRole<TKey> where TKey : IEquatable<TKey>
     {
         public IdentityRole() { }
@@ -68,6 +70,8 @@ namespace Identity
         /// <summary>
         /// Navigation property for claims in the role
         /// </summary>
+        /// 
+        [BsonIgnoreIfNull]
         public virtual IList<IdentityClaim> Claims
         {
             get { return _claims; }

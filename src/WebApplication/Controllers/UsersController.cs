@@ -18,35 +18,29 @@ namespace WebApplication.Controllers
     {
         private readonly ILogger _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
-
+        protected readonly RoleStore<IdentityUser, IdentityRole> _roleStore;
         public UsersController(
             UserManager<IdentityUser> userManager,
             ILoggerFactory loggerFactory,
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context,
             UserStore<IdentityUser,IdentityRole> userStore
+          
             ) : base(userManager,context, userStore)
         {
             _roleManager = roleManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
+
    
         }
 
        
-        public async Task<IActionResult> Index(int page =1)
+        public async Task<IActionResult> Index()
         {
 
             var user =  _userStore.Users;
 
             var u = user.ToList();//.ToListViewModel();
-
-            //var _users = u
-            //    .OrderBy(a => a.UserName)
-            //    // .Skip(page * itemsPerPage)
-            //    // .Take(page)
-            //    .ToList();
-
-
 
             return View(u);
         }
@@ -72,7 +66,7 @@ namespace WebApplication.Controllers
 
         public async Task<IActionResult> Search(string searchString)
         {
-           var item =  _userStore.SearchByUserName(searchString);
+           var item =   _userStore.SearchByUserName(searchString);
 
             return View(item);
         }
@@ -114,8 +108,9 @@ namespace WebApplication.Controllers
 
                 await _userManager.SetEmailAsync(user, model.Email);
                 await _userManager.SetUserNameAsync(user, model.UserName);
+              //await _userManager.AddToRolesAsync(user, model.Roles);
 
-                user = model.UpdateEntity(user);
+                //user = model.UpdateEntity(user);
 
                 var result = await _userManager.UpdateAsync(user);
 

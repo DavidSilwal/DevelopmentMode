@@ -1454,5 +1454,18 @@ namespace Identity
             await UpdateAsync(user);
         }
 
+
+        public virtual async Task UpdateRoleOnUsers(TRole role, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var roleFilter = Builders<IdentityRole<TKey>>.Filter.Eq(x => x.Id, role.Id);
+            var userFilter = Builders<TUser>.Filter.ElemMatch(x => x.Roles, roleFilter);
+
+            var update = Builders<TUser>.Update.Set("Roles.$", role);
+            var options = new UpdateOptions { IsUpsert = false };
+
+            await DatabaseContext.UserCollection.UpdateManyAsync(userFilter, update, options, cancellationToken);
+        }
+
+
     }
 }

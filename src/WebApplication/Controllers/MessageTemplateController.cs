@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -22,7 +23,7 @@ namespace WebApplication.Controllers
 
         protected readonly IMessageRepository _messageRepository;
 
-        public async Task<ActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             var item = await _messageRepository.FindAll();
 
@@ -37,10 +38,10 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         public IActionResult Create(MessageTemplate model)
-        {
+            {
             if (ModelState.IsValid)
             {
-                _messageRepository.Save(model);
+                _messageRepository.Save(model);  // this function didnt invoke coz create form can not return objectid
             }
             else
             {
@@ -85,14 +86,15 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(MessageTemplate model)
         {
-            if (model._id == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                await  _messageRepository.Update(model);
+
+                return RedirectToAction("Index");
             }
-            await _messageRepository.Update(model);
-              
             return View();
         }
 
@@ -107,16 +109,22 @@ namespace WebApplication.Controllers
             }
             var queryresult = await _messageRepository.Get(id);
 
+            if(queryresult == null)
+            {
+                return NotFound();
+            }
+
            return View(queryresult);
         }
      
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(MessageTemplate model)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            var item = await _messageRepository.Get(id);
+            await _messageRepository.Delete(item);
 
-            await _messageRepository.Delete(model);
             return RedirectToAction("Index");
         }
         

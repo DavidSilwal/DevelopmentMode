@@ -13,6 +13,7 @@ namespace WebApplication.Data
     public class MessageTemplate
     {
         public ObjectId _id { get; set; }
+
         public string Subject { get; set; }
 
         [DataType(DataType.MultilineText)]

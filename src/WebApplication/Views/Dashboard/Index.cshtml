@@ -1,12 +1,27 @@
+@model WebApplication.Models.TileViewModel
 
-<h1>Admin Dashboard</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Dashboard</h1>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    @Html.Partial("_TileViewModel")
+</div>
+
+
+
+@*<h1>Admin Dashboard</h1>
 <br/>
 
 <p>
 <h1>Total Registered User :@ViewBag.TotalUser </h1>
 <h1> Admin User:@ViewBag.admin </h1>
     <h1> Registered User:@ViewBag.user </h1>
-</p>
+</p>*@
 
 <a asp-controller="Roles" asp-action="Index">Roles Admin</a><br/>
 <a asp-controller="Users" asp-action="Index">Users Admin</a><br />
