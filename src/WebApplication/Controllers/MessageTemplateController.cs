@@ -51,7 +51,7 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(Guid? id)
         {
 
             if (id == null)
@@ -69,7 +69,7 @@ namespace WebApplication.Controllers
             return View(queryresult);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -91,16 +91,16 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                await  _messageRepository.Update(model);
+                await  _messageRepository.UpdateMsg(model);
 
                 return RedirectToAction("Index");
             }
             return View();
         }
 
+  
 
-
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
 
             if (id == null)
@@ -120,7 +120,7 @@ namespace WebApplication.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(Guid? id)
         {
             var item = await _messageRepository.Get(id);
             await _messageRepository.Delete(item);

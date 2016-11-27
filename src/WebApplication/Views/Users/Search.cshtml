@@ -1,41 +1,57 @@
-﻿@model List<Identity.IdentityUser>
+﻿
+@model WebApplication.Models.UserSearchViewModel
 
-@{
-    ViewData["Title"] = "Search";
-}
+
+<form asp-controller="Users" asp-action="Search" method="get">
+    <p>
+        <select asp-for="selectList" asp-items="Model.selectList">
+            <option value="">All</option>
+        </select>
+
+        User Name: <input type="text" name="id">
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
 
 
 <table class="table">
-    @*<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
+    <tr>
         <th>
             @Html.DisplayNameFor(model => model.Users[0].UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Users[0].FirstName)
+            @Html.DisplayNameFor(model => model.Users[0].Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Users[0].LastName)
+            @Html.DisplayNameFor(model => model.Users[0].Roles)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users[0].EmailConfirmed)
         </th>
         <th></th>
-    </tr>*@
+    </tr>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Users)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
+                    @Html.DisplayFor(modelItem => item.Roles)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailConfirmed)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

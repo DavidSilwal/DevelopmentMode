@@ -34,19 +34,17 @@
                            
                             @foreach (var role in Roles)
                             {
-                                <input asp-for-collection="Roles" type="checkbox" value="role.ID" />
-                                <label asp-for="Roles" asp-for-value="role.Id">@role.Name</label>
+                                @*<input asp-for-collection="Roles" type="checkbox" value="role.ID" />
+                                <label asp-for="Roles" asp-for-value="role.Id">@role.Name</label>*@
                               
-                                  @*@Html.CheckBoxFor(m=>m.Roles.Select(m=>m.Name)),true)*@
-                               
-                                 @*<div class="permission">
+                                 <div class="permission">
                                     <label for="@role.Id" class="cb-checkbox cb-sm">
                                         <input type="checkbox" name="RoleIds" value="@role.Id"
                                                @if (Model != null && Model.Ids.Contains(role.Id))
                                                { <text> checked="checked" </text>    } />
                                         <span>@role.Name</span>
                                     </label>
-                                </div>*@
+                                </div>
                             }
                         </div>
                     </div>
@@ -60,3 +58,10 @@
         </div>
     </div>
 </div>
+
+
+       <script type="text/javascript">
+        $(document).ready(function () {
+            $('.checkbo').checkBo();
+        });
+</script>

@@ -231,6 +231,7 @@
 -r:"C:\Users\DAVID SILWAL\.nuget\packages\WebMarkupMin.Core\2.1.0\lib\netstandard1.3\WebMarkupMin.Core.dll"
 -r:"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\Identity\bin\Debug\netstandard1.6\Identity.dll"
 -resource:"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\obj\Debug\netcoreapp1.0\WebApplicationdotnet-compile.deps.json",WebApplication.deps.json
+"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\objectid.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Program.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Startup.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\AccountController.cs"
@@ -248,6 +249,7 @@
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\IMessageRepository.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\MessageRepository.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\MessageTemplate.cs"
+"C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\Repos.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\Role.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\User.cs"
 "C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\Enums\Countries.cs"

@@ -9,6 +9,8 @@ using WebApplication.Models;
 using WebApplication.Models.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApplication.Controllers
 {
@@ -34,15 +36,37 @@ namespace WebApplication.Controllers
    
         }
 
-       
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
+            return View(_userStore.Users.ToList());
+        }
 
-            var user =  _userStore.Users;
 
-            var u = user.ToList();//.ToListViewModel();
 
-            return View(u);
+
+       
+        public async Task<IActionResult> Search(string id)
+        {
+        
+            var user =  _userManager.Users;
+            List<IdentityUser> u =  user.ToList();//.ToListViewModel();
+
+                IEnumerable<string> IQueryItem = from m in u
+                       orderby m.UserName
+                       select m.UserName;
+
+
+            var item = from m in u
+                       select m;
+            
+            if (!string.IsNullOrEmpty(id))
+            {
+                item = item.Where(s => s.UserName.Contains(id));
+            }
+            var userVM = new UserSearchViewModel();
+            userVM.selectList = new SelectList(IQueryItem.Distinct().ToList());
+            userVM.Users = _userManager.Users.ToList();
+            return View(userVM);
         }
 
 
@@ -64,12 +88,12 @@ namespace WebApplication.Controllers
             return View(user);          
         }
 
-        public async Task<IActionResult> Search(string searchString)
-        {
-           var item =   _userStore.SearchByUserName(searchString);
+        //public async Task<IActionResult> Search(string searchString)
+        //{
+        //   var item =   _userStore.SearchByUserName(searchString);
 
-            return View(item);
-        }
+        //    return View(item);
+        //}
         
 
         public async Task<IActionResult> Edit(string id)

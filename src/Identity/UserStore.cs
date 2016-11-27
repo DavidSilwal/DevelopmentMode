@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using System;
@@ -1465,6 +1466,14 @@ namespace Identity
 
             await DatabaseContext.UserCollection.UpdateManyAsync(userFilter, update, options, cancellationToken);
         }
+
+
+        //public List<IdentityUser> Filter(string jsonQuery)
+        //{
+        //    var queryDoc = new QueryDocument(BsonSerializer.Deserialize<BsonDocument>(jsonQuery));
+        //    return DatabaseContext.UserCollection.Find<IdentityUser>(queryDoc).ToList();
+        //}
+
 
 
     }

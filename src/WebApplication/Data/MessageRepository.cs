@@ -18,9 +18,9 @@ namespace WebApplication.Data
         }
 
 
-        public async Task<MessageTemplate> Get(string id)
+        public async Task<MessageTemplate> Get(Guid? _id)
         {
-            ObjectId _id = ObjectId.Parse(id);
+            //ObjectId _id = ObjectId.Parse(id);
             return await _context.MessageTemplateCollection.FindSync(x => x._id == _id).SingleAsync();
         }
 
@@ -40,13 +40,19 @@ namespace WebApplication.Data
             await _context.MessageTemplateCollection.ReplaceOneAsync(x => x._id == MessageTemplate._id, MessageTemplate);
         
         }
-
-
+        
         public async Task<List<MessageTemplate>> FindAll()
         {
             var MessageTemplates = await _context.MessageTemplateCollection.Find("{}").ToListAsync();
             return MessageTemplates;
         }
+        
+
+        public async Task UpdateMsg(MessageTemplate msg)
+        {
+            await _context.MessageTemplateCollection.ReplaceOneAsync(x => x._id == msg._id, msg);
+        }
+
 
 
 

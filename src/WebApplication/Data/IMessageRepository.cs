@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using System;
 
 namespace WebApplication.Data
 {
@@ -8,8 +9,10 @@ namespace WebApplication.Data
     {
         Task Delete(MessageTemplate MessageTemplate);
         Task<List<MessageTemplate>> FindAll();
-        Task<MessageTemplate> Get(string _id);
+        Task<MessageTemplate> Get(Guid? _id);
         Task Save(MessageTemplate MessageTemplate);
         Task Update(MessageTemplate MessageTemplate);
+   
+        Task UpdateMsg(MessageTemplate msg);
     }
 }
