@@ -41,7 +41,7 @@ namespace WebApplication.Controllers
             {
             if (ModelState.IsValid)
             {
-                _messageRepository.Save(model);  // this function didnt invoke coz create form can not return objectid
+                _messageRepository.Save(model);  
             }
             else
             {

@@ -1,0 +1,24 @@
+﻿@*<form asp‐controller="Profile" asp‐action="Upload" method="post"
+      asp‐antiforgery="false"
+      class="dropzone" id="UploadForm" enctype="multipart/form‐data">
+    <div class="fallback">
+        <input name="image" type="file" multiple />
+        <input type="submit" value="Upload" />
+    </div>
+</form>
+
+<script>
+    Dropzone.options.UploadForm = {
+        maxFilesize: 20, // MB
+        acceptedFiles: "image/*"
+    };
+</script>*@
+
+
+<form asp-action="Upload"
+      asp-controller="Profile"
+      method="post"
+      enctype="multipart/form-data">
+    <input type="file" name="image" multiple />
+    <input type="submit" value="Upload Selected Files" />
+</form>

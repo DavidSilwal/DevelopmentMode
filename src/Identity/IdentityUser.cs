@@ -133,7 +133,15 @@ namespace Identity
         public virtual Occurrence CreatedOn { get; private set; }
         public virtual Occurrence DeletedOn { get; private set; }
 
-  
+
+
+        public string AboutMe { get; set; }
+
+        public GenderType Gender { get; set; }
+
+
+
+
 
         /// <summary>
         /// Navigation property for users in the role
@@ -250,4 +258,11 @@ namespace Identity
         #endregion
     }
 
+    public enum GenderType
+    {
+        MALE,
+        FEMALE
+       
+
+    }
 }

@@ -56,6 +56,9 @@ namespace WebApplication
             services.AddSingleton<IViewModelService, ViewModelService>();
             services.AddSingleton<IDashboardViewModel, DashboardViewModel>();
 
+
+            services.AddSingleton<IUserStatusDataRepository,UserStatusDataRepository>();
+
             services.AddWebMarkupMin(
         options =>
         {

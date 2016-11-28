@@ -106,7 +106,7 @@ namespace WebApplication.Controllers
                     }
                     
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToAction("Index", "Newsfeed");
+                    return RedirectToAction("Index", "UserStatus");
                     //return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

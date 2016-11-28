@@ -1,0 +1,28 @@
+﻿@model ResendEmailViewModel
+
+<div class="page-auth text-center">
+    <div class="login-box center-block">
+
+        <h3 class="text-center">Resend Email COnfirmation</h3>
+        <form asp-controller="Account" asp-action="ResendEmailConfirmation" method="post" class="form-horizontal" role="form">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label sr-only"></label>
+                <div class="col-md-12">
+                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-custom-primary btn-block">Send Confirmation Email</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
