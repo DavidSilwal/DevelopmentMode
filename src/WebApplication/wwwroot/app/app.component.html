@@ -1,0 +1,16 @@
+<div class="card-wide mdl-card mdl-shadow--2dp">
+    
+    <div class="mdl-list">
+        <div class="mdl-list__item" *ngFor="let item of userstatus">
+            <span class="mdl-list__item-primary-content">
+                <span>{{item._id}}</span>
+                <span>{{item.type}}</span>
+                <span>{{item.status}}</span>
+                <span>{{item.updateTime}}</span>
+            </span>
+            <a class="mdl-list__item-secondary-action mdl-js-ripple-effect mdl-button mdl-js-button mdl-button--icon mdl-button--colored" href="#"></a>
+        </div>
+    </div>
+</div>
+
+

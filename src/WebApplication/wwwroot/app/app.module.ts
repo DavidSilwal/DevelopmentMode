@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 import { routing, appRoutingProviders } from './app.routing';
 
-
+import { UserStatusService } from './services/userstatus.service';
     
 
 @NgModule({
@@ -19,7 +19,7 @@ import { routing, appRoutingProviders } from './app.routing';
     ],
     providers: [
         appRoutingProviders,
-    
+        UserStatusService
     
     ],
     declarations: [

@@ -14,6 +14,7 @@ var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var app_component_1 = require('./app.component');
 var app_routing_1 = require('./app.routing');
+var userstatus_service_1 = require('./services/userstatus.service');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -27,6 +28,7 @@ var AppModule = (function () {
             ],
             providers: [
                 app_routing_1.appRoutingProviders,
+                userstatus_service_1.UserStatusService
             ],
             declarations: [
                 app_component_1.AppComponent,

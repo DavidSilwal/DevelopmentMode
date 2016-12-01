@@ -9,17 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var userstatus_service_1 = require('./services/userstatus.service');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(userStatusService) {
+        this.userStatusService = userStatusService;
         this.title = 'user status';
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userStatusService.getUserStatus()
+            .subscribe(function (userstatus) { return _this.userstatus = userstatus; });
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            //templateUrl: 'app.component.html'
-            template: "\n    <h1>{{title}}</h1>\n    "
+            templateUrl: './app/app.component.html',
+            styleUrls: ['./app/app.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [userstatus_service_1.UserStatusService])
     ], AppComponent);
     return AppComponent;
 }());
