@@ -146,6 +146,12 @@ namespace WebApplication.Controllers
                 string FilePath = parsedContentDisposition.FileName.Trim('"');
                 string FileExtension = Path.GetExtension(FilePath);
 
+                //if(!(new[] { ".jpg", ".png", ".jpeg" }.Any(s=>s.FileExtension==s)))
+                //{
+                //    return BadRequest("File msut be .jpg or .png");
+
+                //}
+
                 var uploadDir = _environment.WebRootPath + $@"\UploadImages\";
                 if (!Directory.Exists(uploadDir))
                 {
@@ -171,6 +177,23 @@ namespace WebApplication.Controllers
         }
 
 
+        //private Stream ResizeImage(Stream stream, Size size)
+        //{
+        //    MemoryStream outStream = new MemoryStream();
+
+        //    using (ImageFactory imageFactory = new ImageFactory())
+        //    {
+        //        // Load, resize, set the format, and quality and save an image.
+        //        imageFactory.Load(stream)
+        //                    .Resize(new ResizeLayer(size))
+        //                    .Format(new JpegFormat())
+        //                    .Quality(70)
+        //                    .BackgroundColor(Color.White)
+        //                    .Save(outStream);
+        //    }
+
+        //    return outStream;
+        //}
 
 
 

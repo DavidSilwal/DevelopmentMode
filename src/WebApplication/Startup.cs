@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Identity;
 using WebMarkupMin.AspNetCore1;
 using WebApplication.Models;
 using WebApplication.Middlewares;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+
 namespace WebApplication
 {
     public class Startup
@@ -132,6 +135,17 @@ namespace WebApplication
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
+                RequestPath = "/node_modules"
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
+            });
+
         }
     }
 }

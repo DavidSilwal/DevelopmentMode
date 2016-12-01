@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace WebApplication.Controllers
 {
@@ -268,6 +269,46 @@ namespace WebApplication.Controllers
 
            return View(model);
         }
+            
+        //
+       
+        public IActionResult Get(int page =1)
+        {
+            int pageSize = 2;
+            PaginationSet<IdentityUser> pagedSet = null;
+
+                 int currentPage = page;
+                int currentPageSize = pageSize;
+
+                List<IdentityUser> _users = null;
+                int _totalusers = new int();
+
+                var u = _userManager.Users.ToList();
+
+                    _users = u
+                        .OrderBy(p => p.UserName)
+                        .Skip(currentPage * currentPageSize)
+                        .Take(currentPageSize)
+                        .ToList();
+                  var item = _users;
+                  _totalusers = _userManager.Users.Count();
+
+
+                pagedSet = new PaginationSet<IdentityUser>()
+                {
+                    Page = currentPage,
+                    TotalCount = _totalusers,
+                    TotalPages = (int)Math.Ceiling((decimal)_totalusers / currentPageSize),
+                    Items = u
+                };
+            return View(pagedSet);
+        }
+     
+         
+           
+        }
 
     }
-}
+
+    
+  

@@ -31,7 +31,10 @@
       "type": "platform"
     },
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "Ngonzalez.ImageProcessorCore": "0.0.1"
+    "Ngonzalez.ImageProcessorCore": "0.0.1",
+    "Microsoft.AspNetCore.SpaServices": "1.0.0-beta-000019",
+    "ImageSharp": "0.0.0",
+    "Microsoft.AspNetCore.Cors": "1.0.0"
   },
 
     "tools": {
@@ -61,12 +64,17 @@
     },
 
     "publishOptions": {
-        "include": [
-            "wwwroot",
-            "**/*.cshtml",
-            "appsettings.json",
-            "web.config"
-        ]
+      "include": [
+       
+        "**/*.cshtml",
+        "appsettings.json",
+        "web.config"
+      ],
+      "exclude": [
+        "bower_components",
+        "wwwroot",
+        "node_modules"
+      ]
     },
 
     "scripts": {

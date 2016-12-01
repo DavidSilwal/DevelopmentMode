@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.0",
-    "signature": "503e208715151b61a122d728562bfe8abdd85779"
+    "signature": "6c02ac791a737cf9caa1782fdeab16a70db526ea"
   },
   "compilationOptions": {
     "defines": [
@@ -40,7 +40,10 @@
           "WebMarkupMin.AspNetCore1": "2.1.0",
           "Microsoft.NETCore.App": "1.0.1",
           "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-          "Ngonzalez.ImageProcessorCore": "0.0.1"
+          "Ngonzalez.ImageProcessorCore": "0.0.1",
+          "Microsoft.AspNetCore.SpaServices": "1.0.0-beta-000019",
+          "ImageSharp": "0.0.0",
+          "Microsoft.AspNetCore.Cors": "1.0.0"
         },
         "runtime": {
           "WebApplication.dll": {}
@@ -49,6 +52,7 @@
           "WebApplication.dll": {}
         }
       },
+      "ImageSharp/0.0.0": {},
       "MailKit/1.6.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
@@ -876,6 +880,30 @@
           "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.ViewFeatures.dll": {}
         }
       },
+      "Microsoft.AspNetCore.NodeServices/1.0.0-beta-000019": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Configuration.Json": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+          "Microsoft.Extensions.Logging.Console": "1.0.0",
+          "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
+          "Newtonsoft.Json": "9.0.1",
+          "System.Console": "4.0.0",
+          "System.Diagnostics.Process": "4.1.0",
+          "System.IO.Pipes": "4.0.0",
+          "System.Net.Http": "4.1.0",
+          "System.Net.Sockets": "4.1.0",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.0.0",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading.Tasks.Dataflow": "4.6.0"
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.NodeServices.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.NodeServices.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Razor/1.0.0": {
         "dependencies": {
           "System.Diagnostics.Debug": "4.0.11",
@@ -1008,6 +1036,18 @@
         },
         "compile": {
           "lib/netstandard1.3/Microsoft.AspNetCore.Server.Kestrel.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.SpaServices/1.0.0-beta-000019": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "1.0.1",
+          "Microsoft.AspNetCore.NodeServices": "1.0.0-beta-000019"
+        },
+        "runtime": {
+          "lib/netstandard1.6/Microsoft.AspNetCore.SpaServices.dll": {}
+        },
+        "compile": {
+          "lib/netstandard1.6/Microsoft.AspNetCore.SpaServices.dll": {}
         }
       },
       "Microsoft.AspNetCore.StaticFiles/1.0.0": {
@@ -2144,6 +2184,41 @@
         },
         "compile": {
           "lib/netstandard1.0/System.Interactive.Async.dll": {}
+        }
+      },
+      "System.IO.Pipes/4.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "System.Diagnostics.Debug": "4.0.11",
+          "System.IO": "4.1.0",
+          "System.IO.FileSystem.Primitives": "4.0.1",
+          "System.Net.Primitives": "4.0.11",
+          "System.Net.Sockets": "4.1.0",
+          "System.Reflection": "4.1.0",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.Handles": "4.0.1",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Security.Principal": "4.0.1",
+          "System.Text.Encoding": "4.0.11",
+          "System.Threading": "4.0.11",
+          "System.Threading.Overlapped": "4.0.1",
+          "System.Threading.Tasks": "4.0.11",
+          "runtime.native.System": "4.0.0"
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard1.3/System.IO.Pipes.dll": {
+            "rid": "unix",
+            "assetType": "runtime"
+          },
+          "runtimes/win/lib/netstandard1.3/System.IO.Pipes.dll": {
+            "rid": "win",
+            "assetType": "runtime"
+          }
+        },
+        "compile": {
+          "ref/netstandard1.3/System.IO.Pipes.dll": {}
         }
       },
       "System.Net.NetworkInformation/4.1.0": {
@@ -3975,6 +4050,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "ImageSharp/0.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4dhg+f/gcriqlhayk2pkhLH1AXnRlou1cDG9pIjOy0ZpYAFLSW3N6xjHTzBRffjAvv50oi5KsfPBZJsBW1oV2g=="
+    },
     "MailKit/1.6.0": {
       "type": "package",
       "serviceable": true,
@@ -4230,6 +4310,11 @@
       "serviceable": true,
       "sha512": "sha512-1zGeF76JEqvocxdM+H5n/vJunUUVNzKK4LmgnaFdrrCDTrI6MVdok+8TBBUbeI+uNk3ssrLnP3EcHIdvxl66gw=="
     },
+    "Microsoft.AspNetCore.NodeServices/1.0.0-beta-000019": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UKvXTY0TU0u4FSMo/IMezqdpeE3ChcqV+H+dhCr8QK6eEhWrB22XA6DZ/3flgnuQI5hS0Wzy6ZU0GCucWt1nOQ=="
+    },
     "Microsoft.AspNetCore.Razor/1.0.0": {
       "type": "package",
       "serviceable": true,
@@ -4264,6 +4349,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-GrTVDsRR6j2WrrTuNsZkG1R8aV1UbsA8TKUD+MKVSpXIoEpQNryCT181Zu94CARowQwFQdW4Q1DwfO4FdAhXiQ=="
+    },
+    "Microsoft.AspNetCore.SpaServices/1.0.0-beta-000019": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YLY9l1zhZdbycBI/eGUaLAybTjLWF/lv+88cw0U1SVENKd/4G7Hjrsyg3L82jlQ/Me0og7EilP6a7ds75TLbDQ=="
     },
     "Microsoft.AspNetCore.StaticFiles/1.0.0": {
       "type": "package",
@@ -4614,6 +4704,11 @@
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-UEM+WmG1Oq0bNbPx/E1jaIQ83QOrPfVDUyuYBtG6D6DpB77ytv9flPterMujumpHuoRjSc0ilSB8w41fQc05dw=="
+    },
+    "System.IO.Pipes/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-L9QVhk8hIEix5KNA0kW58Ha+Y1dNGqqqIhAaJkhcGCWeQzUmN0njzI7SG/XAazpMecboOdFFlH3pH/qbwXLJAg=="
     },
     "System.Net.NetworkInformation/4.1.0": {
       "type": "package",

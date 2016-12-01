@@ -64,6 +64,7 @@
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Mvc.Razor.Host\1.0.1\lib\netstandard1.6\Microsoft.AspNetCore.Mvc.Razor.Host.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Mvc.TagHelpers\1.0.1\lib\netstandard1.6\Microsoft.AspNetCore.Mvc.TagHelpers.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Mvc.ViewFeatures\1.0.1\lib\netstandard1.6\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
+--reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.NodeServices\1.0.0-beta-000019\lib\netstandard1.3\Microsoft.AspNetCore.NodeServices.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Razor\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Razor.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Razor.Runtime\1.0.0\lib\netstandard1.5\Microsoft.AspNetCore.Razor.Runtime.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Razor.Tools\1.0.0-preview2-final\lib\netcoreapp1.0\dotnet-razor-tooling.dll
@@ -71,6 +72,7 @@
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Routing.Abstractions\1.0.1\lib\netstandard1.3\Microsoft.AspNetCore.Routing.Abstractions.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Server.IISIntegration\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.Server.IISIntegration.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.Server.Kestrel\1.0.1\lib\netstandard1.3\Microsoft.AspNetCore.Server.Kestrel.dll
+--reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.SpaServices\1.0.0-beta-000019\lib\netstandard1.6\Microsoft.AspNetCore.SpaServices.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.StaticFiles\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.StaticFiles.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.AspNetCore.WebUtilities\1.0.0\lib\netstandard1.3\Microsoft.AspNetCore.WebUtilities.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\Microsoft.CodeAnalysis.Common\1.3.0\lib\netstandard1.3\Microsoft.CodeAnalysis.dll
@@ -172,6 +174,7 @@
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\System.IO.FileSystem.Primitives\4.0.1\ref\netstandard1.3\System.IO.FileSystem.Primitives.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\System.IO.FileSystem.Watcher\4.0.0\ref\netstandard1.3\System.IO.FileSystem.Watcher.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\System.IO.MemoryMappedFiles\4.0.0\ref\netstandard1.3\System.IO.MemoryMappedFiles.dll
+--reference:C:\Users\DAVID SILWAL\.nuget\packages\System.IO.Pipes\4.0.0\ref\netstandard1.3\System.IO.Pipes.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\System.IO.UnmanagedMemoryStream\4.0.1\ref\netstandard1.3\System.IO.UnmanagedMemoryStream.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\System.Linq\4.1.0\ref\netstandard1.6\System.Linq.dll
 --reference:C:\Users\DAVID SILWAL\.nuget\packages\System.Linq.Expressions\4.1.0\ref\netstandard1.6\System.Linq.Expressions.dll
@@ -248,6 +251,7 @@ C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controller
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\ProfileController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\RolesController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\UsersController.cs
+C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\Api\CharactersController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Controllers\Api\UserStatusController.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\ApplicationDbContext.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Data\MessageTemplate.cs
@@ -259,6 +263,7 @@ C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Middleware
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\DashboardViewModel.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\IDashboardViewModel.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\InstallationViewModel.cs
+C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\PaginationSet.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\RoleViewModel.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\SettingViewModel.cs
 C:\Users\DAVID SILWAL\Source\Repos\DevelopmentMode\src\WebApplication\Models\TileViewModel.cs
