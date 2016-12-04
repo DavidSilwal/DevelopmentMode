@@ -65,3 +65,16 @@
             $('.checkbo').checkBo();
         });
 </script>
+@section Breadcrumbs {
+    <ol class="breadcrumb">
+        <li>
+            <a asp-controller="Dashboard" asp-action="Index">Home</a>
+        </li>
+        <li>
+            <a asp-controller="Users" asp-action="Index">Users</a>
+        </li>
+        <li class="active">
+            <a href="javascript:;">Edit</a>
+        </li>
+    </ol>
+}

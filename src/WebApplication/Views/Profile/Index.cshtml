@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Manage your account details";
 }
-
+<!--
 <div>
     <h4>Change your account settings</h4>
     <hr />
@@ -56,4 +56,107 @@
 
 <a asp-controller="Profile" asp-action="Upload" title="Change Profile Image">Change Profile Image</a><br/>
 <a asp-action="UserActivity">Show User Activities</a>
+-->
 
+
+<div class="main-content">
+
+    <div class="profile-page">
+
+        <div class="profile active" id="profile-tab">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="user-info-left">
+                        <img src="~/UploadImages/@Model.Image" alt="Profile Picture" width="150" height="150" />
+                        @*@Html.RenderPartialAsync("Upload")*@
+                        <a asp-controller="Profile" asp-action="Upload" class="btn btn-primary btn-xs" title="Change Profile Image">Change Profile Picture</a>
+                        <h2>@Model.FirstName @Model.LastName<i class="fa fa-circle green-font online-icon"></i><sup class="sr-only">online</sup></h2>
+                        <p>
+                            <a asp-action="UserActivity" class="btn btn-primary btn-xs">My Activity</a>
+
+                        </p>
+                        
+
+                        <div class="contact">
+                            <a href="#" class="btn btn-block btn-custom-primary"><i class="fa fa-envelope-o"></i> Send Message</a>
+                            <a href="#" class="btn btn-block btn-custom-secondary"><i class="fa fa-book"></i> Add To Contact</a>
+                            <ul class="list-inline social">
+                                <li><a href="#" title="Facebook"><i class="fa fa-facebook-square"></i></a></li>
+                                <li><a href="#" title="Twitter"><i class="fa fa-twitter-square"></i></a></li>
+                                <li><a href="#" title="Google Plus"><i class="fa fa-google-plus-square"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+
+
+                    <div class="user-info-right">
+                        <a asp-action="Edit/@Model.Id" class="btn btn-primary btn-xs"> Edit</a>
+                        
+                        <div class="basic-info">
+                            <h3><i class="fa fa-square"></i> Basic Information</h3>
+                            <p class="data-row">
+                                <span class="data-name">Username</span>
+                                <span class="data-value">@Model.UserName.Result</span>
+                            </p>
+
+                            <p class="data-row">
+                                <span class="data-name">Name</span>
+                                <span class="data-value">@Model.FirstName @Model.LastName</span>
+                            </p>
+                            <p class="data-row">
+                                <span class="data-name">Birth Date</span>
+                                <span class="data-value">@Model.DateOfBirth</span>
+                            </p>
+                            <p class="data-row">
+                                <span class="data-name">Birth Country Country</span>
+                                <span class="data-value">@Model.BirthCountry</span>
+                            </p>
+
+                            <p class="data-row">
+                                <span class="data-name">Current Country</span>
+                                <span class="data-value">@Model.CurrentCountry</span>
+                            </p>
+
+                            @*<p class="data-row">
+                                    <span class="data-name">Gender</span>
+                                    <span class="data-value">@Model.Gender</span>
+                                </p>*@
+                            @*<p class="data-row">
+                                    <span class="data-name">Website</span>
+                                    <span class="data-value"><a href="#">www.jonasmith.com</a></span>
+                                </p>*@
+                            @*<p class="data-row">
+                                    <span class="data-name">Last Login</span>
+                                    <span class="data-value">2 hours ago</span>
+                                </p>*@
+
+                        </div>
+                        <div class="contact_info">
+                            <h3><i class="fa fa-square"></i> Contact Information</h3>
+                            <p class="data-row">
+                                <span class="data-name">Email</span>
+                                <span class="data-value">@Model.Email.Result</span>
+                            </p>
+                            <p class="data-row">
+                                <span class="data-name">Phone</span>
+                                <span class="data-value">@Model.PhoneNumber.Result</span>
+                            </p>
+                            @*<p class="data-row">
+                                    <span class="data-name">Address</span>
+                                    <span class="data-value">@Model<br />Colorado</span>
+                                </p>*@
+                        </div>
+                        <div class="about">
+                            <h3><i class="fa fa-square"></i> About Me</h3>
+                            Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                            Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

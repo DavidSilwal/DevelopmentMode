@@ -93,6 +93,11 @@ namespace WebApplication
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+
+                //  app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
+                //     HotModuleReplacement = true
+                // });
+
             }
             else
             {
@@ -115,16 +120,26 @@ namespace WebApplication
                {
                    AppId = "901611409868059",
                    AppSecret = "4aa3c530297b1dcebc8860334b39668b"
+
+
+                   //AppId = "1448839281810879",
+                   //AppSecret = "7733ae8f75e2d3d18cf6fec6c791ad5d"
                })
                 .UseGoogleAuthentication(new GoogleOptions
                 {
                     ClientId = "514485782433-fr3ml6sq0imvhi8a7qir0nb46oumtgn9.apps.googleusercontent.com",
                     ClientSecret = "V2nDD9SkFbvLTqAUBWBBxYAL"
+
+                    //ClientId = "602092482899-l41fviq79kr7hd7lpju2qfp0skkvfdlv.apps.googleusercontent.com",
+                    //ClientSecret = "K39xJM_AOOhVTpahCu6rxU6-"
                 })
                 .UseTwitterAuthentication(new TwitterOptions
                 {
                     ConsumerKey = "BSdJJ0CrDuvEhpkchnukXZBUv",
                     ConsumerSecret = "xKUNuKhsRdHD03eLn67xhPAyE1wFFEndFo1X2UJaK2m1jdAxf4"
+
+                    //ConsumerKey = "OMSp7qx2V1Vv71RO6BNfLlb6T",
+                    //ConsumerSecret = "pWe7V0znSDUoL86puPOSPE3fq3J9rYsZLOw3evwjHIQfXPqUZy"
                 });
 
 

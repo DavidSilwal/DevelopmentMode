@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Controllers
 {
-    public class UserStatusController : Controller
+    public class NewsfeedController : Controller
     {
         public IActionResult Index()
         {

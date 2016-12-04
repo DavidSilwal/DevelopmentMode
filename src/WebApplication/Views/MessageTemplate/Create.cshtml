@@ -51,3 +51,16 @@
     </div>
 </div>
 
+@section Breadcrumbs {
+    <ol class="breadcrumb">
+        <li>
+            <a asp-controller="Dashboard" asp-action="Index">Home</a>
+        </li>
+        <li>
+            <a asp-controller="MessageTemplate" asp-action="Index">Mesaage Template</a>
+        </li>
+        <li class="active">
+            <a href="javascript:;">Create</a>
+        </li>
+    </ol>
+}

@@ -1,10 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { Http, Headers } from '@angular/http';
-
 
 import { UserStatusService } from './services/userstatus.service';
+
 
 @Component({   
     selector: 'my-app',
@@ -13,14 +10,16 @@ import { UserStatusService } from './services/userstatus.service';
    
 })
    
-
-export class AppComponent implements OnInit
+export class AppComponent 
 {   title = 'user status'; 
     userstatus: string[];
+    
 
-    constructor(private userStatusService: UserStatusService) { }
+    constructor(
+         private userStatusService: UserStatusService) { }
 
-    ngOnInit() {
+
+    nxgOnInit() {
         this.userStatusService.getUserStatus()
             .subscribe(userstatus => this.userstatus = userstatus);
     }

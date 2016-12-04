@@ -1,11 +1,8 @@
-@using Identity
 @model UserViewModel
-
 @{
     ViewData["Title"] = "Edit User";
     var Roles = ViewBag.Roles as List<RoleViewModel>;
 }
-
 <div class="panel mb25">
     <div class="panel-heading border">
         Create User
@@ -17,8 +14,6 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
 
-
-
                     <div class="form-group">
                         <label asp-for="UserName" class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">
@@ -26,7 +21,6 @@
                             <span asp-validation-for="UserName" class="text-danger" />
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label asp-for="Email" class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">
@@ -34,31 +28,40 @@
                             <span asp-validation-for="Email" class="text-danger" />
                         </div>
                     </div>
-
                     <div class="form-group checkbo">
                         <label class="col-sm-2 control-label">Roles</label>
                         <div class="col-sm-10">
+                           
                             @foreach (var role in Roles)
                             {
-                                <div class="permission">
+                                @*<input asp-for-collection="Roles" type="checkbox" value="role.ID" />
+                                <label asp-for="Roles" asp-for-value="role.Id">@role.Name</label>*@
+                              
+                                 <div class="permission">
                                     <label for="@role.Id" class="cb-checkbox cb-sm">
-                                        <input type="checkbox" name="Ids" value="@role.Id" @if (Model != null && Model.Ids.Contains(role.Id)) { <text> checked="checked" </text>   } />
+                                        <input type="checkbox" name="RoleIds" value="@role.Id"
+                                               @if (Model != null && Model.Ids.Contains(role.Id))
+                                               { <text> checked="checked" </text>    } />
                                         <span>@role.Name</span>
                                     </label>
                                 </div>
                             }
-
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <input type="submit" value="Update" class="btn btn-default" />
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+       <script type="text/javascript">
+        $(document).ready(function () {
+            $('.checkbo').checkBo();
+        });
+</script>

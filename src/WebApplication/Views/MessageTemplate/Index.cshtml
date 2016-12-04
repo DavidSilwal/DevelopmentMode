@@ -1,64 +1,67 @@
 ﻿@model List<WebApplication.Data.MessageTemplate>
 
-
-<p><a asp-action="Create">Create New</a></p>
-
-<br />
-<table class="table">
-    <tr>
-        <th>
-            <label>Subject</label>
-        </th>
-        <th>
-            <label>Body</label>
-        </th>
-        <th>
-            <label>Mail From</label>
-        </th>
-        <th>
-            <label>Added On</label>
-        </th>
-
-        <th>
-            <label>Is Active</label>
-        </th>
-
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject)
+@{
+    ViewData["Title"] = "Message Template";
+}
 
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Body)
 
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.MailFrom)
-                
-            </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.AddedOn)
+<div class="panel">
+    <div class="panel-heading">
+        <span>Message Template</span>
+        <span class="pull-right">
+            <a asp-action="Create">Create New</a>
+        </span>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped mb0">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Body</th>
+                        <th>Mail From</th>
+                        <th>Added on</th>
+                        <th>Is Active</th>
+                        
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="text-center">
+                            <td>@Html.DisplayFor(modelItem => item.Subject)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Body)</td>
+                            <td>@Html.DisplayFor(modelItem => item.MailFrom)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AddedOn)</td>
+                            
+                            <td>@Html.DisplayFor(modelItem => item.IsActive)</td>
+                            
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item._id" data-toggle=tooltip data-placement=top title="Edit"><i class="fa fa-edit"></i></a>
+                                &nbsp;
+                                <a asp-action="Details" asp-route-id="@item._id" data-toggle=tooltip data-placement=top title="Details"><i class="fa fa-eye"></i></a>
+                                &nbsp;
+                                <a asp-action="Delete" asp-route-id="@item._id" data-toggle=tooltip data-placement=top title="Delete"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-
-            </td>
-
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item._id }) |
-                @Html.ActionLink("Details", "Details", new { id = item._id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item._id })
-            </td>
-        </tr>
-    }
-
-</table>
+@section Breadcrumbs {
+    <ol class="breadcrumb">
+        <li>
+            <a asp-controller="Dashboard" asp-action="Index">Home</a>
+        </li>
+       
+        <li class="active">
+            <a href="javascript:;">Mesaage Template</a>
+        </li>
+    </ol>
+}

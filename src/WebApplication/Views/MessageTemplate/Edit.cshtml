@@ -1,5 +1,8 @@
 ﻿@using WebApplication.Data
 @model MessageTemplate
+@{
+    ViewData["Title"] = "Edit Message Template";
+}
 
 <div class="panel mb25">
     <div class="panel-heading border">
@@ -30,7 +33,7 @@
                     <div class="form-group">
                         <label asp-for="Body" class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">
-                            <input asp-for="Body" class="form-control" />
+                            <textarea asp-for="Body" class="form-control" rows="10" ></textarea>
                             <span asp-validation-for="Body" class="text-danger" />
                         </div>
                     </div>
@@ -45,3 +48,17 @@
         </div>
     </div>
 </div>
+
+@section Breadcrumbs {
+    <ol class="breadcrumb">
+        <li>
+            <a asp-controller="Dashboard" asp-action="Index">Home</a>
+        </li>
+        <li>
+            <a asp-controller="MessageTemplate" asp-action="Index">Mesaage Template</a>
+        </li>
+        <li class="active">
+            <a href="javascript:;">Edit</a>
+        </li>
+    </ol>
+}

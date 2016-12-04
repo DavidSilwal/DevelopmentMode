@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
 using WebApplication.Data;
 
 namespace Identity
@@ -198,14 +193,14 @@ namespace Identity
         /// </summary>
         /// 
         [BsonIgnoreIfNull]      // if we didnt ingore this users/index will render but external login provider work
-        [BsonIgnore]    
+       
          public virtual IList<UserLoginInfo> Logins
         {
             get { return _logins; }
             set { _logins = value ?? new List<UserLoginInfo>(); }
         }
         [BsonIgnoreIfNull]
-        [BsonIgnore]
+  
 
         private IList<UserLoginInfo> _logins = new List<UserLoginInfo>();
 

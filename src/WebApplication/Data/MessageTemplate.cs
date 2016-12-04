@@ -37,7 +37,9 @@ namespace WebApplication.Data
 
         public bool IsDeleted { get; set; }
         public bool IsModifield { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTimeOffset AddedOn { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTimeOffset UpdatedOn { get; set; }
 
         public string AddedBy { get; set; }

@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/main.css" />
         <link rel="stylesheet" href="~/lib/Font-Awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="~/css/dashboard.css"/>
 
     </environment>
     <environment names="Staging,Production">
@@ -20,21 +21,32 @@
     </environment>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    @await Html.PartialAsync("_DashboardSidebar")
 
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="UserStatus" asp-action="Index">News Feed</a></li>
-                </ul>
-                @await Html.PartialAsync("_LoginPartial")
+ 
+
+    <div class="content">
+        <div class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="UserStatus" asp-action="Index">News Feed</a></li>
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
-   
-    <div class="container body-content">
-        @RenderBody()
+
+        <div class="container body-content">
+            @if (IsSectionDefined("Breadcrumbs"))
+            {
+                RenderSection("Breadcrumbs");
+            }
+             @RenderBody()
+        </div> 
+       
 
     </div>
 
@@ -58,5 +70,6 @@
     </environment>
 
     @RenderSection("scripts", required: false)
+    <script src="~/js/dashboard.js"></script>
 </body>
 </html>

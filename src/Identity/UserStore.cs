@@ -1467,6 +1467,16 @@ namespace Identity
             await DatabaseContext.UserCollection.UpdateManyAsync(userFilter, update, options, cancellationToken);
         }
 
+        public Task AddLoginAsync(TUser user, Microsoft.AspNetCore.Identity.UserLoginInfo login, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IList<Microsoft.AspNetCore.Identity.UserLoginInfo>> IUserLoginStore<TUser>.GetLoginsAsync(TUser user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
 
         //public List<IdentityUser> Filter(string jsonQuery)
         //{

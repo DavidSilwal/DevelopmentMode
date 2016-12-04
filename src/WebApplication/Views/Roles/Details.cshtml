@@ -25,3 +25,17 @@
         </div>
     </div>
 </div>
+@section Breadcrumbs {
+    <ol class="breadcrumb">
+        <li>
+            <a asp-controller="Dashboard" asp-action="Index">Home</a>
+        </li>
+        <li>
+            <a asp-controller="Roles" asp-action="Index">Roles</a>
+        </li>
+        <li class="active ng-binding">
+            <a href="javascript:;">Details</a>
+        </li>
+    </ol>
+}
+

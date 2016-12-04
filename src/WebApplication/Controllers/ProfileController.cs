@@ -87,7 +87,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
       
-        public async Task<ActionResult> Edit(EditProfileViewModel editUser)
+        public async Task<ActionResult> Edit(ProfileViewModel editUser)
         {
             if (ModelState.IsValid)
             {
@@ -102,8 +102,8 @@ namespace WebApplication.Controllers
 
                 await _users.SetFirstNameAsync(user, editUser.FirstName);
                 await _users.SetLastNameAsync(user, editUser.LastName);
-                await _users.SetUserNameAsync(user, editUser.UserName);
-                await _users.SetEmailAsync(user, editUser.Email);
+                // await _users.SetUserNameAsync(user, editUser.UserName);
+                // await _users.SetEmailAsync(user, editUser.Email);
                 await _users.SetBirthCountryAsync(user, editUser.BirthCountry);
                 await _users.SetCurrentCountryAsync(user, editUser.CurrentCountry);
                 // await _users.SetUserPhoneNumberAsync(user, editUser.PhoneNumber);

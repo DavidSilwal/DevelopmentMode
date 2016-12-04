@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 
+import { UserStatus } from '../models/userstatus'
+
 @Injectable()
 export class UserStatusService {
-    statusupdate = {};
 
     constructor(private http: Http) { }
 
@@ -11,11 +12,6 @@ export class UserStatusService {
         return this.http.get('api/userstatus')
             .map(response => <string[]>response.json());
     }
-    addUserStatus() {
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json; charset=utf-8');
-        this.http.post('api/userstatus', JSON.stringify(this.statusupdate), { headers: headers }).subscribe();
-        alert("Status Inserted");
-        this.getUserStatus(); 
-    }
+    
+
 }
