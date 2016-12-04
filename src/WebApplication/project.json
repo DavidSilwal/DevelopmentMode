@@ -37,47 +37,59 @@
     "Microsoft.AspNetCore.Cors": "1.0.0"
   },
 
-    "tools": {
-        "BundlerMinifier.Core": "2.0.238",
-        "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final", 
-        "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
-    },
+  "tools": {
+    "BundlerMinifier.Core": "2.0.238",
+    "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",
+    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final",
+    "Microsoft.DotNet.Watcher.Tools": "1.0.0-preview2-final"
 
-    "frameworks": {
-        "netcoreapp1.0": {
-            "imports": [
-                "dotnet5.6",
-                "portable-net45+win8"
-            ]
-        }
-    },
 
-    "buildOptions": {
-        "emitEntryPoint": true,
-        "preserveCompilationContext": true
-    },
+  },
 
-    "runtimeOptions": {
-        "configProperties": {
-            "System.GC.Server": true
-        }
-    },
-
-    "publishOptions": {
-      "include": [
-        "**/*.cshtml",
-        "appsettings.json",
-        "web.config"
-      ],
-      "exclude": [
-        "bower_components",
-        "wwwroot",
-        "node_modules"
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
       ]
-    },
-
-    "scripts": {
-        "prepublish": ["bower install", "dotnet bundle"],
-        "postpublish": ["dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"]
     }
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true,
+    "compile": {
+      "exclude": [ "node_modules" ]
+    }
+  },
+
+  "runtimeOptions": {
+    "configProperties": {
+      "System.GC.Server": true
+    }
+  },
+
+  "publishOptions": {
+    "include": [
+      "**/*.cshtml",
+      "appsettings.json",
+      "ClientApp/dist",
+      "web.config"
+    ],
+    "exclude": [
+      "bower_components",
+      "wwwroot",
+      "node_modules",
+      "wwwroot/dist/*.map"
+    ]
+  },
+  "scripts": {
+    "prepublish": [
+      "npm install",
+      "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod",
+      "node node_modules/webpack/bin/webpack.js --env.prod"
+    ],
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  }
+
 }

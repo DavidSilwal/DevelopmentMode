@@ -11,6 +11,10 @@
         <link rel="stylesheet" href="~/css/main.css" />
         <link rel="stylesheet" href="~/lib/Font-Awesome/css/font-awesome.min.css" />
 
+        <base href="/" />
+        @*<link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />*@
+
+
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -26,7 +30,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="UserStatus" asp-action="Index">News Feed</a></li>
+                    <li><a asp-area="" asp-controller="Feed" asp-action="Index">Feed</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

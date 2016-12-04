@@ -1,0 +1,92 @@
+﻿<!--<p *ngIf="!status"><em>Loading...</em></p>
+<table class='table' *ngIf="status">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Type (C)</th>
+            <th>Status (F)</th>
+            <th>updateTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of status">
+            <td>{{ item._id }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.updateTime }}</td>
+        </tr>
+    </tbody>
+</table>-->
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 cg">
+            <form class="form-horizontal bordered-group" role="form">
+                <div class="panel border">
+                    <div class="panel-heading nomargint">
+                        <a href="" class="btn btn-default noborder "><i class="fa fa-camera"></i> Photo/Video</a>
+                        |
+                        <a href="" class="btn btn-default noborder"><i class="fa fa-photo"></i> Photo/Video Album</a>
+                        <hr class="nomargint nomarginb" />
+                    </div>
+                    <div class="panel-body ">
+                        <div class="row ">
+                            <div class="col-xs-12">
+                                <div class="form-group ">
+                                    <div class="col-xs-1">
+                                        <img src="" width="45" height="45" alt="" />
+                                    </div>
+                                    <div class="col-xs-11">
+                                        <textarea class="form-control noborder" rows="2" placeholder="Whats on your mind?"></textarea>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="form-group nomarginb">
+                                    <div class="col-xs-12">
+                                        <a href="" type="submit" class="btn btn-primary pull-right btn-sm">Post</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        
+            <div *ngFor="let item of status">
+                <div class="panel border">
+                <div class="panel-heading nomargint">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <img src="" height="45" width="45" alt="" />
+                        </div>
+                        <div class="col-md-11 pl20">
+                            <div class="name">{{ item._id }}</div>
+                            <div class="Date">
+                            {{ item.updateTime }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body ">
+                    <div class="row ">
+                        <div class="col-xs-12">
+                            <p>
+                                {{ item.status }} || {{ item.type }}
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

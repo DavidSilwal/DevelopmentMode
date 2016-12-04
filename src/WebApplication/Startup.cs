@@ -12,6 +12,7 @@ using WebApplication.Models;
 using WebApplication.Middlewares;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace WebApplication
 {
@@ -94,9 +95,10 @@ namespace WebApplication
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
 
-                //  app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
-                //     HotModuleReplacement = true
-                // });
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
+                    HotModuleReplacement = true
+                });
 
             }
             else
