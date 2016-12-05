@@ -10,22 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var NewsFeedComponent = (function () {
-    function NewsFeedComponent(http) {
+var core_2 = require('@angular/core');
+var FeedComponent = (function () {
+    function FeedComponent(http) {
         var _this = this;
-        http.get('/api/userstatus').subscribe(function (result) {
-            _this.status = result.json();
+        this.Url = 'api/userstatus'; // URL to web api
+        http.get(this.Url).subscribe(function (status) {
+            _this.status = status.json();
         });
     }
-    NewsFeedComponent = __decorate([
+    FeedComponent = __decorate([
         core_1.Component({
-            selector: 'newsfeed',
-            templateUrl: './newsfeed.component.html',
-            styleUrls: ['./newsfeed.component.css']
-        }), 
+            selector: 'feed',
+            template: require('./feed.component.html')
+        }),
+        core_2.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], NewsFeedComponent);
-    return NewsFeedComponent;
+    ], FeedComponent);
+    return FeedComponent;
 }());
-exports.NewsFeedComponent = NewsFeedComponent;
-//# sourceMappingURL=newsfeed.component.js.map
+exports.FeedComponent = FeedComponent;
+//# sourceMappingURL=feed.component.js.map

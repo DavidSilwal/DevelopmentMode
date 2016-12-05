@@ -9,22 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var FetchDataComponent = (function () {
-    function FetchDataComponent(http) {
-        var _this = this;
-        http.get('/api/SampleData/WeatherForecasts').subscribe(function (result) {
-            _this.forecasts = result.json();
-        });
+var HomeComponent = (function () {
+    function HomeComponent() {
     }
-    FetchDataComponent = __decorate([
+    HomeComponent = __decorate([
         core_1.Component({
-            selector: 'fetchdata',
-            templateUrl: './fetchdata.component.html'
+            selector: 'home',
+            template: require('./home.component.html'),
         }), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], FetchDataComponent);
-    return FetchDataComponent;
+        __metadata('design:paramtypes', [])
+    ], HomeComponent);
+    return HomeComponent;
 }());
-exports.FetchDataComponent = FetchDataComponent;
-//# sourceMappingURL=fetchdata.component.js.map
+exports.HomeComponent = HomeComponent;
+//# sourceMappingURL=home.component.js.map

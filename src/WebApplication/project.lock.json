@@ -924,29 +924,23 @@
           "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.ViewFeatures.dll": {}
         }
       },
-      "Microsoft.AspNetCore.NodeServices/1.0.0-beta-000019": {
+      "Microsoft.AspNetCore.NodeServices/1.0.0-beta-000021": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
           "Microsoft.Extensions.Configuration.Json": "1.0.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
           "Microsoft.Extensions.Logging.Console": "1.0.0",
-          "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
+          "NETStandard.Library": "1.6.0",
           "Newtonsoft.Json": "9.0.1",
-          "System.Console": "4.0.0",
           "System.Diagnostics.Process": "4.1.0",
           "System.IO.Pipes": "4.0.0",
-          "System.Net.Http": "4.1.0",
-          "System.Net.Sockets": "4.1.0",
-          "System.Runtime.InteropServices.RuntimeInformation": "4.0.0",
-          "System.Text.RegularExpressions": "4.1.0",
-          "System.Threading.Tasks.Dataflow": "4.5.25"
+          "System.Threading.Tasks.Dataflow": "4.6.0"
         },
         "compile": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.NodeServices.dll": {}
+          "lib/netstandard1.6/Microsoft.AspNetCore.NodeServices.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Microsoft.AspNetCore.NodeServices.dll": {}
+          "lib/netstandard1.6/Microsoft.AspNetCore.NodeServices.dll": {}
         }
       },
       "Microsoft.AspNetCore.Razor/1.0.0": {
@@ -5373,15 +5367,17 @@
         "lib/netstandard1.6/Microsoft.AspNetCore.Mvc.ViewFeatures.xml"
       ]
     },
-    "Microsoft.AspNetCore.NodeServices/1.0.0-beta-000019": {
-      "sha512": "UKvXTY0TU0u4FSMo/IMezqdpeE3ChcqV+H+dhCr8QK6eEhWrB22XA6DZ/3flgnuQI5hS0Wzy6ZU0GCucWt1nOQ==",
+    "Microsoft.AspNetCore.NodeServices/1.0.0-beta-000021": {
+      "sha512": "wj1iYE+8OmLzdJffaEMMqVoK0CXOqOCl3dywsqrzpjmeyp2dQLV1XsZHDi7BeE616AxEAJh5mUWVhKyeixgmLA==",
       "type": "package",
-      "path": "Microsoft.AspNetCore.NodeServices/1.0.0-beta-000019",
+      "path": "Microsoft.AspNetCore.NodeServices/1.0.0-beta-000021",
       "files": [
-        "Microsoft.AspNetCore.NodeServices.1.0.0-beta-000019.nupkg.sha512",
+        "Microsoft.AspNetCore.NodeServices.1.0.0-beta-000021.nupkg.sha512",
         "Microsoft.AspNetCore.NodeServices.nuspec",
         "lib/net451/Microsoft.AspNetCore.NodeServices.dll",
-        "lib/netstandard1.3/Microsoft.AspNetCore.NodeServices.dll"
+        "lib/net451/Microsoft.AspNetCore.NodeServices.xml",
+        "lib/netstandard1.6/Microsoft.AspNetCore.NodeServices.dll",
+        "lib/netstandard1.6/Microsoft.AspNetCore.NodeServices.xml"
       ]
     },
     "Microsoft.AspNetCore.Razor/1.0.0": {
@@ -11527,6 +11523,7 @@
       "Microsoft.AspNetCore.Cors >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Mvc >= 1.0.1",
+      "Microsoft.AspNetCore.NodeServices >= 1.0.0-beta-000021",
       "Microsoft.AspNetCore.Razor.Tools >= 1.0.0-preview2-final",
       "Microsoft.AspNetCore.Routing >= 1.0.1",
       "Microsoft.AspNetCore.Server.IISIntegration >= 1.0.0",
@@ -11597,6 +11594,23 @@
         "runtime": {
           "lib/netcoreapp1.0/dotnet-publish-iis.dll": {}
         }
+      },
+      "Microsoft.DotNet.Watcher.Tools/1.0.0-preview2-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.DotNet.Watcher.Core": "1.0.0-preview2-final",
+          "Microsoft.Extensions.CommandLineUtils": "1.0.0",
+          "Microsoft.Extensions.Logging": "1.0.0",
+          "Microsoft.Extensions.Logging.Console": "1.0.0",
+          "Microsoft.NETCore.App": "1.0.0",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.0.0"
+        },
+        "compile": {
+          "lib/netcoreapp1.0/dotnet-watch.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.0/dotnet-watch.dll": {}
+        }
       }
     }
   },
@@ -11604,7 +11618,8 @@
     ".NETCoreApp,Version=v1.0": [
       "BundlerMinifier.Core >= 2.0.238",
       "Microsoft.AspNetCore.Razor.Tools >= 1.0.0-preview2-final",
-      "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.0.0-preview2-final"
+      "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.0.0-preview2-final",
+      "Microsoft.DotNet.Watcher.Tools >= 1.0.0-preview2-final"
     ]
   }
 }

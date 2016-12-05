@@ -32,6 +32,7 @@
     },
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Ngonzalez.ImageProcessorCore": "0.0.1",
+    "Microsoft.AspNetCore.NodeServices": "1.0.0-beta-000021",
     "Microsoft.AspNetCore.SpaServices": "1.0.0-beta-000019",
     "ImageSharp": "0.0.0",
     "Microsoft.AspNetCore.Cors": "1.0.0"

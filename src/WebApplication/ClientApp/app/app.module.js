@@ -12,9 +12,9 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var angular2_universal_1 = require('angular2-universal');
 var app_component_1 = require('./components/app/app.component');
-var navmenu_component_1 = require('./components/navmenu/navmenu.component');
-var fetchdata_component_1 = require('./components/fetchdata/fetchdata.component');
-var newsfeed_component_1 = require('./components/newsfeed/newsfeed.component');
+var home_component_1 = require('./components/home/home.component');
+var post_component_1 = require('./components/home/post.component');
+var feed_component_1 = require('./components/home/feed.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -23,17 +23,16 @@ var AppModule = (function () {
             bootstrap: [app_component_1.AppComponent],
             declarations: [
                 app_component_1.AppComponent,
-                navmenu_component_1.NavMenuComponent,
-                fetchdata_component_1.FetchDataComponent,
-                newsfeed_component_1.NewsFeedComponent
+                home_component_1.HomeComponent,
+                post_component_1.PostComponent,
+                feed_component_1.FeedComponent
             ],
             imports: [
                 angular2_universal_1.UniversalModule,
                 router_1.RouterModule.forRoot([
-                    { path: '', redirectTo: 'newsfeed', pathMatch: 'full' },
-                    { path: 'fetch-data', component: fetchdata_component_1.FetchDataComponent },
-                    { path: 'newsfeed', component: newsfeed_component_1.NewsFeedComponent },
-                    { path: '**', redirectTo: 'newsfeed' }
+                    { path: '', redirectTo: 'home', pathMatch: 'full' },
+                    { path: 'home', component: home_component_1.HomeComponent },
+                    { path: '**', redirectTo: 'home' }
                 ])
             ]
         }), 

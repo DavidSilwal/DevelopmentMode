@@ -159,7 +159,7 @@ namespace WebApplication
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
                 RequestPath = "/node_modules"
             });
-
+                
             app.UseMvc(routes =>
             {
                 routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });

@@ -1,14 +1,12 @@
 "use strict";
 require('angular2-universal-polyfills');
 require('zone.js');
-var aspnet_prerendering_1 = require('aspnet-prerendering');
 var core_1 = require('@angular/core');
 var angular2_universal_1 = require('angular2-universal');
 var app_module_1 = require('./app/app.module');
 core_1.enableProdMode();
 var platform = angular2_universal_1.platformNodeDynamic();
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = aspnet_prerendering_1.createServerRenderer(function (params) {
+function default_1(params) {
     return new Promise(function (resolve, reject) {
         var requestZone = Zone.current.fork({
             name: 'angular-universal request',
@@ -17,7 +15,9 @@ exports.default = aspnet_prerendering_1.createServerRenderer(function (params) {
                 requestUrl: params.url,
                 originUrl: params.origin,
                 preboot: false,
-                document: '<app></app>'
+                // TODO: Render just the <app> component instead of wrapping it inside an extra HTML document
+                // Waiting on https://github.com/angular/universal/issues/347
+                document: '<!DOCTYPE html><html><head></head><body><app></app></body></html>'
             },
             onHandleError: function (parentZone, currentZone, targetZone, error) {
                 // If any error occurs while rendering the module, reject the whole operation
@@ -29,5 +29,7 @@ exports.default = aspnet_prerendering_1.createServerRenderer(function (params) {
             resolve({ html: html });
         }, reject);
     });
-});
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = default_1;
 //# sourceMappingURL=boot-server.js.map

@@ -9,18 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var NavMenuComponent = (function () {
-    function NavMenuComponent() {
+var PostComponent = (function () {
+    function PostComponent() {
     }
-    NavMenuComponent = __decorate([
+    PostComponent = __decorate([
         core_1.Component({
-            selector: 'nav-menu',
-            templateUrl: './navmenu.component.html',
-            styleUrls: ['./navmenu.component.css']
+            selector: 'post',
+            template: require('./post.component.html')
         }), 
         __metadata('design:paramtypes', [])
-    ], NavMenuComponent);
-    return NavMenuComponent;
+    ], PostComponent);
+    return PostComponent;
 }());
-exports.NavMenuComponent = NavMenuComponent;
-//# sourceMappingURL=navmenu.component.js.map
+exports.PostComponent = PostComponent;
+//# sourceMappingURL=post.component.js.map
