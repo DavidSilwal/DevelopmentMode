@@ -87,13 +87,58 @@ namespace WebApplication.Controllers
 
            var msg = new MessageTemplate
             {
+                MessageTemplateTypeID = $"Hello",
                 Subject = $"Hello",
                 Body = $"Welcome to this application",
                 MailFrom = $"admin@admin.com"
 
             };         
             await _messageRepository.Save(msg);
-            
+
+            await _messageRepository.Save(new MessageTemplate
+            {
+                MessageTemplateTypeID = $"Registration Success",
+                Subject =$"User Registration Successful ",
+                Body = $" The user is registered successfully when the registration method.",
+                MailFrom =$"admin@admin.com "
+            });
+
+            await _messageRepository.Save(new MessageTemplate
+            {
+                MessageTemplateTypeID = $" ",
+                Subject = $" ",
+                Body = $" ",
+                MailFrom = $" "
+            });
+            await _messageRepository.Save(new MessageTemplate
+            {
+                MessageTemplateTypeID = $" ",
+                Subject = $" ",
+                Body = $" ",
+                MailFrom = $" "
+            });
+            await _messageRepository.Save(new MessageTemplate
+            {
+                MessageTemplateTypeID = $" ",
+                Subject = $" ",
+                Body = $" ",
+                MailFrom = $" "
+            });
+            await _messageRepository.Save(new MessageTemplate
+            {
+                MessageTemplateTypeID = $" ",
+                Subject = $" ",
+                Body = $" ",
+                MailFrom = $" "
+            });
+            await _messageRepository.Save(new MessageTemplate
+            {
+                MessageTemplateTypeID = $" ",
+                Subject = $" ",
+                Body = $" ",
+                MailFrom = $" "
+            });
+
             return RedirectToAction("Index","Dashboard");
             
         }

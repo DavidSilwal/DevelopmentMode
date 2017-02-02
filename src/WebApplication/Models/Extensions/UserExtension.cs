@@ -10,43 +10,43 @@ namespace WebApplication.Models.Extensions
 {
     public static partial class Extensions
     {
-        //public static IdentityUser UpdateEntity(this UserViewModel source, IdentityUser destination)
-        //{
+        public static IdentityUser UpdateEntity(this UserViewModel source, IdentityUser destination)
+        {
 
-        //    var oldRoles = new List<IdentityRole<string>>();
+            var oldRoles = new List<IdentityRole<string>>();
 
-        //    foreach (var userRole in destination.Roles)
-        //    {
-        //        oldRoles.Add(userRole);
-        //    }
+            foreach (var userRole in destination.Roles)
+            {
+                oldRoles.Add(userRole);
+            }
 
-        //    foreach (var oldRole in oldRoles)
-        //    {
-        //        if (!source.Ids.Contains(oldRole.Id))
-        //        {
-        //            destination.Roles.Remove(oldRole);
-        //        }
-        //        else
-        //        {
-        //            source.Ids.Remove(oldRole.Id);
-    
-        //        }
-        //    }
+            foreach (var oldRole in oldRoles)
+            {
+                if (!source.Ids.Contains(oldRole.Id))
+                {
+                    destination.Roles.Remove(oldRole);
+                }
+                else
+                {
+                    source.Ids.Remove(oldRole.Id);
 
-        //    if (source.Ids != null)
-        //    {
-        //        foreach (var Id in source.Roles)
-        //        {
-        //            var userRole = new IdentityRole<string>();
-               
-        //            userRole.Id = Id;
-                 
-        //            destination.Roles.Add(userRole);
-        //        }
-        //    }
+                }
+            }
 
-        //    return destination;
-        //}
+            if (source.Ids != null)
+            {
+                foreach (var Id in source.Ids)
+                {
+                    var userRole = new IdentityRole<string>();
+
+                    userRole.Id = Id;
+
+                    destination.Roles.Add(userRole);
+                }
+            }
+
+            return destination;
+        }
 
         public static IdentityUser ToEntity(this UserViewModel source)
         {

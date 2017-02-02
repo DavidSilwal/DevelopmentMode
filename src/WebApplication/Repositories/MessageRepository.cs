@@ -43,10 +43,21 @@ namespace WebApplication.Data
 
         public async Task<List<MessageTemplate>> FindAll()
         {
+
             var MessageTemplates = await _context.MessageTemplateCollection.Find("{}").ToListAsync();
             return MessageTemplates;
         }
 
+        public virtual  Task<MessageTemplate> FindByMessageTemplateTypeByID(string ID)
+        {
+            if (string.IsNullOrWhiteSpace(ID)) return Task.FromResult((MessageTemplate)null);
+
+            var filter = Builders<MessageTemplate>.Filter.Eq(x => x.MessageTemplateTypeID, ID);
+            var options = new FindOptions { AllowPartialResults = false };
+
+            return _context.MessageTemplateCollection.Find(filter, options).SingleOrDefaultAsync();
+
+        }
 
         public async Task UpdateMsg(MessageTemplate msg)
         {

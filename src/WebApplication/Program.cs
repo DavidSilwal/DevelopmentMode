@@ -12,6 +12,9 @@ namespace WebApplication
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
+                .CaptureStartupErrors(true)
+                 .UseSetting("detailedErrors", "true")
+                .UseEnvironment("Development")
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()

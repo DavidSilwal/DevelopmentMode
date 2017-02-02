@@ -635,3 +635,27 @@ c-g {
 
 
 /*#endregion */
+
+/*#region angular home */
+
+.noborder{
+    border:none;
+    box-shadow:none;
+}
+.noborder:hover,
+.noborder:active,
+.noborder:focus{
+    border:none;
+    box-shadow:none;
+}
+.border{
+    border:1px solid #ddd;
+}
+.nomarginb,.nomargint,.nomarginl,.nomarginr{
+    margin-bottom: 0;
+}
+.pl20{
+    padding-left:20px;
+}
+
+/*#endregion */

@@ -3,6 +3,22 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
+      "cloudscribe.Web.Pagination/1.0.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "System.Linq.Queryable": "4.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.6/cloudscribe.Web.Pagination.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/cloudscribe.Web.Pagination.dll": {}
+        }
+      },
       "ImageSharp/0.0.0": {
         "type": "package"
       },
@@ -4670,6 +4686,19 @@
     }
   },
   "libraries": {
+    "cloudscribe.Web.Pagination/1.0.5": {
+      "sha512": "umQRqkX/A0v8+ZJ4fVzNtNPi6FwUoh2AiPwF0DMhv6CuLR0jJv5Kxd2cyYe8768iOFKETjIWCt75sfKMxVihPw==",
+      "type": "package",
+      "path": "cloudscribe.Web.Pagination/1.0.5",
+      "files": [
+        "cloudscribe.Web.Pagination.1.0.5.nupkg.sha512",
+        "cloudscribe.Web.Pagination.nuspec",
+        "lib/net451/cloudscribe.Web.Pagination.dll",
+        "lib/net452/cloudscribe.Web.Pagination.dll",
+        "lib/net46/cloudscribe.Web.Pagination.dll",
+        "lib/netstandard1.6/cloudscribe.Web.Pagination.dll"
+      ]
+    },
     "ImageSharp/0.0.0": {
       "sha512": "4dhg+f/gcriqlhayk2pkhLH1AXnRlou1cDG9pIjOy0ZpYAFLSW3N6xjHTzBRffjAvv50oi5KsfPBZJsBW1oV2g==",
       "type": "package",
@@ -11540,7 +11569,8 @@
       "Microsoft.NETCore.App >= 1.0.1",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
       "Ngonzalez.ImageProcessorCore >= 0.0.1",
-      "WebMarkupMin.AspNetCore1 >= 2.1.0"
+      "WebMarkupMin.AspNetCore1 >= 2.1.0",
+      "cloudscribe.Web.Pagination >= 1.0.5"
     ],
     ".NETCoreApp,Version=v1.0": []
   },
@@ -11611,6 +11641,19 @@
         "runtime": {
           "lib/netcoreapp1.0/dotnet-watch.dll": {}
         }
+      },
+      "Microsoft.VisualStudio.Web.CodeGeneration.Tools/1.0.0-preview2-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.0.0",
+          "Microsoft.VisualStudio.Web.CodeGeneration": "1.0.0-preview2-final"
+        },
+        "compile": {
+          "lib/netcoreapp1.0/dotnet-aspnet-codegenerator.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.0/dotnet-aspnet-codegenerator.dll": {}
+        }
       }
     }
   },
@@ -11619,7 +11662,8 @@
       "BundlerMinifier.Core >= 2.0.238",
       "Microsoft.AspNetCore.Razor.Tools >= 1.0.0-preview2-final",
       "Microsoft.AspNetCore.Server.IISIntegration.Tools >= 1.0.0-preview2-final",
-      "Microsoft.DotNet.Watcher.Tools >= 1.0.0-preview2-final"
+      "Microsoft.DotNet.Watcher.Tools >= 1.0.0-preview2-final",
+      "Microsoft.VisualStudio.Web.CodeGeneration.Tools >= 1.0.0-preview2-final"
     ]
   }
 }

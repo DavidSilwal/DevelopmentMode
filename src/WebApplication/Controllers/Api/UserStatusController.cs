@@ -21,12 +21,12 @@ namespace WebApplication.Controllers.Api
         {       
             _UserStatusDataRepository = UserStatusDataRepository;
             
-            _UserStatusDataRepository.Save(new UserStatusData {
-             Type = "activity",
-             Status = "hello",
-             IsHidden=false
+            //_UserStatusDataRepository.Save(new UserStatusData {
+            // Type = "activity",
+            // Status = "hello",
+            // IsHidden=false
              
-             });
+            // });
         }
 
 
@@ -35,6 +35,7 @@ namespace WebApplication.Controllers.Api
         {
             return await _UserStatusDataRepository.FindAll();
         }
+
 
         [HttpGet("{id}", Name = "GetUserStatus")]
         public IActionResult GetById(Guid? id)

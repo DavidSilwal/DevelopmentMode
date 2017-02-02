@@ -21,7 +21,6 @@ namespace WebApplication.Data
 
         public async Task<UserStatusData> Get(Guid? _id)
         {
-          
             return await _context.UserStatusDataCollection.FindSync(x => x._id == _id).SingleAsync();
         }
 

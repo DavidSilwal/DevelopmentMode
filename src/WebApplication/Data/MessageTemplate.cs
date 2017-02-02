@@ -24,11 +24,10 @@ namespace WebApplication.Data
 
       
         public Guid _id { get; set; }
-
-        public int MessageTemplateTypeID { get; set; }
+        
+        public string MessageTemplateTypeID { get; set; }
         public string Subject { get; set; }
 
-        [DataType(DataType.MultilineText)]
         public string Body { get; set; }
 
         [EmailAddress]

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using WebApplication.Data;
 using WebApplication.Models;
 using WebApplication.Models.Extensions;
+using WebApplication.Services;
 
 namespace WebApplication.Controllers
 {
@@ -34,9 +35,11 @@ namespace WebApplication.Controllers
             _roleManager = roleManager;
             _logger = loggerFactory.CreateLogger<RolesController>();
         }
-
+        IEmailSender email;
+        
         public async Task<IActionResult> Index()
         {
+            //await email.SendEmailMessageTemplate("Hello","de.davidsilwal@gmail.com");
 
             var roles = _roleManager.Roles;
 

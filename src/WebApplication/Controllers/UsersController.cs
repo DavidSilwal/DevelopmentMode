@@ -42,20 +42,16 @@ namespace WebApplication.Controllers
             return View(_userStore.Users.ToList());
         }
 
-
-
-
-       
+        
         public async Task<IActionResult> Search(string id)
         {
         
             var user =  _userManager.Users;
             List<IdentityUser> u =  user.ToList();//.ToListViewModel();
 
-                IEnumerable<string> IQueryItem = from m in u
+            IEnumerable<string> IQueryItem = from m in u
                        orderby m.UserName
                        select m.UserName;
-
 
             var item = from m in u
                        select m;
@@ -89,13 +85,6 @@ namespace WebApplication.Controllers
             return View(user);          
         }
 
-        //public async Task<IActionResult> Search(string searchString)
-        //{
-        //   var item =   _userStore.SearchByUserName(searchString);
-
-        //    return View(item);
-        //}
-        
 
         public async Task<IActionResult> Edit(string id)
         {
@@ -124,6 +113,7 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
+                 
                 var user = await _userManager.FindByIdAsync(model.Id);
 
                 if (user == null)
@@ -133,9 +123,8 @@ namespace WebApplication.Controllers
 
                 await _userManager.SetEmailAsync(user, model.Email);
                 await _userManager.SetUserNameAsync(user, model.UserName);
-              //await _userManager.AddToRolesAsync(user, model.Roles);
 
-                //user = model.UpdateEntity(user);
+                user = model.UpdateEntity(user);
 
                 var result = await _userManager.UpdateAsync(user);
 
@@ -226,7 +215,6 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-         
             IdentityUser user = await _userManager.FindByIdAsync(id);
             await _userManager.DeleteAsync(user);
 
@@ -272,13 +260,14 @@ namespace WebApplication.Controllers
             
         //
        
-        public IActionResult Get(int page =1)
+        public IActionResult Get()
         {
-            int pageSize = 2;
+            int page = 1;
+            int pageSize = 1;
             PaginationSet<IdentityUser> pagedSet = null;
 
-                 int currentPage = page;
-                int currentPageSize = pageSize;
+                int currentPage = page;
+                int currentPageSize  = pageSize;
 
                 List<IdentityUser> _users = null;
                 int _totalusers = new int();
@@ -287,25 +276,22 @@ namespace WebApplication.Controllers
 
                     _users = u
                         .OrderBy(p => p.UserName)
-                        .Skip(currentPage * currentPageSize)
+                        .Skip((currentPage) * currentPageSize)
                         .Take(currentPageSize)
                         .ToList();
                   var item = _users;
                   _totalusers = _userManager.Users.Count();
 
-
-                pagedSet = new PaginationSet<IdentityUser>()
-                {
-                    Page = currentPage,
-                    TotalCount = _totalusers,
-                    TotalPages = (int)Math.Ceiling((decimal)_totalusers / currentPageSize),
-                    Items = u
+            pagedSet = new PaginationSet<IdentityUser>()
+            {
+                Page = currentPage,
+                TotalCount = _totalusers,
+                TotalPages = (int)Math.Ceiling(_totalusers / (double)currentPageSize),
+                Items = item
                 };
             return View(pagedSet);
         }
      
-         
-           
         }
 
     }

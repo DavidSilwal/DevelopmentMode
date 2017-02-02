@@ -6,8 +6,7 @@ import { PostComponent } from './post.component';
 @Component({
     selector: 'home',
     template: require('./home.component.html'),
- 
-})
+ })
 
 export class HomeComponent
 {

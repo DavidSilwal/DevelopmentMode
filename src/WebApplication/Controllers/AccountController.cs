@@ -45,8 +45,7 @@ namespace WebApplication.Controllers
             _userStore = userStore;
         }
 
-        //
-        // GET: /Account/Login
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
@@ -56,8 +55,7 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -216,7 +214,7 @@ namespace WebApplication.Controllers
             {
                 return RedirectToAction(nameof(Login));
             }
-
+            
             // Sign in the user with this external login provider if the user already has a login.
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
 
@@ -238,7 +236,7 @@ namespace WebApplication.Controllers
                 // If the user does not have an account, then ask the user to create an account.
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
-                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email); //ask for email
                 return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
             }
         }
@@ -260,14 +258,18 @@ namespace WebApplication.Controllers
                 }
                 var user = new IdentityUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user);
+                   
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Registered User");
+
                     result = await _userManager.AddLoginAsync(user, info);
+
                     if (result.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToLocal(returnUrl);
+                            return RedirectToLocal(returnUrl);
                     }
                 }
                 AddErrors(result);

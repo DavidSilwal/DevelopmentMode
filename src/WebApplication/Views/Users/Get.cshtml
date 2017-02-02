@@ -1,0 +1,107 @@
+﻿@*@model List<WebApplication.Models.UserViewModel>*@
+
+@model PaginationSet<Identity.IdentityUser>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+
+<form asp-controller="Users" asp-action="Index" method="get">
+    <p>
+        Title: <input type="text" name="searchString">
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+
+
+
+
+<br />
+
+
+<div class="panel mb25">
+    <div class="panel-heading">
+        <span>Users | Total Users: @Model.Count</span>
+        <span class="pull-right">
+            <a asp-action="Create">Create New</a>
+        </span>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped mb0">
+                <thead>
+                    <tr>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Roles
+                        </th>
+                        <th>
+                            Email Confirmed
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr class="text-center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Roles)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" data-toggle=tooltip data-placement=top title="Edit"><i class="fa fa-edit"></i></a>
+                                &nbsp;
+                                <a asp-action="Details" asp-route-id="@item.Id" data-toggle=tooltip data-placement=top title="Details"><i class="fa fa-eye"></i></a>
+                                &nbsp;
+                                <a asp-action="Delete" asp-route-id="@item.Id" data-toggle=tooltip data-placement=top title="Delete"><i class="fa fa-trash"></i></a>
+                                &nbsp;
+                                <a asp-action="ChangePassword" asp-route-id="@item.Id" data-toggle=tooltip data-placement=top title="Change Password"><i class="fa fa-key"></i></a>
+
+
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    
+<cs-pager cs-paging-pagesize="1"
+          cs-paging-pagenumber="@Model.Page"
+          cs-paging-totalitems="@Model.TotalCount"
+          cs-pagenumber-param="page"
+          asp-controller="Users"
+          asp-action="Get"></cs-pager>
+
+
+@section Breadcrumbs {
+    <ol class="breadcrumb">
+        <li>
+            <a asp-controller="Dashboard" asp-action="Index">Home</a>
+        </li>
+
+        <li class="active">
+            <a href="javascript:;">Users</a>
+        </li>
+    </ol>
+}

@@ -19,9 +19,10 @@
             <table class="table table-bordered table-striped mb0">
                 <thead>
                     <tr>
+                        <th> MessageTemplateTypeID</th>
                         <th>Subject</th>
                         <th>Body</th>
-                        <th>Mail From</th>
+                        <th>Mail From</th> 
                         <th>Added on</th>
                         <th>Is Active</th>
                         
@@ -32,8 +33,10 @@
                     @foreach (var item in Model)
                     {
                         <tr class="text-center">
+                            <td>@Html.DisplayFor(modelItem => item.MessageTemplateTypeID)</td>
                             <td>@Html.DisplayFor(modelItem => item.Subject)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Body)</td>
+                            <td>@Html.Raw(item.Body)</td>
+
                             <td>@Html.DisplayFor(modelItem => item.MailFrom)</td>
                             <td>@Html.DisplayFor(modelItem => item.AddedOn)</td>
                             

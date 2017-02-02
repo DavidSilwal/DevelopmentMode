@@ -21,6 +21,6 @@ namespace WebApplication.Models
         public int TotalPages { get; set; }
         public int TotalCount { get; set; }
 
-        public IEnumerable<T> Items { get; set; }
+        public IList<T> Items { get; set; }
     }
 }

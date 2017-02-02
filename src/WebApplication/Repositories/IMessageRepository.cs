@@ -9,6 +9,7 @@ namespace WebApplication.Data
     {
         Task Delete(MessageTemplate MessageTemplate);
         Task<List<MessageTemplate>> FindAll();
+        Task<MessageTemplate> FindByMessageTemplateTypeByID(string Id);
         Task<MessageTemplate> Get(Guid? _id);
         Task Save(MessageTemplate MessageTemplate);
         Task Update(MessageTemplate MessageTemplate);

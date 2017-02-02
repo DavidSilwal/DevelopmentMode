@@ -89,16 +89,26 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(MessageTemplate model)
         {
+         
             if (ModelState.IsValid)
             {
-                await  _messageRepository.UpdateMsg(model);
+                MessageTemplate item = new MessageTemplate
+                {       
+                     _id = model._id,
+                    Subject = model.Subject,
+                    Body = Request.Form["editor1"].ToString(),
+                    MailFrom = model.MailFrom
+                 };         
+
+
+                await _messageRepository.UpdateMsg(item);
 
                 return RedirectToAction("Index");
             }
             return View();
         }
 
-  
+ 
 
         public async Task<IActionResult> Delete(Guid? id)
         {

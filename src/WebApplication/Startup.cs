@@ -13,6 +13,7 @@ using WebApplication.Middlewares;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using MongoDB.Bson.Serialization;
 
 namespace WebApplication
 {
@@ -81,6 +82,19 @@ namespace WebApplication
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IViewModelService, ViewModelService>();
+
+            services.AddCloudscribePagination();
+
+            BsonClassMap.RegisterClassMap<IdentityUser>(map =>
+            {
+                map.AutoMap();
+                map.SetIgnoreExtraElements(true);
+                BsonClassMap.RegisterClassMap<UserLoginInfo>(item =>
+                {
+                    item.AutoMap();
+                    item.SetIgnoreExtraElements(true);
+                });
+            });
          
         }
 
@@ -120,28 +134,18 @@ namespace WebApplication
             app.UseIdentity()
                .UseFacebookAuthentication(new FacebookOptions
                {
-                   AppId = "901611409868059",
-                   AppSecret = "4aa3c530297b1dcebc8860334b39668b"
-
-
-                   //AppId = "1448839281810879",
-                   //AppSecret = "7733ae8f75e2d3d18cf6fec6c791ad5d"
+                   AppId = "1188984081223294",
+                   AppSecret = "4bed0b56cb77b0b2f1643384eb8f0266"
                })
                 .UseGoogleAuthentication(new GoogleOptions
                 {
-                    ClientId = "514485782433-fr3ml6sq0imvhi8a7qir0nb46oumtgn9.apps.googleusercontent.com",
-                    ClientSecret = "V2nDD9SkFbvLTqAUBWBBxYAL"
-
-                    //ClientId = "602092482899-l41fviq79kr7hd7lpju2qfp0skkvfdlv.apps.googleusercontent.com",
-                    //ClientSecret = "K39xJM_AOOhVTpahCu6rxU6-"
+                    ClientId = "1007746957521-ei30jkh72jq90fec7m3re91dpeaobgl4.apps.googleusercontent.com",
+                    ClientSecret = "MEKtgoPZGPYxu9aHqkIeqmqj-"
                 })
                 .UseTwitterAuthentication(new TwitterOptions
-                {
-                    ConsumerKey = "BSdJJ0CrDuvEhpkchnukXZBUv",
-                    ConsumerSecret = "xKUNuKhsRdHD03eLn67xhPAyE1wFFEndFo1X2UJaK2m1jdAxf4"
-
-                    //ConsumerKey = "OMSp7qx2V1Vv71RO6BNfLlb6T",
-                    //ConsumerSecret = "pWe7V0znSDUoL86puPOSPE3fq3J9rYsZLOw3evwjHIQfXPqUZy"
+                {                    
+                    ConsumerKey = "D8QfWaX5wQIwQaoBHdKSHdYDH",
+                    ConsumerSecret = "84kGnFVjpnaGFxvZXmhG47qju3pxnJIY8Kll5zoor00W0u6iqp"
                 });
 
 
