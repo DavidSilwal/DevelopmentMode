@@ -36,6 +36,39 @@ namespace WebApplication.Controllers
 
    
         }
+        public IActionResult Get()
+        {
+            int page = 1;
+            int pageSize = 1;
+            PaginationSet<IdentityUser> pagedSet = null;
+
+            int currentPage = page;
+            int currentPageSize = pageSize;
+
+            List<IdentityUser> _users = null;
+            int _totalusers = new int();
+
+            var u = _userManager.Users.ToList();
+
+            _users = u
+                .OrderBy(p => p.UserName)
+                .Skip((currentPage) * currentPageSize)
+                .Take(currentPageSize)
+                .ToList();
+            var item = _users;
+            _totalusers = _userManager.Users.Count();
+
+            pagedSet = new PaginationSet<IdentityUser>()
+            {
+                Page = currentPage,
+                TotalCount = _totalusers,
+                TotalPages = (int)Math.Ceiling(_totalusers / (double)currentPageSize),
+                Items = item
+            };
+            return View(pagedSet);
+        }
+
+
 
         public IActionResult Index()
         {
@@ -258,40 +291,7 @@ namespace WebApplication.Controllers
            return View(model);
         }
             
-        //
-       
-        public IActionResult Get()
-        {
-            int page = 1;
-            int pageSize = 1;
-            PaginationSet<IdentityUser> pagedSet = null;
-
-                int currentPage = page;
-                int currentPageSize  = pageSize;
-
-                List<IdentityUser> _users = null;
-                int _totalusers = new int();
-
-                var u = _userManager.Users.ToList();
-
-                    _users = u
-                        .OrderBy(p => p.UserName)
-                        .Skip((currentPage) * currentPageSize)
-                        .Take(currentPageSize)
-                        .ToList();
-                  var item = _users;
-                  _totalusers = _userManager.Users.Count();
-
-            pagedSet = new PaginationSet<IdentityUser>()
-            {
-                Page = currentPage,
-                TotalCount = _totalusers,
-                TotalPages = (int)Math.Ceiling(_totalusers / (double)currentPageSize),
-                Items = item
-                };
-            return View(pagedSet);
-        }
-     
+  
         }
 
     }

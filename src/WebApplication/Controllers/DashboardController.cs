@@ -19,26 +19,12 @@ namespace WebApplication.Controllers
             _viewModelService = viewModelService;
         }
 
-       
-        //public DashboardController(UserStore<IdentityUser, IdentityRole> userStore)
-        //{
-        //    _userStore = userStore;
-        //}
 
-        //protected readonly UserStore<IdentityUser, IdentityRole> _userStore;
-        public async Task<ActionResult> Index()
+        public IActionResult Index()
         {
-            //ViewBag.TotalUser = _userStore.Users.Count();
-            //var adminRole =  await _userStore.GetUsersInRoleAsync("Admin");
-
-            //ViewBag.admin = adminRole.Count();
-
-            //var userRole = await _userStore.GetUsersInRoleAsync("Registered User");
-            //ViewBag.user = userRole.Count();
 
             ViewBag.Title = "Dashboard";
-
-
+            
             return View(_viewModelService.GetUserDashboardViewModel());
         }
 

@@ -36,7 +36,8 @@
     "Microsoft.AspNetCore.SpaServices": "1.0.0-beta-000019",
     "ImageSharp": "0.0.0",
     "Microsoft.AspNetCore.Cors": "1.0.0",
-    "cloudscribe.Web.Pagination": "1.0.5"
+    "cloudscribe.Web.Pagination": "1.0.5",
+    "RazorLight": "1.0.0-rc1"
   },
 
   "tools": {

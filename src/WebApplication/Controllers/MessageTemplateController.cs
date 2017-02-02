@@ -93,8 +93,8 @@ namespace WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 MessageTemplate item = new MessageTemplate
-                {       
-                     _id = model._id,
+                {   MessageTemplateTypeID = model.MessageTemplateTypeID,
+                    _id = model._id,
                     Subject = model.Subject,
                     Body = Request.Form["editor1"].ToString(),
                     MailFrom = model.MailFrom

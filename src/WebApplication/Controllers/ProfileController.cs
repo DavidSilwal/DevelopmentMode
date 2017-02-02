@@ -170,7 +170,7 @@ namespace WebApplication.Controllers
 
             return RedirectToAction("Index");
         }
-        public async Task<ActionResult> UserActivity()
+        public ActionResult UserActivity()
         {
             var item = _users.Users.ToList();
             return View(item);

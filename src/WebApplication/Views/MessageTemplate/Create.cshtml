@@ -14,6 +14,15 @@
                 <form asp-action="Create" class="form-horizontal bordered-group" role="form">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                    
+
+                    <div class="form-group">
+                        <label asp-for="MessageTemplateTypeID" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="MessageTemplateTypeID" class="form-control" />
+                            <span asp-validation-for="MessageTemplateTypeID" class="text-danger" />
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label asp-for="MailFrom" class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">
