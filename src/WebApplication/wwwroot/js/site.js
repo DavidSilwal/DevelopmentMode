@@ -1,27 +1,44 @@
-﻿//$(function () {
-//    var s = 0;
+﻿$(function () {
+    var s;
+    if (s == 1) {
+        s = 1;
+    }
+    else
+        s = 0;
 
-//    $('.sidebar-toggle').click(function () {
-//        if (s == 0) {
-//            s = 1;
+    $('.sidebar-toggle').click(function () {
+        toggle();
+    });
 
-//            //$('.sidebar').css('left', '0');
-//            $('.sidebar').css('width', '50px');
+    toggle();
 
-//            $('.content').css('padding-left', '15px');
-//            $('.sidebar .pl-25').addClass('hidden');
-           
+    function toggle() {
+        if (s != 1) {
+            s = 1;
 
-           
-//        } else {
-//            s = 0;
-//            //$('.sidebar').css('left', '-200px');
+            //$('.sidebar').css('left', '0');
+            $('.sidebar').css('width', '50px');
 
-//            $('.sidebar').css('width', '250px');
+            $('.content').css('padding-left', '50px');
 
-//            $('.content').css('padding-left', '200px');
-//            $('.sidebar .pl-25').removeClass('hidden');
-            
-//        }
-//    });
-//});
+            $('.sidebar .pl-25').addClass('hidden');
+
+
+
+        } else {
+            s = 0;
+            //$('.sidebar').css('left', '-200px');
+
+            $('.sidebar').css('width', '200px');
+
+            $('.content').css('padding-left', '200px');
+            $('.sidebar .pl-25').removeClass('hidden');
+
+
+        }
+    }
+
+
+
+
+});

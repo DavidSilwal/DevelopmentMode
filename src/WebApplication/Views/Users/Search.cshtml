@@ -1,6 +1,4 @@
-﻿
-@model WebApplication.Models.UserSearchViewModel
-
+﻿@model WebApplication.Models.UserSearchViewModel
 
 <form asp-controller="Users" asp-action="Search" method="get">
     <p>
@@ -8,7 +6,7 @@
             <option value="">All</option>
         </select>
 
-        User Name: <input type="text" name="id">
+        User Name: <input type="text" name="searchString">
         <input type="submit" value="Search" />
     </p>
 </form>

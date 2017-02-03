@@ -21,10 +21,9 @@ namespace WebApplication.Data
             IsDeleted = false;
 
         }
-
-      
+              
         public Guid _id { get; set; }
-        
+        [Required]
         public string MessageTemplateTypeID { get; set; }
         public string Subject { get; set; }
 

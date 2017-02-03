@@ -41,11 +41,20 @@ namespace WebApplication.Controllers
             {
             if (ModelState.IsValid)
             {
-                _messageRepository.Save(model);  
+                MessageTemplate item = new MessageTemplate
+                {
+                    MessageTemplateTypeID = model.MessageTemplateTypeID,
+                    _id = model._id,
+                    Subject = model.Subject,
+                    Body = Request.Form["editor1"].ToString(),
+                    MailFrom = model.MailFrom
+                };
+                
+                _messageRepository.Save(item);  
             }
             else
             {
-                return View();
+                return View(model);
             };
 
             return RedirectToAction("Index");
@@ -109,7 +118,6 @@ namespace WebApplication.Controllers
         }
 
  
-
         public async Task<IActionResult> Delete(Guid? id)
         {
 

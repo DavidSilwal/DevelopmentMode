@@ -1,29 +1,24 @@
-@*@model List<WebApplication.Models.UserViewModel>*@
-
-@model List<Identity.IdentityUser>
+﻿@model PaginationSet<Identity.IdentityUser>
 
 @{
     ViewData["Title"] = "Users";
+    var RolesVM = ViewBag.Roles as List<RoleViewModel>;
+
 }
 
 
-<form asp-controller="Users" asp-action="Index" method="get">
+<form asp-controller="Users" asp-action="Search" method="get">
     <p>
         Title: <input type="text" name="searchString">
         <input type="submit" value="Search" />
     </p>
 </form>
 
-
-
-
-
-<br/>
-
+<br />
 
 <div class="panel mb25">
     <div class="panel-heading">
-        <span>Users | Total Users: @Model.Count</span>
+        <span>Users | Total Users: @Model.TotalCount</span>
         <span class="pull-right">
             <a asp-action="Create">Create New</a>
         </span>
@@ -37,7 +32,7 @@
                             Username
                         </th>
                         <th>
-                           Email
+                            Email
                         </th>
                         <th>
                             Roles
@@ -46,14 +41,17 @@
                             Email Confirmed
                         </th>
                         <th>
+                            Last Logins
+                        </th>
+                        <th>
                             Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Items)
                     {
-                        <tr class="text-center" >
+                        <tr class="text-center">
                             <td>
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </td>
@@ -61,10 +59,31 @@
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem=>item.Roles)
+                                @*@Html.DisplayFor(modelItem => item.Roles)*@
+                                @foreach (var role in item.Roles)
+                                {
+                                    @foreach (var rolesVM in RolesVM)
+                                    {
+
+                                        @if (role.Id != null && role.Id.Contains(rolesVM.Id))
+                                        {
+                                            @Html.DisplayFor(modelItem => rolesVM.Name) <br/>
+
+                                        }
+                                    }
+                                    
+                                    @*@Html.DisplayFor(modelItem => role.Id) <br />*@
+                                }
                             </td>
+
+
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserActivities.LastOrDefault().TimeStamp)
                             </td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@item.Id" data-toggle=tooltip data-placement=top title="Edit"><i class="fa fa-edit"></i></a>
@@ -74,9 +93,9 @@
                                 <a asp-action="Delete" asp-route-id="@item.Id" data-toggle=tooltip data-placement=top title="Delete"><i class="fa fa-trash"></i></a>
                                 &nbsp;
                                 <a asp-action="ChangePassword" asp-route-id="@item.Id" data-toggle=tooltip data-placement=top title="Change Password"><i class="fa fa-key"></i></a>
-                                
 
-                                
+
+
                             </td>
                         </tr>
                     }
@@ -86,12 +105,24 @@
     </div>
 </div>
 
+Page @Model.Page of @Model.TotalPages
+    
+
+<cs-pager cs-paging-pagesize="@Model.Count"
+          cs-paging-pagenumber="@Model.Page"
+          cs-paging-totalitems="@Model.TotalCount"
+          cs-pagenumber-param="page"
+          asp-controller="Users"
+          asp-action="Index">
+</cs-pager>
+
+
 @section Breadcrumbs {
     <ol class="breadcrumb">
         <li>
             <a asp-controller="Dashboard" asp-action="Index">Home</a>
         </li>
-       
+
         <li class="active">
             <a href="javascript:;">Users</a>
         </li>

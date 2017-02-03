@@ -66,14 +66,12 @@ namespace WebApplication.Controllers
                 returnUrl = "Home/Index";
             }
             ViewData["ReturnUrl"] = returnUrl;
+
             if (ModelState.IsValid)
             {
-                //Required Email Confirmation before procceed to login
-
+              
                 var user = await _userManager.FindByNameAsync(model.UserName);
-
-               // var role = _userStore.AddToRoleAsync(user, "Admin");
-
+                
                 if (user != null)
                 {
                     if (!await _userManager.IsEmailConfirmedAsync(user))
@@ -86,6 +84,7 @@ namespace WebApplication.Controllers
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
+
                 if (result.Succeeded)
                 {
                     UserActivity activity = new UserActivity
@@ -104,7 +103,7 @@ namespace WebApplication.Controllers
                     }
                     
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToAction("Index", "UserStatus");
+                    return RedirectToAction("Index", "Home");
                     //return RedirectToLocal(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -122,13 +121,11 @@ namespace WebApplication.Controllers
                     return View(model);
                 }
             }
-
-            // If we got this far, something failed, redisplay form
+            
             return View(model);
         }
 
-        //
-        // GET: /Account/Register
+ 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
@@ -137,8 +134,7 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Register
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -153,29 +149,27 @@ namespace WebApplication.Controllers
                 
                 if (result.Succeeded)
                 {
-                    var roles = _userStore.AddToRoleAsync(user, "Users");
+                    var roles = _userManager.AddToRoleAsync(user, "Registered User");
                   
-                    //For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                    //Send an email with this link
-
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
                     await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                         $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
+
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
+    
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
@@ -185,21 +179,18 @@ namespace WebApplication.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        //
-        // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
-            // Request a redirect to the external login provider.
+          
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
 
-        //
-        // GET: /Account/ExternalLoginCallback
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
@@ -215,7 +206,7 @@ namespace WebApplication.Controllers
                 return RedirectToAction(nameof(Login));
             }
             
-            // Sign in the user with this external login provider if the user already has a login.
+ 
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
 
             if (result.Succeeded)
@@ -250,7 +241,7 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Get the information about the user from the external login provider
+
                 var info = await _signInManager.GetExternalLoginInfoAsync();
                 if (info == null)
                 {
@@ -279,7 +270,6 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
-        // GET: /Account/ConfirmEmail
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
@@ -325,9 +315,12 @@ namespace WebApplication.Controllers
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
                 await _emailSender.SendEmailAsync(model.Email, "Reset Password",
                    $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+
                 return View("ForgotPasswordConfirmation");
             }
 
@@ -350,17 +343,16 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var user = await _userManager.FindByNameAsync(model.Email);
                 if (user == null)
                 {
                     return RedirectToAction(nameof(AccountController.ResendEmailConfirmation), "Account");
                 }
-
-
-
+                                
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
                 var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
                 await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                     $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
 

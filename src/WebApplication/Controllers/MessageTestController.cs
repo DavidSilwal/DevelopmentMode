@@ -1,6 +1,8 @@
 ﻿using Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using RazorLight;
 using RazorLight.Extensions;
 using System;
@@ -10,10 +12,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
+using WebApplication.Models;
 using WebApplication.Services;
 
 namespace WebApplication.Controllers
 {
+    [Authorize()]
     public class MessageTestController : Controller
     {
         private readonly IEmailSender _emailSender;
@@ -41,16 +45,47 @@ namespace WebApplication.Controllers
         //    return View();
         //}
 
-       public IActionResult SendEmail()
+       public async Task<IActionResult> Index()
         {
             var message = _messageRepository.FindAll();
             var messagetypeID = message.Result;
 
+            IEnumerable<String> IQueryItem = from m in messagetypeID
+                                             orderby m.MessageTemplateTypeID
+                                             select m.MessageTemplateTypeID;
+
+            var selectlist = new SelectList(IQueryItem.Distinct().ToList());
+
+            ViewBag.MessageType = selectlist;
+
             return View();
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> Index(SendEmailViewModel model)
+        {
+            var engine = EngineFactory.CreatePhysical(@"D:\Email");
 
+            var user = await GetCurrentUserAsync();
 
-        public async Task<string> Index()
+            string messageTypeID = model.MessageTypeID.ToString();
+
+            var message = _messageRepository.FindByMessageTemplateTypeByID(messageTypeID).Result;
+
+            var modelitem = new
+            {
+                UserName = _userStore.GetUserNameAsync(user).Result.ToString(),
+                FirstName = _userStore.GetFirstName(user),
+                LastName = _userStore.GetLastName(user),
+                Email = _userStore.GetEmailAsync(user),
+            };
+            string result = engine.ParseString(message.Body, modelitem);
+
+            await _emailSender.SendEmailAsync(model.Email, message.Subject, result);
+            
+            return View();
+        }
+        public async Task<string> Index1()
         {
 
             var engine = EngineFactory.CreatePhysical(@"D:\Email");

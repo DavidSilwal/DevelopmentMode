@@ -76,8 +76,6 @@ namespace WebApplication.Data
             await _context.MessageTemplateCollection.ReplaceOneAsync(x => x._id == msg._id, msg);
         }
 
-
-
-
+        
     }
 }

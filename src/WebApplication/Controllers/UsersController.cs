@@ -36,10 +36,10 @@ namespace WebApplication.Controllers
 
    
         }
-        public IActionResult Get()
+        public IActionResult Index( int page=1)
         {
-            int page = 1;
-            int pageSize = 1;
+            int pageSize = 2;
+
             PaginationSet<IdentityUser> pagedSet = null;
 
             int currentPage = page;
@@ -65,21 +65,24 @@ namespace WebApplication.Controllers
                 TotalPages = (int)Math.Ceiling(_totalusers / (double)currentPageSize),
                 Items = item
             };
+
+            ViewBag.Roles = _roleManager.Roles.ToList().ToListViewModel();
+
             return View(pagedSet);
         }
 
 
 
-        public IActionResult Index()
+        public IActionResult Index1()
         {
             return View(_userStore.Users.ToList());
         }
 
         
-        public async Task<IActionResult> Search(string id)
+        public async Task<IActionResult> Search(string searchString)
         {
-        
             var user =  _userManager.Users;
+
             List<IdentityUser> u =  user.ToList();//.ToListViewModel();
 
             IEnumerable<string> IQueryItem = from m in u
@@ -89,15 +92,17 @@ namespace WebApplication.Controllers
             var item = from m in u
                        select m;
             
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(searchString))
             {
-                item = item.Where(s => s.UserName.Contains(id));
+                item = item.Where(s => s.UserName.Contains(searchString));
             }
+
             var userVM = new UserSearchViewModel();
             userVM.selectList = new SelectList(IQueryItem.Distinct().ToList());
-            userVM.Users = _userManager.Users.ToList();
+            userVM.Users = item.ToList();
             return View(userVM);
         }
+
 
 
         public async Task<IActionResult> Details(string id)
@@ -274,7 +279,6 @@ namespace WebApplication.Controllers
                var user = model.ToEntity();
 
                var result = await _userManager.CreateAsync(user, model.Password);
-               //var roles = await _userManager.AddToRolesAsync(user,model.Roles);
 
                if (result.Succeeded)
                {

@@ -1,6 +1,6 @@
-﻿@*@model List<WebApplication.Models.UserViewModel>*@
+@*@model List<WebApplication.Models.UserViewModel>*@
 
-@model PaginationSet<Identity.IdentityUser>
+@model List<Identity.IdentityUser>
 
 @{
     ViewData["Title"] = "Users";
@@ -18,7 +18,7 @@
 
 
 
-<br />
+<br/>
 
 
 <div class="panel mb25">
@@ -37,7 +37,7 @@
                             Username
                         </th>
                         <th>
-                            Email
+                           Email
                         </th>
                         <th>
                             Roles
@@ -51,9 +51,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Items)
+                    @foreach (var item in Model)
                     {
-                        <tr class="text-center">
+                        <tr class="text-center" >
                             <td>
                                 @Html.DisplayFor(modelItem => item.UserName)
                             </td>
@@ -61,7 +61,7 @@
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Roles)
+                                @Html.DisplayFor(modelItem=>item.Roles)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.EmailConfirmed)
@@ -74,9 +74,9 @@
                                 <a asp-action="Delete" asp-route-id="@item.Id" data-toggle=tooltip data-placement=top title="Delete"><i class="fa fa-trash"></i></a>
                                 &nbsp;
                                 <a asp-action="ChangePassword" asp-route-id="@item.Id" data-toggle=tooltip data-placement=top title="Change Password"><i class="fa fa-key"></i></a>
+                                
 
-
-
+                                
                             </td>
                         </tr>
                     }
@@ -85,21 +85,13 @@
         </div>
     </div>
 </div>
-    
-<cs-pager cs-paging-pagesize="1"
-          cs-paging-pagenumber="@Model.Page"
-          cs-paging-totalitems="@Model.TotalCount"
-          cs-pagenumber-param="page"
-          asp-controller="Users"
-          asp-action="Get"></cs-pager>
-
 
 @section Breadcrumbs {
     <ol class="breadcrumb">
         <li>
             <a asp-controller="Dashboard" asp-action="Index">Home</a>
         </li>
-
+       
         <li class="active">
             <a href="javascript:;">Users</a>
         </li>

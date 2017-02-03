@@ -24,6 +24,7 @@ namespace WebApplication.Controllers
         protected ApplicationDbContext _context;
 
         protected readonly UserStore<IdentityUser, IdentityRole> _userStore;
+
         protected void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

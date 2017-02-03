@@ -108,7 +108,6 @@ overflow-y:hidden;
 }
 
 .no-touch .scrollable.hover:hover {
-overflow-y:;
 overflow:visible;
 }
 
@@ -164,3 +163,14 @@ background-color:#fff;
 .frmx100{
     max-width:100%;
 }
+
+/*#region dashboard left */
+
+
+    .navbar-right {
+        margin-right: 0px;
+    }
+
+
+
+/*#endregion */
