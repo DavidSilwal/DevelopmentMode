@@ -11,5 +11,8 @@ namespace WebApplication.Services
         Task SendEmailAsync(string email, string subject, string message);
         Task SendEmailMessageTemplate(string TemplateTypeID, string email);
 
+        Task SendEmailGridAsync(string email, string subject, string message);
+
+
     }
 }

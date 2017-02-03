@@ -37,7 +37,8 @@
     "ImageSharp": "0.0.0",
     "Microsoft.AspNetCore.Cors": "1.0.0",
     "cloudscribe.Web.Pagination": "1.0.5",
-    "RazorLight": "1.0.0-rc1"
+    "RazorLight": "1.0.0-rc1",
+    "SendGrid.NetCore": "1.0.0-rtm-00002"
   },
 
   "tools": {

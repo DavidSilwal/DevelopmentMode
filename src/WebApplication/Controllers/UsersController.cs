@@ -38,7 +38,7 @@ namespace WebApplication.Controllers
         }
         public IActionResult Index( int page=1)
         {
-            int pageSize = 2;
+            int pageSize = 3;
 
             PaginationSet<IdentityUser> pagedSet = null;
 

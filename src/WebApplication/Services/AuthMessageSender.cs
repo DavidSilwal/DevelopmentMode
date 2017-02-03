@@ -6,6 +6,9 @@ using MailKit.Net.Smtp;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
+using System.Net.Mail;
+using SendGrid;
+using MailKit.Security;
 
 namespace WebApplication.Services
 {
@@ -42,6 +45,34 @@ namespace WebApplication.Services
             return Task.FromResult(0);
         }
 
+
+
+
+        public async Task SendEmailGridAsync(string email, string subject, string msg)
+        {
+
+            var myMessage = new SendGrid.SendGridMessage();
+            myMessage.AddTo(email);
+            myMessage.From = new System.Net.Mail.MailAddress("de.davidsilwal@gmail.com", "David Silwal");
+            myMessage.Subject = subject;
+            myMessage.Text = msg ;
+
+            var credentials = new System.Net.NetworkCredential(
+                "DavidSilwal",
+                "Admin123!@#");
+           
+            // Create a Web transport for sending email.
+            var transportWeb = new SendGrid.Web(credentials);
+
+            await transportWeb.DeliverAsync(myMessage);
+            
+            await Task.FromResult(0);
+
+            
+        }
+
+
+        
         public Task SendEmailMessageTemplate(string TemplateTypeID, string email)
         {
 

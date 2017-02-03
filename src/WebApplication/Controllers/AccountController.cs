@@ -155,7 +155,7 @@ namespace WebApplication.Controllers
 
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    await _emailSender.SendEmailGridAsync(model.Email, "Confirm your account",
                         $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
@@ -228,7 +228,11 @@ namespace WebApplication.Controllers
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email); //ask for email
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
+
+                var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
+                var lastName = info.Principal.FindFirstValue(ClaimTypes.Surname);
+                
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email,FirstName=firstName,LastName=lastName });
             }
         }
 
@@ -247,7 +251,8 @@ namespace WebApplication.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                var user = new IdentityUser { UserName = model.Email, Email = model.Email,FirstName = model.FirstName , LastName=model.LastName };
+
                 var result = await _userManager.CreateAsync(user);
                    
                 if (result.Succeeded)
@@ -318,7 +323,7 @@ namespace WebApplication.Controllers
 
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-                await _emailSender.SendEmailAsync(model.Email, "Reset Password",
+                await _emailSender.SendEmailGridAsync(model.Email, "Reset Password",
                    $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
 
                 return View("ForgotPasswordConfirmation");
@@ -353,7 +358,7 @@ namespace WebApplication.Controllers
 
                 var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-                await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                await _emailSender.SendEmailGridAsync(model.Email, "Confirm your account",
                     $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
 
             }
@@ -464,7 +469,7 @@ namespace WebApplication.Controllers
             var message = "Your security code is: " + code;
             if (model.SelectedProvider == "Email")
             {
-                await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
+                await _emailSender.SendEmailGridAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
             }
             else if (model.SelectedProvider == "Phone")
             {
