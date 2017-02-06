@@ -65,7 +65,8 @@ namespace WebApplication.Controllers.Api
             });
 
             // return CreatedAtRoute("GetById", new { id = item._id }, item);
-            return RedirectToAction("Index", "Feed");
+            //return RedirectToAction("index", "home");
+            return Ok();
         }
 
         [HttpPut("{id}")]
@@ -84,7 +85,7 @@ namespace WebApplication.Controllers.Api
             }
 
             _UserStatusDataRepository.Update(item);
-            return new NoContentResult();   
+            return Ok();   
         }
 
         [HttpDelete("{id}")]
@@ -93,11 +94,11 @@ namespace WebApplication.Controllers.Api
             var item = _UserStatusDataRepository.Get(id);
             if (item == null)
             {
-                return NotFound();
+                return new NoContentResult();
             }
 
-            //_UserStatusDataRepository.Delete(item);
-            return new NoContentResult();
+            //UserStatusDataRepository.Delete(i);
+            return Ok();
         }
 
 

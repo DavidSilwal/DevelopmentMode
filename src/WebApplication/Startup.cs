@@ -41,17 +41,10 @@ namespace WebApplication
            .AddDefaultTokenProviders();
 
             services.AddSingleton <UserStore<IdentityUser, IdentityRole>>();
-         
-                //services.AddAuthentication(options =>
-                //{
-
-                //    options.SignInScheme = new IdentityCookieOptions().ExternalCookieAuthenticationScheme;
-                //});
-
-
+            
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Admin", policy => policy.RequireClaim("Role", "Admin"));
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Roles", "Admin"));
             });
 
 
@@ -138,6 +131,7 @@ namespace WebApplication
 
             
             app.UseCookieAuthentication();
+
             app.UseIdentity()
                .UseFacebookAuthentication(new FacebookOptions
                {
@@ -155,10 +149,8 @@ namespace WebApplication
                     ConsumerSecret = "fF4cdlcMxeDrvZJFLRZAj7SDkQt7NYBetewCzbJzRxUUbPCMmO"
                 });
 
-
             //app.UseInstaller();
            
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

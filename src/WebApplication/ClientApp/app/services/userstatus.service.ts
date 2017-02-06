@@ -24,7 +24,7 @@ export class UserStatusService {
 
             .map((res: Response) => res.json())
 
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: Response) => Observable.throw(error.json().error || 'Server error'));
 
     }
 
@@ -36,7 +36,7 @@ export class UserStatusService {
 
         return this.http.post(this.Url, body, options) // ...using post request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+            .catch((error: Response) => Observable.throw(error.json().error || 'Server error')); //...errors if any
     }
 
     // Update a status
@@ -47,12 +47,17 @@ export class UserStatusService {
 
         return this.http.put(`${this.Url}/${body['id']}`, body, options) // ...using put request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+            .catch((error: Response) => Observable.throw(error.json().error || 'Server error')); //...errors if any
     }
     // Delete a status
     removeStatus(id: string): Observable<UserStatus[]> {
         return this.http.delete(`${this.Url}/${id}`) // ...using put request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+            .catch((error: Response) => Observable.throw(error.json().error || 'Server error')); //...errors if any
     }
-}
+    public handleError(error: Response) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+    }
+
+    }

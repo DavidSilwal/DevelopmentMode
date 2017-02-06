@@ -7,7 +7,8 @@ import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { FeedComponent } from './components/feed/feed.component';
-//import { FeedBoxComponent } from './components/feed-box/feed-box.component';
+
+import { FeedBoxComponent } from './components/feedbox/feedbox.component';
 
 import { UserStatus } from './models/userstatus';
 
@@ -21,8 +22,8 @@ import { EmitterService } from './services/emitter.service';
         AppComponent,
         HomeComponent,
         PostComponent,
-        FeedComponent
-       // FeedBoxComponent
+        FeedComponent,
+        FeedBoxComponent
 
     ],
     imports: [

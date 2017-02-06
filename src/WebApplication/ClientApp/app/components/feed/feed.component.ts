@@ -2,8 +2,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-//import { FeedBoxComponent } from '../feed-box/feed-box.component';
-
 import { EmitterService } from '../../services/emitter.service';
 import { UserStatusService } from '../../services/userstatus.service';
 
