@@ -27,22 +27,27 @@
                 <thead>
                     <tr>
                         <th>
-                            Username
+                            <label asp-for="@Model.Items[0].UserName"></label>
+                          
                         </th>
                         <th>
-                            Email
+                            <label asp-for="@Model.Items[0].Email"></label>
+                        
                         </th>
                         <th>
-                            Roles
+                            <label asp-for="@Model.Items[0].Roles"></label>
+                            
                         </th>
                         <th>
-                            Email Confirmed
+                          <label>Email Confirmed</label>
+                            
                         </th>
                         <th>
-                            Last Logins
+                           <label> Last Logins</label>
+                           
                         </th>
                         <th>
-                            Action
+                           <lable>Action</lable>
                         </th>
                     </tr>
                 </thead>
@@ -51,13 +56,15 @@
                     {
                         <tr class="text-center">
                             <td>
-                                @Html.DisplayFor(modelItem => item.UserName)
+                       
+                                @*@Model.Items[0].UserName.ToString()*@
+                               @Html.DisplayFor(modelItem => item.UserName)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
                             <td>
-                                @*@Html.DisplayFor(modelItem => item.Roles)*@
+
                                 @foreach (var role in item.Roles)
                                 {
                                     @foreach (var rolesVM in RolesVM)
@@ -65,11 +72,11 @@
 
                                         @if (role.Id != null && role.Id.Contains(rolesVM.Id))
                                         {
-                                            @Html.DisplayFor(modelItem => rolesVM.Name) <br/>
+                                            @Html.DisplayFor(modelItem => rolesVM.Name) <br />
 
                                         }
                                     }
-                                    
+
                                     @*@Html.DisplayFor(modelItem => role.Id) <br />*@
                                 }
                             </td>

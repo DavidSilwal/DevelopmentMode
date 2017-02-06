@@ -77,8 +77,15 @@ namespace WebApplication
                 options.MinificationSettings.RemoveHttpProtocolFromAttributes = true;
                 options.MinificationSettings.RemoveHttpsProtocolFromAttributes = true;
             })
+          .AddHtmlMinification(
+            options =>
+            {
+                options.MinificationSettings.RemoveRedundantAttributes = true;
+                options.MinificationSettings.RemoveHttpProtocolFromAttributes = true;
+                options.MinificationSettings.RemoveHttpsProtocolFromAttributes = true;
+            })
         .AddHttpCompression();
-        
+
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<IViewModelService, ViewModelService>();
@@ -144,8 +151,8 @@ namespace WebApplication
                 })
                 .UseTwitterAuthentication(new TwitterOptions
                 {                    
-                    ConsumerKey = "D8QfWaX5wQIwQaoBHdKSHdYDH",
-                    ConsumerSecret = "84kGnFVjpnaGFxvZXmhG47qju3pxnJIY8Kll5zoor00W0u6iqp"
+                    ConsumerKey = "tl0zTPXYqQRV969qVbXyCQsb8",
+                    ConsumerSecret = "fF4cdlcMxeDrvZJFLRZAj7SDkQt7NYBetewCzbJzRxUUbPCMmO"
                 });
 
 

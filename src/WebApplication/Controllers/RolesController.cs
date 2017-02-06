@@ -24,8 +24,7 @@ namespace WebApplication.Controllers
 
 
         public RolesController(
-           UserManager<IdentityUser> userManager,
-           
+           UserManager<IdentityUser> userManager,         
            RoleManager<IdentityRole> roleManager,
            ILoggerFactory loggerFactory,
            ApplicationDbContext context,
@@ -35,12 +34,9 @@ namespace WebApplication.Controllers
             _roleManager = roleManager;
             _logger = loggerFactory.CreateLogger<RolesController>();
         }
-        IEmailSender email;
-        
-        public async Task<IActionResult> Index()
+       
+        public IActionResult Index()
         {
-            //await email.SendEmailMessageTemplate("Hello","de.davidsilwal@gmail.com");
-
             var roles = _roleManager.Roles;
 
             return View(roles.ToList().ToListViewModel());
@@ -48,14 +44,11 @@ namespace WebApplication.Controllers
 
         public IActionResult Create()
         {
-
             return View();
         }
 
         public async Task<IActionResult> Details(string id)
         {
-          
-
             if (id == null)
             {
                 return NotFound();
@@ -92,16 +85,13 @@ namespace WebApplication.Controllers
                     AddErrors(result);
                 }
             }
-
-
+            
             return View(model);
         }
 
         [ActionName("Delete")]
         public async Task<IActionResult> Delete(string id)
         {
-
-
             if (id == null)
             {
                 return NotFound();
@@ -128,12 +118,10 @@ namespace WebApplication.Controllers
 
             return RedirectToAction("Index");
         }
-
-
-
+        
         public async Task<IActionResult> Edit(string id)
         {
-          
+        
             if (id == null)
             {
                 return NotFound();
@@ -176,8 +164,7 @@ namespace WebApplication.Controllers
                     AddErrors(result);
                 }
             }
-
-
+            
             return View(model);
         }
 

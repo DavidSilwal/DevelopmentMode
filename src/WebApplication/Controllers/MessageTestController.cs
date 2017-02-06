@@ -79,9 +79,10 @@ namespace WebApplication.Controllers
                 LastName = _userStore.GetLastName(user),
                 Email = _userStore.GetEmailAsync(user),
             };
+
             string result = engine.ParseString(message.Body, modelitem);
 
-            await _emailSender.SendEmailAsync(model.Email, message.Subject, result);
+            await _emailSender.SendEmailGridAsync(model.Email, message.Subject, result);
             
             return View();
         }

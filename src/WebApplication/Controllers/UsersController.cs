@@ -103,8 +103,6 @@ namespace WebApplication.Controllers
             return View(userVM);
         }
 
-
-
         public async Task<IActionResult> Details(string id)
         {
      
@@ -122,8 +120,7 @@ namespace WebApplication.Controllers
 
             return View(user);          
         }
-
-
+        
         public async Task<IActionResult> Edit(string id)
         {
            

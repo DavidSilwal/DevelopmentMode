@@ -195,10 +195,6 @@ namespace WebApplication.Controllers
         //    return outStream;
         //}
 
-
-
-
-
-
+        
     }
 }

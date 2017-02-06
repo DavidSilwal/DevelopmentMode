@@ -9,12 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var angular2_universal_1 = require('angular2-universal');
 var app_component_1 = require('./components/app/app.component');
 var home_component_1 = require('./components/home/home.component');
-var post_component_1 = require('./components/home/post.component');
-var feed_component_1 = require('./components/home/feed.component');
+var post_component_1 = require('./components/post/post.component');
+var feed_component_1 = require('./components/feed/feed.component');
+var userstatus_service_1 = require('./services/userstatus.service');
+var emitter_service_1 = require('./services/emitter.service');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,12 +32,14 @@ var AppModule = (function () {
             ],
             imports: [
                 angular2_universal_1.UniversalModule,
+                forms_1.FormsModule,
                 router_1.RouterModule.forRoot([
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
                     { path: 'home', component: home_component_1.HomeComponent },
                     { path: '**', redirectTo: 'home' }
                 ])
-            ]
+            ],
+            providers: [userstatus_service_1.UserStatusService, emitter_service_1.EmitterService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

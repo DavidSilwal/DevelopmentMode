@@ -8,26 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+/* * * ./app/emitter.service.ts * * */
+// https://gist.github.com/sasxa
+// Imports
 var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var core_2 = require('@angular/core');
-var FeedComponent = (function () {
-    function FeedComponent(http) {
-        var _this = this;
-        this.Url = 'api/userstatus'; // URL to web api
-        http.get(this.Url).subscribe(function (status) {
-            _this.status = status.json();
-        });
+var EmitterService = (function () {
+    function EmitterService() {
     }
-    FeedComponent = __decorate([
-        core_1.Component({
-            selector: 'feed',
-            template: require('./feed.component.html')
-        }),
-        core_2.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], FeedComponent);
-    return FeedComponent;
+    // Set a new event in the store with a given ID
+    // as key
+    EmitterService.get = function (ID) {
+        if (!this._emitters[ID])
+            this._emitters[ID] = new core_1.EventEmitter();
+        return this._emitters[ID];
+    };
+    // Event store
+    EmitterService._emitters = {};
+    EmitterService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [])
+    ], EmitterService);
+    return EmitterService;
 }());
-exports.FeedComponent = FeedComponent;
-//# sourceMappingURL=feed.component.js.map
+exports.EmitterService = EmitterService;
+//# sourceMappingURL=emitter.service.js.map

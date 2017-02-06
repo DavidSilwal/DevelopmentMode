@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
@@ -15,18 +17,15 @@ namespace WebApplication.Controllers.Api
     public class UserStatusController : Controller
     {
         private readonly IUserStatusDataRepository _UserStatusDataRepository;
-    
+        private readonly UserManager<IdentityUser> _UserManager;
 
-        public UserStatusController(IUserStatusDataRepository UserStatusDataRepository)
+        public UserStatusController(
+            IUserStatusDataRepository UserStatusDataRepository,
+            UserManager<IdentityUser> userManager)
         {       
             _UserStatusDataRepository = UserStatusDataRepository;
-            
-            //_UserStatusDataRepository.Save(new UserStatusData {
-            // Type = "activity",
-            // Status = "hello",
-            // IsHidden=false
-             
-            // });
+            _UserManager = userManager;
+
         }
 
 
@@ -55,8 +54,18 @@ namespace WebApplication.Controllers.Api
             {
                 return BadRequest();
             }
-            _UserStatusDataRepository.Save(item);
-            return CreatedAtRoute("Getitem", new { id = item._id }, item);
+        
+            _UserStatusDataRepository.Save(
+                new UserStatusData
+            {
+                UserID = GetCurrentUserId(),
+                Status = item.Status,
+                UpdateTime = item.UpdateTime,
+
+            });
+
+            // return CreatedAtRoute("GetById", new { id = item._id }, item);
+            return RedirectToAction("Index", "Feed");
         }
 
         [HttpPut("{id}")]
@@ -75,7 +84,7 @@ namespace WebApplication.Controllers.Api
             }
 
             _UserStatusDataRepository.Update(item);
-            return new NoContentResult();
+            return new NoContentResult();   
         }
 
         [HttpDelete("{id}")]
@@ -90,6 +99,27 @@ namespace WebApplication.Controllers.Api
             //_UserStatusDataRepository.Delete(item);
             return new NoContentResult();
         }
+
+
+        protected async Task<IdentityUser> GetCurrentUserAsync()
+        {
+            return await _UserManager.GetUserAsync(HttpContext.User);
+        }
+
+        protected string GetCurrentUserId()
+        {
+            var task = GetCurrentUserAsync();
+
+            var user = task.Result;
+
+            if (user == null)
+            {
+                throw new Exception("Unable to get id of current user.");
+            }
+
+            return user.Id;
+        }
+
 
     }
 }

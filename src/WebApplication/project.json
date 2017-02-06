@@ -89,7 +89,8 @@
       "bower_components",
       "wwwroot",
       "node_modules",
-      "wwwroot/dist/*.map"
+      "wwwroot/dist/*.map",
+        "**/.spec.ts"
     ]
   },
   "scripts": {

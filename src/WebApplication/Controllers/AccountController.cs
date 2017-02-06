@@ -211,6 +211,16 @@ namespace WebApplication.Controllers
 
             if (result.Succeeded)
             {
+
+                UserActivity activity = new UserActivity
+                {
+                    Browser = Request.Headers["User-Agent"].ToString(),
+                    IpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString(),
+                    TimeStamp = DateTime.Now
+                };
+
+                await _userStore.AddUserActivities(await GetCurrentUserAsync(), activity);
+
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
                 return RedirectToLocal(returnUrl);
             }
@@ -251,7 +261,7 @@ namespace WebApplication.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new IdentityUser { UserName = model.Email, Email = model.Email,FirstName = model.FirstName , LastName=model.LastName };
+                var user = new IdentityUser { UserName = model.Email, Email = model.Email,FirstName = model.FirstName , LastName=model.LastName};
 
                 var result = await _userManager.CreateAsync(user);
                    

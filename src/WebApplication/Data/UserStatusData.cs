@@ -10,6 +10,7 @@ namespace WebApplication.Data
     public class UserStatusData
     {
         public Guid _id { get; set; }
+        public string UserID { get; set; }
 
         public string Type { get; set; }
         
@@ -19,6 +20,10 @@ namespace WebApplication.Data
         public DateTime UpdateTime { get; set; }
 
         public bool IsHidden { get; set; } // if  personal user visible
-        
+
+        public List<string> LikesUserIDs { get; set; }
+        public List<Comments> Comments { get; set; }
+
+
     }
 }

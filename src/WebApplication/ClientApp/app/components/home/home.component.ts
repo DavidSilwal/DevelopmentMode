@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
-import { PostComponent } from './post.component';
+import { PostComponent } from '../post/post.component';
 
+import { FeedComponent } from '../feed/feed.component';
 
 @Component({
     selector: 'home',
