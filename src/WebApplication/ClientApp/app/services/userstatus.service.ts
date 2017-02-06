@@ -16,7 +16,7 @@ export class UserStatusService {
 
     constructor(private http: Http) { }
 
-    private Url = "http://localhost:50353/api/userstatus";
+    private Url = "brainapp.azurewebsites.net/api/userstatus";
 
     getStatus(): Observable<UserStatus[]> {
 
