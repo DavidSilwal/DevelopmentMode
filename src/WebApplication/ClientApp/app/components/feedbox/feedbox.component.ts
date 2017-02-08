@@ -27,9 +27,9 @@ export class FeedBoxComponent {
         EmitterService.get(this.editId).emit(this.status);
     }
 
-    deleteStatus(id: string) {
-        // Call removeComment() from CommentService to delete comment
-        this.statusService.removeStatus(id).subscribe(
+    deleteStatus(_id: string) {
+
+        this.statusService.removeStatus(_id).subscribe(
             status => {
                 // Emit list event
                 EmitterService.get(this.listId).emit(status);

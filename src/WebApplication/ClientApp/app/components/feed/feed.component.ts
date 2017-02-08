@@ -1,11 +1,13 @@
-﻿// Imports
+﻿import { Router } from '@angular/router';
+
+import { UserStatus } from '../../models/userstatus';
+// Imports
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { EmitterService } from '../../services/emitter.service';
 import { UserStatusService } from '../../services/userstatus.service';
 
-import { UserStatus } from '../../models/userstatus';
 
 @Component({
     selector: 'app-feed',
@@ -15,9 +17,12 @@ import { UserStatus } from '../../models/userstatus';
 
 export class FeedComponent implements OnInit, OnChanges {
 
-    constructor(private statusService: UserStatusService) { }
+    constructor(
+        private statusService: UserStatusService,
+        private router: Router
+    ) { }
     //local properties
-    userstatus: UserStatus[]
+    userstatus: UserStatus[];
 
     // Input properties
     @Input() listId: string;
@@ -28,17 +33,22 @@ export class FeedComponent implements OnInit, OnChanges {
             .subscribe(
             userstatus => this.userstatus = userstatus, //Bind to view
             err => {
-                // Log errors if any
-                console.log(err);
-            });
+                  console.log(err);
+            });                                     
+        
     }
 
-    ngOnInit() {
+    ngOnInit() : void {
         // Load status
-        this.loadStatuss()
+         this.loadStatuss()
+
     }
 
-
+//   gotoDetail(userstatus: UserStatus): void {
+//     let link = ['/detail', userstatus.id];
+//     this.router.navigate(link);
+//   }
+  
     ngOnChanges(changes: any) {
         // Listen to the 'list'emitted event so as populate the model
         // with the event payload

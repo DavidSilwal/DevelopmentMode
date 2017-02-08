@@ -34,6 +34,11 @@ namespace WebApplication.Data
             await _context.UserStatusDataCollection.DeleteOneAsync(x => x._id == item._id);
         }
 
+        public async Task DeleteByID(Guid id)
+        {
+            await _context.UserStatusDataCollection.DeleteOneAsync(x => x._id == id);
+        }
+
         public async Task Update(UserStatusData item)
         {
 

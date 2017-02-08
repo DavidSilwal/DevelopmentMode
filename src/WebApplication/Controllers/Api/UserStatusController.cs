@@ -88,16 +88,16 @@ namespace WebApplication.Controllers.Api
             return Ok();   
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(Guid? id)
+        [HttpDelete("{_id}")]
+        public async Task<IActionResult> Delete(Guid _id)
         {
-            var item = _UserStatusDataRepository.Get(id);
-            if (item == null)
+            if (_id == null)
             {
                 return new NoContentResult();
             }
 
-            //UserStatusDataRepository.Delete(i);
+            var item = _UserStatusDataRepository.DeleteByID(_id);
+            
             return Ok();
         }
 

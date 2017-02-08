@@ -33,6 +33,7 @@ import { EmitterService } from './services/emitter.service';
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: '**', redirectTo: 'home' }
+       
         ])
     ],
     providers: [UserStatusService, EmitterService]

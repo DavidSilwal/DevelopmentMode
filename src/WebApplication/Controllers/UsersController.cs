@@ -52,7 +52,7 @@ namespace WebApplication.Controllers
 
             _users = u
                 .OrderBy(p => p.UserName)
-                .Skip((currentPage) * currentPageSize)
+                .Skip(((currentPage) * currentPageSize)- currentPage)
                 .Take(currentPageSize)
                 .ToList();
             var item = _users;

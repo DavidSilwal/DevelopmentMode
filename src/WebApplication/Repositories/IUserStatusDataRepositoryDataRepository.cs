@@ -11,6 +11,8 @@ namespace WebApplication.Data
         Task<UserStatusData> Get(Guid? _id);
         Task Save(UserStatusData MessageTemplate);
         Task Update(UserStatusData item);
+
+        Task DeleteByID(Guid id);
         Task UpdateMsg(UserStatusData item);
     }
 }

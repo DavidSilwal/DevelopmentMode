@@ -1,6 +1,5 @@
-﻿import { Injectable } from '@angular/core';
-
-import { UserStatus } from '../models/userstatus';
+﻿import { UserStatus } from './../models/userstatus';
+import { Injectable } from '@angular/core';
 
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
@@ -9,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()
@@ -16,17 +16,30 @@ export class UserStatusService {
 
     constructor(private http: Http) { }
 
-    private Url = "brainapp.azurewebsites.net/api/userstatus";
+    private Url = "http://localhost:50353/api/UserStatus";
 
-    getStatus(): Observable<UserStatus[]> {
+
+   getStatus(): Observable<UserStatus[]> {
 
         return this.http.get(this.Url)
-
             .map((res: Response) => res.json())
-
-            .catch((error: Response) => Observable.throw(error.json().error || 'Server error'));
-
+            .catch(this.handleError);
     }
+
+    private handleError(error: Response | any) {
+        // In a real world app, we might use a remote logging infrastructure
+        let errMsg: string;
+        if (error instanceof Response) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify(body);
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return Observable.throw(errMsg);
+    }
+
 
     //add a new status
     addStatus(body: Object): Observable<UserStatus[]> {
@@ -36,7 +49,7 @@ export class UserStatusService {
 
         return this.http.post(this.Url, body, options) // ...using post request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-            .catch((error: Response) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+            .catch(this.handleError);
     }
 
     // Update a status
@@ -50,14 +63,10 @@ export class UserStatusService {
             .catch((error: Response) => Observable.throw(error.json().error || 'Server error')); //...errors if any
     }
     // Delete a status
-    removeStatus(id: string): Observable<UserStatus[]> {
-        return this.http.delete(`${this.Url}/${id}`) // ...using put request
+    removeStatus(_id: string): Observable<UserStatus[]> {
+        return this.http.delete(`${this.Url}/${_id}`) // ...using put request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-            .catch((error: Response) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+            .catch(this.handleError); //...errors if any
     }
-    public handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
-    }
-
+  
     }

@@ -10,6 +10,7 @@ namespace WebApplication.Data
     public class UserStatusData
     {
         public Guid _id { get; set; }
+
         public string UserID { get; set; }
 
         public string Type { get; set; }

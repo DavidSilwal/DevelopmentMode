@@ -18,7 +18,7 @@ export class PostComponent implements OnChanges {
 
     constructor(private statusService: UserStatusService) { }
     // Local properties
-    private model = new UserStatus(new Date());
+    private model = new UserStatus();
     private editing = false;
 
     // Input properties
@@ -31,7 +31,7 @@ export class PostComponent implements OnChanges {
         let statusOperation: Observable<UserStatus[]>;
 
         statusOperation = this.statusService.addStatus(this.model)
-
+    
         //if (!this.editing) {
         //    // Create a new status
         //    statusOperation = this.statusService.addStatus(this.model)
@@ -47,7 +47,7 @@ export class PostComponent implements OnChanges {
                 // Emit list event
                 EmitterService.get(this.listId).emit(status);
                 // Empty model
-                this.model = new UserStatus(new Date);
+                this.model = new UserStatus();
                 // Switch editing status
                 //if (this.editing) this.editing = !this.editing;
             },
