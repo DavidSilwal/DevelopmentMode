@@ -55,7 +55,13 @@ namespace WebApplication.Data
 
         public async Task UpdateMsg(UserStatusData item)
         {
-            await _context.UserStatusDataCollection.ReplaceOneAsync(x => x._id == item._id, item);
+            await _context.UserStatusDataCollection.ReplaceOneAsync(x => x._id == item._id, item); 
+        }
+
+        public async Task<List<UserStatusData>> GetStatusByID(string userID)
+        {
+            var item = await _context.UserStatusDataCollection.FindSync(x=>x.UserID == userID).ToListAsync();
+            return item;
         }
 
 

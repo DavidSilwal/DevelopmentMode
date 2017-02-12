@@ -66,7 +66,7 @@ namespace WebApplication.Data
 
             var filter = Builders<MessageTemplate>.Filter.Eq(x => x.MessageTemplateTypeID, ID);
             var options = new FindOptions { AllowPartialResults = false };
-
+            
             return _context.MessageTemplateCollection.Find(filter, options).SingleOrDefaultAsync();
 
         }
@@ -75,7 +75,6 @@ namespace WebApplication.Data
         {
             await _context.MessageTemplateCollection.ReplaceOneAsync(x => x._id == msg._id, msg);
         }
-
-        
+                
     }
 }

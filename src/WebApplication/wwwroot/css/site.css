@@ -659,3 +659,11 @@ c-g {
 }
 
 /*#endregion */
+
+.mi-hi-40{
+min-height:40px;
+}
+
+.mar-to--5{
+    margin-top:-5px;
+}

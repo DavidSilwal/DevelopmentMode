@@ -8,7 +8,7 @@ import { UserStatus } from '../../models/userstatus';
 
 @Component({
     selector: 'app-feedbox',
-    template: require('./feedbox.component.html'),
+    template: require('./feedbox.component.html'),  
     styleUrls: [require('./feedbox.component.css')]
 })
 

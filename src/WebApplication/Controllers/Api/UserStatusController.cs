@@ -34,9 +34,9 @@ namespace WebApplication.Controllers.Api
         {
             return await _UserStatusDataRepository.FindAll();
         }
+        
 
-
-        [HttpGet("{id}", Name = "GetUserStatus")]
+        [HttpGet("{id}", Name = "get")]
         public IActionResult GetById(Guid? id)
         {
             var item = _UserStatusDataRepository.Get(id);
@@ -52,6 +52,7 @@ namespace WebApplication.Controllers.Api
         {
             if (item == null)
             {
+                
                 return BadRequest();
             }
         
@@ -89,7 +90,7 @@ namespace WebApplication.Controllers.Api
         }
 
         [HttpDelete("{_id}")]
-        public async Task<IActionResult> Delete(Guid _id)
+        public IActionResult Delete(Guid _id)
         {
             if (_id == null)
             {
@@ -101,6 +102,7 @@ namespace WebApplication.Controllers.Api
             return Ok();
         }
 
+              
 
         protected async Task<IdentityUser> GetCurrentUserAsync()
         {
@@ -121,6 +123,7 @@ namespace WebApplication.Controllers.Api
             return user.Id;
         }
 
+       
 
     }
 }

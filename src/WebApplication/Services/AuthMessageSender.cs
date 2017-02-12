@@ -47,7 +47,6 @@ namespace WebApplication.Services
 
 
 
-
         public async Task SendEmailGridAsync(string email, string subject, string msg)
         {
 
@@ -67,11 +66,8 @@ namespace WebApplication.Services
             await transportWeb.DeliverAsync(myMessage);
             
             await Task.FromResult(0);
-
-            
+                        
         }
-
-
         
         public Task SendEmailMessageTemplate(string TemplateTypeID, string email)
         {

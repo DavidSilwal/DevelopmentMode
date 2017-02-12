@@ -14,7 +14,7 @@ namespace WebApplication.Data
         public string UserID { get; set; }
 
         public string Type { get; set; }
-        
+        [Required]
         public string Status { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]

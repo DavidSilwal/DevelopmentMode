@@ -14,5 +14,7 @@ namespace WebApplication.Data
 
         Task DeleteByID(Guid id);
         Task UpdateMsg(UserStatusData item);
+
+        Task<List<UserStatusData>> GetStatusByID(string userID);
     }
 }

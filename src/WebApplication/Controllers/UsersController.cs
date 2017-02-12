@@ -72,13 +72,10 @@ namespace WebApplication.Controllers
         }
 
 
-
         public IActionResult Index1()
         {
             return View(_userStore.Users.ToList());
         }
-
-        
         public async Task<IActionResult> Search(string searchString)
         {
             var user =  _userManager.Users;
