@@ -8,13 +8,20 @@ namespace WebApplication.Data
     {
         Task Delete(UserStatusData item);
         Task<List<UserStatusData>> FindAll();
-        Task<UserStatusData> Get(Guid? _id);
+        Task<UserStatusData> Get(string _id);
         Task Save(UserStatusData MessageTemplate);
         Task Update(UserStatusData item);
 
-        Task DeleteByID(Guid id);
+        Task DeleteByID(string id);
         Task UpdateMsg(UserStatusData item);
 
         Task<List<UserStatusData>> GetStatusByID(string userID);
+
+        Task AddLikes(string userID, string statusID);
+
+        Task AddComments(string statusID, Comments Comment);
+
+
+
     }
 }

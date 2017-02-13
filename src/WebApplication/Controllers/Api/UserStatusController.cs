@@ -37,7 +37,7 @@ namespace WebApplication.Controllers.Api
         
 
         [HttpGet("{id}", Name = "get")]
-        public IActionResult GetById(Guid? id)
+        public IActionResult GetById(string id)
         {
             var item = _UserStatusDataRepository.Get(id);
             if (item == null)
@@ -71,7 +71,7 @@ namespace WebApplication.Controllers.Api
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(Guid? id, [FromBody] UserStatusData item)
+        public IActionResult Update(string id, [FromBody] UserStatusData item)
         {
             
             if (id == null)
@@ -90,7 +90,7 @@ namespace WebApplication.Controllers.Api
         }
 
         [HttpDelete("{_id}")]
-        public IActionResult Delete(Guid _id)
+        public IActionResult Delete(string _id)
         {
             if (_id == null)
             {

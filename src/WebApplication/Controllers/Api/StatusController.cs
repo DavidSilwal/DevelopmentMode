@@ -1,4 +1,5 @@
 ﻿using Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using WebApplication.Data;
 namespace WebApplication.Controllers
 {
     [Route("api/feed")]
+    [Authorize()]
     public class StatusController : Controller
     {
         private readonly UserStore<IdentityUser,IdentityRole> _userStore;
@@ -61,8 +63,8 @@ namespace WebApplication.Controllers
         //}
 
 
-        [HttpGet("{id:Guid?}", Name = "GetSingleStatus")]
-        public IActionResult GetSingle(Guid? id)
+        [HttpGet("{id}", Name = "GetSingleStatus")]
+        public IActionResult GetSingle(string id)
         {
             try
             {
@@ -81,11 +83,10 @@ namespace WebApplication.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError);
             }
         }
+        
 
-
-
-        [HttpPatch("{id:Guid?}")]
-        public IActionResult Patch(Guid? id, [FromBody] JsonPatchDocument<UserStatusData> statusPatchDocument)
+        [HttpPatch("{id}")]
+        public IActionResult Patch(string id, [FromBody] JsonPatchDocument<UserStatusData> statusPatchDocument)
         {
             try
             {
@@ -154,8 +155,8 @@ namespace WebApplication.Controllers
             }
         }
 
-        [HttpPut("{id:Guid?}")]
-        public IActionResult Update(Guid? id, [FromBody] UserStatusData userStatus)
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, [FromBody] UserStatusData userStatus)
         {
             try
             {
@@ -188,8 +189,8 @@ namespace WebApplication.Controllers
             }
         }
 
-        [HttpDelete("{id:Guid?}")]
-        public IActionResult Delete(Guid? id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
         {
             try
             {
@@ -211,36 +212,33 @@ namespace WebApplication.Controllers
             }
         }
 
+        [HttpGet("likes/{id}")]
+        public async Task<IActionResult> Likes(string id)
+        {
+            string userID = GetCurrentUserId();
+            await _userstatusRepository.AddLikes(userID,id);
+               
+            return Ok();
+        }
 
-        //
-        public async Task<IActionResult> Likes()
+        [HttpGet("unlikes/{id}")]
+        public async Task<IActionResult> UnLikes(string id)
         {
             var user = GetCurrentUserId();
-            //check if it contains 
-
-           // var status = _userstatusRepository.GetStatusByID(statusID);
-
-
-            //getstatus by id
-            //add 1 List<idsuser >if it is unique
+            var status = _userstatusRepository.Get(id);
+            status.Result.LikesUserIDs.Remove(user);
 
             return Ok();
         }
 
-        public async Task<IActionResult> UnLikes()
+        [HttpGet("addcomments/{id}")]
+        public async Task<IActionResult> AddComments(string id,Comments comments)
         {
+            var status = _userstatusRepository.AddComments(id,comments);
+                                   
             return Ok();
         }
-
-        public async Task<IActionResult> AddComments()
-        {
-
-           
-            // add to the list
-
-            return Ok();
-        }
-
+        [HttpGet("removecomments/{id}")]
         public async Task<IActionResult> RemoveComments()
         {
             return Ok();

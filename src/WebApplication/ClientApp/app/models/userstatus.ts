@@ -6,6 +6,9 @@ export class UserStatus {
     updateTime: Date;
     type: string;
     isHidden: boolean
-    LikesUserIDs: Array<string>;
-    Comments : Array<Comments>
+    likesCounts: number;
+    commentsCounts: number;
+    likesUserIDs: Array<string>;
+    Comments: Array<Comments>;
+    updatedAgo: string;
 }

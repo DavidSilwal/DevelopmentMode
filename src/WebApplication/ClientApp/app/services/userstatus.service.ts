@@ -53,7 +53,7 @@ export class UserStatusService {
     }
 
     // Update a status
-    updateStatus(body: Object): Observable<UserStatus[]> {
+    updateStatus(body: UserStatus): Observable<UserStatus[]> {
         let bodyString = JSON.stringify(body); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options = new RequestOptions({ headers: headers }); // Create a request option

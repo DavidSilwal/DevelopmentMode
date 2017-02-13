@@ -4,7 +4,9 @@
             Type
         </span>
         <span class="pull-right">
-            {{status.updateTime}}
+            {{status.updateTime}}|
+            {{status.updatedAgo}} ago
+            
         </span>
     </div>
     <div class="panel-body">
@@ -15,7 +17,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                like counts | comment counts Delete Edit
+                {{status.likesCounts}} likes | {{status.commentsCounts}} Comments Delete Edit
             </div>
         </div>
     </div>
@@ -25,8 +27,7 @@
         </div>
         <div class="col-xs-11">
             <input type="text" placeholder="add a comment" class="form-control input-sm mar-to--5 border-hidden" />
-
-        </div>
+         </div>
 
     </div>
 </div>
