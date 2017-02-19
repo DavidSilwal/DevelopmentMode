@@ -33,7 +33,7 @@ namespace WebApplication
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {   
             services.AddIdentity<IdentityUser, IdentityRole>().AddMongoDBIdentityStores<ApplicationDbContext, IdentityUser, IdentityRole, string>(options =>
             {
                 options.ConnectionString = Configuration["Data:DefaultConnection:ConnectionString"];
@@ -117,7 +117,9 @@ namespace WebApplication
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                 app.UseExceptionHandler("/Home/Error");
+
+                 app.UseStatusCodePagesWithReExecute("/errors/{0}");
             }
 
             app.UseStaticFiles();

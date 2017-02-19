@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 namespace Identity
 {
    
+
     public static class UserLoginInfoExtensions
     {
+
         public static bool AreEqual(this UserLoginInfo thisObj, UserLoginInfo obj)
         {
             if (thisObj == null && obj == null) return true; // both objects are null

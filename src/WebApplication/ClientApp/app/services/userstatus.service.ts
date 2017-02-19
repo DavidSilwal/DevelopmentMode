@@ -1,4 +1,6 @@
 ﻿import { UserStatus } from './../models/userstatus';
+import { Comments } from './../models/comments'
+
 import { Injectable } from '@angular/core';
 
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
@@ -16,7 +18,7 @@ export class UserStatusService {
 
     constructor(private http: Http) { }
 
-    private Url = "http://localhost:50353/api/UserStatus";
+    private Url = "http://localhost:50353/api/feed";
 
 
    getStatus(): Observable<UserStatus[]> {
@@ -42,7 +44,7 @@ export class UserStatusService {
 
 
     //add a new status
-    addStatus(body: Object): Observable<UserStatus[]> {
+    addStatus(body: UserStatus): Observable<UserStatus[]> {
         let bodyString = JSON.stringify(body); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options = new RequestOptions({ headers: headers }); // Create a request option
@@ -68,5 +70,16 @@ export class UserStatusService {
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
     }
+    
+    addComment(comment: Comment): Observable<Comments[]> {
+        let commentString = JSON.stringify(comment); // Stringify payload
+        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        let options = new RequestOptions({ headers: headers }); // Create a request option
+
+        return this.http.post(this.Url + '/addcomments/', comment, options) // ...using post request
+            .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
+            .catch(this.handleError);
+    }
+
   
     }

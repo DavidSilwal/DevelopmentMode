@@ -91,6 +91,16 @@ namespace WebApplication.Data
             await _context.UserStatusDataCollection.UpdateOneAsync(filter, update);
         }
 
+        public async  Task<List<UserStatusData>> FindAllByType(string Type)
+        {
+            if (string.IsNullOrWhiteSpace(Type))  Task.FromResult((UserStatusData)null);
+
+            var filter =  Builders<UserStatusData>.Filter.Eq(x => x.Type, Type);
+            var options = new FindOptions { AllowPartialResults = false };
+
+           return await  _context.UserStatusDataCollection.Find(filter, options).ToListAsync();
+        }
+
 
 
     }

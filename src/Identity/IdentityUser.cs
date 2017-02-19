@@ -10,43 +10,47 @@ namespace Identity
     [BsonIgnoreExtraElements]
     public class IdentityUser : IdentityUser<string>
     {
+        [BsonConstructor]
         public IdentityUser() : base()
         {
             Id = Guid.NewGuid().ToString();
         }
-
+        [BsonConstructor]
         public IdentityUser(string userName) : this()
         {
             UserName = userName;
         }
     }
-
+    [BsonIgnoreExtraElements]
     public class IdentityUser<TKey> : IdentityUser<IdentityRole<TKey>, TKey>
         where TKey : IEquatable<TKey>
     {
+        [BsonConstructor]
         public IdentityUser() : base()
         {
         }
-
+        [BsonConstructor]
         public IdentityUser(string userName) : base(userName)
         {
         }
     }
+    [BsonIgnoreExtraElements]
 
     public class IdentityUser<TRole, TKey>
         where TRole : IdentityRole<TKey>
         where TKey : IEquatable<TKey>
     {
 
-
+        [BsonConstructor]
         public IdentityUser() { }
-
+        [BsonConstructor]
         public IdentityUser(string userName) : this()
         {
             UserName = userName;
         }
 
         public virtual TKey Id { get; set; }
+        [BsonIgnoreIfNull]
         public virtual string UserName { get; set; }
 
         /// /// <summary>
@@ -54,11 +58,13 @@ namespace Identity
         /// Value will be overridden by RoleStore.
         /// Used to store the username that is formatted in a case insensitive way so can do searches on it
         /// </summary>
+        [BsonIgnoreIfNull]
         public virtual string NormalizedUserName { get; set; }
 
         /// <summary>
         /// Email
         /// </summary>
+      [BsonIgnoreIfNull]
         public virtual string Email { get; set; }
 
         /// /// <summary>
@@ -66,6 +72,7 @@ namespace Identity
         /// Value will be overridden by RoleStore.
         /// Used to store the email that is formatted in a case insensitive way so can do searches on it
         /// </summary>
+        [BsonIgnoreIfNull]
         public virtual string NormalizedEmail { get; set; }
 
         /// <summary>
@@ -81,57 +88,57 @@ namespace Identity
         /// <summary>
         /// A random value that should change whenever a user's credentials change (ie, password changed, login removed)
         /// </summary>
+        /// 
+        [BsonIgnoreIfNull]
         public virtual string SecurityStamp { get; set; }
-
+        [BsonIgnoreIfNull]
         /// <summary>
         /// PhoneNumber for the user
         /// </summary>
         public virtual string PhoneNumber { get; set; }
 
-        /// <summary>
-        /// True if the phone number is confirmed, default is false
-        /// </summary>
+
         public virtual bool PhoneNumberConfirmed { get; set; }
 
-        /// <summary>
-        /// Is two factor enabled for the user
-        /// </summary>
+
         public virtual bool TwoFactorEnabled { get; set; }
+        [BsonIgnoreIfNull]
 
-        /// <summary>
-        /// DateTime in UTC when lockout ends, any time in the past is considered not locked out.
-        /// </summary>
         public virtual DateTimeOffset? LockoutEnd { get; set; }
+        [BsonIgnoreIfNull]
 
-        /// <summary>
-        /// Is lockout enabled for this user
-        /// </summary>
         public virtual bool LockoutEnabled { get; set; }
+        [BsonIgnoreIfNull]
 
-        /// <summary>
-        /// Used to record failures for the purposes of lockout
-        /// </summary>
         public virtual int AccessFailedCount { get; set; }
 
-
+        [BsonIgnoreIfNull]
         public virtual string FirstName { get; set; }
-            
+        [BsonIgnoreIfNull]
+
         public virtual string LastName { get; set; }
-           
+        [BsonIgnoreIfNull]
+
         public virtual DateTimeOffset? DateOfBirth { get; set; }
-            
+        [BsonIgnoreIfNull]
+
         public virtual string BirthCountry { get; set; }
-             
+        [BsonIgnoreIfNull]
+
         public virtual string CurrentCountry { get; set; }
-              
+
+        [BsonIgnoreIfNull]
         public virtual string Image { get; set; }
-              
+        [BsonIgnoreIfNull]
+
         public virtual Occurrence CreatedOn { get; private set; }
+        [BsonIgnoreIfNull]
         public virtual Occurrence DeletedOn { get; private set; }
 
-
+        [BsonIgnoreIfNull]
 
         public string AboutMe { get; set; }
+        [BsonIgnoreIfNull]
 
         public GenderType Gender { get; set; }
 
@@ -139,16 +146,15 @@ namespace Identity
 
 
 
-        /// <summary>
-        /// Navigation property for users in the role
-        /// </summary>
-        /// 
+     
+     
         [BsonIgnoreIfNull]
         public virtual IList<TRole> Roles
         {
             get { return _roles; }
             set { _roles = value ?? new List<TRole>(); }
         }
+        [BsonIgnoreIfNull]
         private IList<TRole> _roles = new List<TRole>();
 
 
@@ -158,24 +164,22 @@ namespace Identity
             get { return _userActivities; }
             set { _userActivities = value ?? new List<UserActivity>(); }
         }
+        [BsonIgnoreIfNull]
         private IList<UserActivity> _userActivities = new List<UserActivity>();
 
 
-        /// <summary>
-        /// Navigation property for users claims
-        /// </summary>
-         [BsonIgnoreIfNull]
+        [BsonIgnoreIfNull]
+
         public virtual IList<IdentityClaim> Claims
         {
             get { return _claims; }
             set { _claims = value ?? new List<IdentityClaim>(); }
         }
+        [BsonIgnoreIfNull]
         private IList<IdentityClaim> _claims = new List<IdentityClaim>();
 
-        /// <summary>
-        /// Get a list of all user's claims combined with claims from role
-        /// </summary>
         [BsonIgnoreIfNull]
+      
         public virtual IList<IdentityClaim> AllClaims
         {
             get
@@ -189,26 +193,20 @@ namespace Identity
             }
         }
 
-        /// <summary>
-        /// Navigation property for users logins
-        /// </summary>
-        /// 
-        [BsonIgnoreIfNull]      // if we didnt ingore this users/index will render but external login provider work
-       
-         public virtual IList<UserLoginInfo> Logins
+
+       [BsonIgnoreIfNull]      // if we didnt ingore this users/index will render but external login provider work
+
+        public virtual IList<UserLoginInfo> Logins
         {
             get { return _logins; }
             set { _logins = value ?? new List<UserLoginInfo>(); }
         }
         [BsonIgnoreIfNull]
-  
 
+   
         private IList<UserLoginInfo> _logins = new List<UserLoginInfo>();
 
-        /// <summary>
-        /// Returns a friendly name
-        /// </summary>
-        /// <returns></returns>
+
         public override string ToString()
         {
             return UserName;

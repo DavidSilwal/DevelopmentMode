@@ -15,6 +15,12 @@ var userstatus_1 = require('../../models/userstatus');
 var PostComponent = (function () {
     function PostComponent(statusService) {
         this.statusService = statusService;
+        this.Types = [
+            new userstatus_1.StatusType(1, 'Feeling sad'),
+            new userstatus_1.StatusType(2, 'Feeling happy'),
+            new userstatus_1.StatusType(3, 'Feeling awesome'),
+            new userstatus_1.StatusType(4, 'Feeling exhausted')
+        ];
         // Local properties
         this.model = new userstatus_1.UserStatus();
         this.editing = false;

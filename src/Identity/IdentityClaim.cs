@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -7,18 +8,20 @@ using System.Threading.Tasks;
 
 namespace Identity
 {
+    [BsonIgnoreExtraElements]
     public class IdentityClaim : IEquatable<IdentityClaim>
     {
+        [BsonConstructor]
         public IdentityClaim()
         {
         }
-
+        [BsonConstructor]
         public IdentityClaim(string type, string value)
         {
             this.ClaimType = type;
             this.ClaimValue = value;
         }
-
+        [BsonConstructor]
         public IdentityClaim(Claim claim)
         {
             if (claim == null) return;
@@ -27,14 +30,10 @@ namespace Identity
             this.ClaimValue = claim.Value;
         }
 
-        /// <summary>
-        /// Claim type
-        /// </summary>
+        [BsonIgnoreIfNull]
         public virtual string ClaimType { get; set; }
 
-        /// <summary>
-        /// Claim value
-        /// </summary>
+        [BsonIgnoreIfNull]
         public virtual string ClaimValue { get; set; }
 
 

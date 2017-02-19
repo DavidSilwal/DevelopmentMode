@@ -10,18 +10,29 @@
                 <div class="col-xs-12">
                     <div class="form-group ">
                         <div class="col-xs-1">
-                                <img src="" width="45" height="45" alt="" />
+                            <img src="" width="45" height="45" alt="" />
                         </div>
                         <div class="col-xs-11">
-                            <textarea class="form-control noborder" rows="2" placeholder="Whats on your mind?" [(ngModel)]="model.status" name="text"></textarea>
+                            <textarea class="form-control noborder" rows="2" placeholder="Whats on your mind?" [(ngModel)]="model.status" name="text" required></textarea>
                         </div>
                     </div>
                     <hr />
                     <div class="form-group nomarginb">
-                        <div class="col-xs-12">
+                        <div class="col-xs-6">
+                            <select class="form-control pull-left" [(ngModel)]="model.type" name="type" required>
+                                <option> Love Guru </option>
+                                <option> Psychologist </option>
+                                <option> Doctor </option>
+                                <option> Other </option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6">
                             <button type="submit" class="btn btn-primary pull-right btn-sm">Post</button>
                         </div>
-                    </div>
+                        
+
+                        </div>
+                   
                 </div>
             </div>
         </div>

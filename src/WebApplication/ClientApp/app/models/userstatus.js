@@ -5,4 +5,10 @@ var UserStatus = (function () {
     return UserStatus;
 }());
 exports.UserStatus = UserStatus;
+var StatusType = (function () {
+    function StatusType(id, type) {
+    }
+    return StatusType;
+}());
+exports.StatusType = StatusType;
 //# sourceMappingURL=userstatus.js.map

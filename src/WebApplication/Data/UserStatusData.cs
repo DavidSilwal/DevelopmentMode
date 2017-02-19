@@ -47,6 +47,7 @@ namespace WebApplication.Data
         }
         private IList<Comments> _comments = new List<Comments>();
 
+        
 
         public int LikesCounts {
             get
@@ -69,6 +70,6 @@ namespace WebApplication.Data
             {
                 return ((DateTime.Now)- (UpdateTime)).ToString();
             }
-            }
+         }
     }
 }

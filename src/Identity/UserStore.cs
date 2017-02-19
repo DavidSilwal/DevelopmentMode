@@ -442,6 +442,7 @@ namespace Identity
             EnsureRolesNotNull(user);
 
             IList<string> roleNames = user.Roles.Select(r => r.Name).ToList();
+            //IList<string> roleIds = user.Roles.Select(r => r.Id.ToString()).ToList();
             return Task.FromResult(roleNames);
         }
 
@@ -1138,7 +1139,20 @@ namespace Identity
             DatabaseContext.UserCollection.DeleteManyAsync(new BsonDocument());
         }
 
-        
+
+        public string GetUserNameByID(string  id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            var user = GetUserById(id);
+
+
+            return user.Result.UserName;
+        }
+
+
         public string GetFirstName(TUser user)
         {
             if (user == null)

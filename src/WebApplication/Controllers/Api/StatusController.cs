@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,9 @@ namespace WebApplication.Controllers
         private readonly IUserStatusDataRepository _userstatusRepository;
         private readonly UserManager<IdentityUser> _userManager;
 
+
+        private readonly ILogger<StatusController> _logger;
+
         public StatusController(
             UserStore<IdentityUser,IdentityRole> userStore,
             UserManager<IdentityUser> userManager,
@@ -36,6 +40,7 @@ namespace WebApplication.Controllers
         [HttpGet]
         public async Task<List<UserStatusData>> GetAll()
         {
+
             return await _userstatusRepository.FindAll();
         }
 
@@ -70,6 +75,7 @@ namespace WebApplication.Controllers
             {
                 var status = _userstatusRepository.Get(id);
 
+                  
                 if (status == null)
                 {
                     return NotFound();
@@ -219,7 +225,7 @@ namespace WebApplication.Controllers
             await _userstatusRepository.AddLikes(userID,id);
                
             return Ok();
-        }
+        }   
 
         [HttpGet("unlikes/{id}")]
         public async Task<IActionResult> UnLikes(string id)
@@ -231,13 +237,21 @@ namespace WebApplication.Controllers
             return Ok();
         }
 
-        [HttpGet("addcomments/{id}")]
+        [HttpPost("addcomments/{id}")]
         public async Task<IActionResult> AddComments(string id,Comments comments)
         {
-            var status = _userstatusRepository.AddComments(id,comments);
+            var status = _userstatusRepository.AddComments(id,
+                new Comments
+            {
+                UserID = GetCurrentUserId(),
+                Text = comments.Text,
+                CommentTime = DateTime.UtcNow
+                       
+            }); 
                                    
             return Ok();
         }
+
         [HttpGet("removecomments/{id}")]
         public async Task<IActionResult> RemoveComments()
         {
@@ -254,6 +268,7 @@ namespace WebApplication.Controllers
         {
             var task = GetCurrentUserAsync();
 
+            
             var user = task.Result;
 
             if (user == null)

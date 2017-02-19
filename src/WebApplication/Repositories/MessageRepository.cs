@@ -49,16 +49,6 @@ namespace WebApplication.Data
         }
 
 
-        //public virtual Task<MessageTemplate> FindAllMessageTemplateID(string ID)
-        //{
-        //    if (string.IsNullOrWhiteSpace(ID)) return Task.FromResult((MessageTemplate)null);
-
-        //    var filter = Builders<MessageTemplate>.Filter(x => x.MessageTemplateTypeID);
-        //    var options = new FindOptions { AllowPartialResults = false };
-
-        //    return _context.MessageTemplateCollection.Find(filter, options).ToList();
-
-        //}
 
         public virtual Task<MessageTemplate> FindByMessageTemplateTypeByID(string ID)
         {

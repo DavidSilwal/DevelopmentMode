@@ -38,8 +38,9 @@
     "Microsoft.AspNetCore.Cors": "1.0.0",
     "cloudscribe.Web.Pagination": "1.0.5",
     "RazorLight": "1.0.0-rc1",
-    "SendGrid.NetCore": "1.0.0-rtm-00002"
-  },
+    "SendGrid.NetCore": "1.0.0-rtm-00002",
+    "NLog.Web.AspNetCore": "4.3.1",
+    "Newtonsoft.Json": "9.0.2-beta2"  },
 
   "tools": {
     "BundlerMinifier.Core": "2.0.238",
@@ -83,7 +84,8 @@
       "**/*.cshtml",
       "appsettings.json",
       "ClientApp/dist",
-      "web.config"
+      "web.config",
+      "nlog.config"
     ],
     "exclude": [
       "bower_components",

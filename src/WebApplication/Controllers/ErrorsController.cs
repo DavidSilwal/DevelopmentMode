@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Controllers
 {   
-    public class ErrorController : Controller
+    public class ErrorsController : Controller
     {
-        public IActionResult Index()
+        [Route("errors/{id:int}")]
+        public IActionResult Index(int id)
         {
-            return View();
+            return new ObjectResult("Error page, status code: " + id) { StatusCode = id };
         }
 
         

@@ -19,7 +19,6 @@ namespace WebApplication.Data
             AddedOn = DateTime.UtcNow;
             IsActive = true;
             IsDeleted = false;
-
         }
               
         public Guid _id { get; set; }

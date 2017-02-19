@@ -21,6 +21,8 @@ namespace WebApplication.Data
 
         Task AddComments(string statusID, Comments Comment);
 
+        Task<List<UserStatusData>> FindAllByType(string Type);
+
 
 
     }

@@ -18,7 +18,7 @@ require('rxjs/add/operator/toPromise');
 var UserStatusService = (function () {
     function UserStatusService(http) {
         this.http = http;
-        this.Url = "http://localhost:50353/api/UserStatus";
+        this.Url = "http://localhost:50353/api/feed";
     }
     UserStatusService.prototype.getStatus = function () {
         return this.http.get(this.Url)
@@ -62,6 +62,14 @@ var UserStatusService = (function () {
         return this.http.delete(this.Url + "/" + _id) // ...using put request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
+    };
+    UserStatusService.prototype.addComment = function (comment) {
+        var commentString = JSON.stringify(comment); // Stringify payload
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        var options = new http_1.RequestOptions({ headers: headers }); // Create a request option
+        return this.http.post(this.Url + '/addcomments/', comment, options) // ...using post request
+            .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
+            .catch(this.handleError);
     };
     UserStatusService = __decorate([
         core_1.Injectable(), 

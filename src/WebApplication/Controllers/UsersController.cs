@@ -153,10 +153,17 @@ namespace WebApplication.Controllers
                     return NotFound();
                 }
 
+                var role = _userManager.GetRolesAsync(user).Result;
+
+                await _userManager.RemoveFromRolesAsync(user, role);
+
+                await _userManager.AddToRolesAsync(user,model.RoleNames);
+                
                 await _userManager.SetEmailAsync(user, model.Email);
                 await _userManager.SetUserNameAsync(user, model.UserName);
 
-                user = model.UpdateEntity(user);
+                
+                //user = model.UpdateEntity(user);
 
                 var result = await _userManager.UpdateAsync(user);
 
@@ -273,6 +280,8 @@ namespace WebApplication.Controllers
                var user = model.ToEntity();
 
                var result = await _userManager.CreateAsync(user, model.Password);
+
+               var roles = await _userManager.AddToRolesAsync(user, model.RoleNames);
 
                if (result.Succeeded)
                {

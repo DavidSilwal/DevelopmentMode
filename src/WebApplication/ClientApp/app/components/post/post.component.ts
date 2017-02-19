@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import { EmitterService } from '../../services/emitter.service';
 import { UserStatusService } from '../../services/userstatus.service';
 
-import { UserStatus } from '../../models/userstatus';
+import { UserStatus, StatusType } from '../../models/userstatus';
 
 @Component({
     selector: 'app-post',
@@ -15,6 +15,15 @@ import { UserStatus } from '../../models/userstatus';
 
 })
 export class PostComponent implements OnChanges {
+
+    selectedType: StatusType; //= new IStatusType(1, 'select value' ); 
+    Types = [
+        new StatusType(1,'Feeling sad'),
+        new StatusType(2, 'Feeling happy'),
+        new StatusType(3, 'Feeling awesome'),
+        new StatusType(4, 'Feeling exhausted')
+
+    ];
 
     constructor(private statusService: UserStatusService) { }
     // Local properties

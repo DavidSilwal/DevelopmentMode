@@ -52,7 +52,7 @@ namespace Identity
         /// Role id
         /// </summary>
         public virtual TKey Id { get; set; }
-
+        [BsonIgnoreIfNull]
         /// <summary>
         /// Role name
         /// </summary>
@@ -63,8 +63,10 @@ namespace Identity
         /// Value will be overridden by RoleStore.
         /// Used to store the role name that is formatted in a case insensitive way so can do searches on it
         /// </summary>
+        /// 
+        [BsonIgnoreIfNull]
         public virtual string NormalizedName { get; set; }
-
+        [BsonIgnoreIfNull]
         public virtual string ConcurrencyStamp { get; set; }
 
         /// <summary>
@@ -78,8 +80,8 @@ namespace Identity
             set { _claims = value ?? new List<IdentityClaim>(); }
         }
 
-       // public string Id { get; set; }
-
+        // public string Id { get; set; }
+   
 
         private IList<IdentityClaim> _claims = new List<IdentityClaim>();
 

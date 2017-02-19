@@ -7,8 +7,11 @@ import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { FeedComponent } from './components/feed/feed.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 import { FeedBoxComponent } from './components/feedbox/feedbox.component';
+
+import { DateFormatPipe } from './pipes/date-format.pipe';
 
 import { UserStatus } from './models/userstatus';
 
@@ -23,7 +26,9 @@ import { EmitterService } from './services/emitter.service';
         HomeComponent,
         PostComponent,
         FeedComponent,
-        FeedBoxComponent
+        FeedBoxComponent,
+        CommentComponent,
+        DateFormatPipe,
 
     ],
     imports: [

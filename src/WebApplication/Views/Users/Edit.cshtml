@@ -48,7 +48,7 @@
                             {
                                 <div class="permission">
                                     <label for="@role.Id" class="cb-checkbox cb-sm">
-                                        <input type="checkbox" name="Ids" value="@role.Id" @if (Model != null && Model.Ids.Contains(role.Id)) { <text> checked="checked" </text>     } />
+                                        <input type="checkbox" name="RoleNames" value="@role.Name" @if (Model != null && Model.Ids.Contains(role.Id)) { <text> checked="checked" </text>      } />
                                         <span>@role.Name</span>
                                     </label>
                                 </div>

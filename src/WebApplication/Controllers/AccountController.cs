@@ -80,7 +80,7 @@ namespace WebApplication.Controllers
                         return View(model);
                     }
                 }
-
+                
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
