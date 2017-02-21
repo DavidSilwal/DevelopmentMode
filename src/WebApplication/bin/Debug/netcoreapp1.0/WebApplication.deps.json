@@ -14,7 +14,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "WebApplication/1.0.0": {
+      "webapplication/1.0.0": {
         "dependencies": {
           "Identity": "1.0.0",
           "MailKit": "1.6.0",
@@ -52,10 +52,10 @@
           "Newtonsoft.Json": "9.0.2-beta2"
         },
         "runtime": {
-          "WebApplication.dll": {}
+          "webapplication.dll": {}
         },
         "compile": {
-          "WebApplication.dll": {}
+          "webapplication.dll": {}
         }
       },
       "cloudscribe.Web.Pagination/1.0.5": {
@@ -4288,7 +4288,7 @@
     }
   },
   "libraries": {
-    "WebApplication/1.0.0": {
+    "webapplication/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -183,8 +183,7 @@ namespace WebApplication.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
-        {
-          
+        {          
             var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
@@ -212,14 +211,14 @@ namespace WebApplication.Controllers
             if (result.Succeeded)
             {
 
-                UserActivity activity = new UserActivity
-                {
-                    Browser = Request.Headers["User-Agent"].ToString(),
-                    IpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString(),
-                    TimeStamp = DateTime.Now
-                };
+                //UserActivity activity = new UserActivity
+                //{
+                //    Browser = Request.Headers["User-Agent"].ToString(),
+                //    IpAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString(),
+                //    TimeStamp = DateTime.Now
+                //};
 
-                await _userStore.AddUserActivities(await GetCurrentUserAsync(), activity);
+                //await _userStore.AddUserActivities(await GetCurrentUserAsync(), activity);
 
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
                 return RedirectToLocal(returnUrl);
@@ -242,6 +241,7 @@ namespace WebApplication.Controllers
                 var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
                 var lastName = info.Principal.FindFirstValue(ClaimTypes.Surname);
                 
+                ////graph.facebook.com/{857947367552466-- id}/picture?type=large                
                 return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email,FirstName=firstName,LastName=lastName });
             }
         }

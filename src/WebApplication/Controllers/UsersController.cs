@@ -53,8 +53,9 @@ namespace WebApplication.Controllers
             _users = u
                 .OrderBy(p => p.UserName)
                 .Skip(((currentPage) * currentPageSize)- currentPage)
-                .Take(currentPageSize)
+                        .Take(currentPageSize)
                 .ToList();
+
             var item = _users;
             _totalusers = _userManager.Users.Count();
 
@@ -76,6 +77,7 @@ namespace WebApplication.Controllers
         {
             return View(_userStore.Users.ToList());
         }
+
         public async Task<IActionResult> Search(string searchString)
         {
             var user =  _userManager.Users;
@@ -99,6 +101,65 @@ namespace WebApplication.Controllers
             userVM.Users = item.ToList();
             return View(userVM);
         }
+
+
+        public async Task<IActionResult> Default(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? page
+            )
+        {
+
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            
+          
+            var u = _userManager.Users.ToList().ToListUserAdminViewModel();
+
+            var users = from m in u
+                         select m;
+
+                        
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(s => s.UserName.Contains(searchString)
+                                       || s.Email.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    users = users.OrderByDescending(s => s.UserName);
+                    break;
+                case "Date":
+                    users = users.OrderBy(s => s.CreatedOn);
+                    break;
+                case "date_desc":
+                    users = users.OrderByDescending(s => s.CreatedOn);
+                    break;
+                default:
+                    users = users.OrderBy(s => s.UserName);
+                    break;
+            }
+
+            int pageSize = 3;
+            return View(await PaginatedList<UserAdminViewModel>.CreateAsync(users.ToList(), page ?? 1, pageSize));
+
+        }
+
 
         public async Task<IActionResult> Details(string id)
         {

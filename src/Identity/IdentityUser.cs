@@ -141,12 +141,7 @@ namespace Identity
         [BsonIgnoreIfNull]
 
         public GenderType Gender { get; set; }
-
-
-
-
-
-     
+             
      
         [BsonIgnoreIfNull]
         public virtual IList<TRole> Roles
@@ -154,6 +149,7 @@ namespace Identity
             get { return _roles; }
             set { _roles = value ?? new List<TRole>(); }
         }
+
         [BsonIgnoreIfNull]
         private IList<TRole> _roles = new List<TRole>();
 
@@ -194,16 +190,14 @@ namespace Identity
         }
 
 
-       [BsonIgnoreIfNull]      // if we didnt ingore this users/index will render but external login provider work
-
+        // if we didnt ingore this users/index will render but external login provider work
+        [BsonIgnoreIfNull]
         public virtual IList<UserLoginInfo> Logins
         {
             get { return _logins; }
             set { _logins = value ?? new List<UserLoginInfo>(); }
         }
         [BsonIgnoreIfNull]
-
-   
         private IList<UserLoginInfo> _logins = new List<UserLoginInfo>();
 
 

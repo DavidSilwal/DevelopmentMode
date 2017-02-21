@@ -89,6 +89,45 @@ namespace WebApplication.Models.Extensions
         }
 
 
+        public static UserAdminViewModel UserAdminViewModel(this IdentityUser source)
+        {
+            var destination = new UserAdminViewModel();
+
+            destination.Id = source.Id;
+            destination.UserName = source.UserName;
+            destination.Email = source.Email;
+            destination.EmailConfirmed = source.EmailConfirmed;
+
+           
+            if(source.Roles != null)
+             {
+                //foreach (var userRole in source.Roles)
+                //{
+                //    destination.RoleNames.Add(userRole.Name);
+
+                //}
+
+            }
+            return destination;
+        }
+
+
+        public static List<UserAdminViewModel> ToListUserAdminViewModel(this List<IdentityUser> source)
+        {
+            var destination = new List<UserAdminViewModel>();
+
+            if (source != null)
+            {
+                foreach (var item in source)
+                {
+                    destination.Add(item.UserAdminViewModel());
+
+                }
+            }
+
+            return destination;
+        }
+
         public static List<UserViewModel> ToListViewModel(this List<IdentityUser> source)
         {
             var destination = new List<UserViewModel>();

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -14,43 +15,62 @@ namespace WebApplication.Controllers
     public class DomainExpertController : Controller
     {
     
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserStatusDataRepository _userStatusRepository;
-        private readonly UserStore<IdentityUser, IdentityRole> _userStore;
-
         public DomainExpertController(
             IUserStatusDataRepository userStatusRepository,
-            UserStore<IdentityUser, IdentityRole> userStore,
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager
-          )
+            UserManager<IdentityUser> userManager
+           )
         {
             _userStatusRepository = userStatusRepository;
-            _userStore = userStore;
             _userManager = userManager;
-            _roleManager = roleManager;
-           }
 
+        }
 
+        [HttpGet()]
         public async Task<IActionResult> Index()
         {
             var user = GetCurrentUserAsync();
 
             var domainExpertType = await _userManager.GetRolesAsync(user.Result);
 
-            var statusByType =await _userStatusRepository.FindAllByType(domainExpertType.ToString());
+            var statusByType = new List<UserStatusData>();
 
-            var recentStatus = statusByType
-                .OrderByDescending(x => x.UpdateTime)
-                .Take(10)
-                .ToList();
+            foreach(string item in domainExpertType)
+            {
+               statusByType = await _userStatusRepository.FindAllByType(item);
 
-                       
+            }   
+            
+            var  recentStatus = statusByType
+                               .OrderByDescending(x => x.UpdateTime)
+                               .Take(10)
+                               .ToList();
+                                   
             return Ok(recentStatus);
         }
 
 
+        [HttpGet("{page:int?}")]
+        public async Task<IActionResult> Default(int? page)
+        {                        
+            var user = GetCurrentUserAsync();
+
+            var domainExpertType = await _userManager.GetRolesAsync(user.Result);
+
+            var statusByType = new List<UserStatusData>();
+
+            foreach (string item in domainExpertType)
+            {
+                statusByType = await _userStatusRepository.FindAllByType(item);
+
+            }   
+
+            int pageSize = 1;
+            return Ok(await PaginatedList<UserStatusData>.CreateAsync(statusByType.ToList(), page ?? 1, pageSize));
+
+        }
+        
 
         protected async Task<IdentityUser> GetCurrentUserAsync()
         {

@@ -77,14 +77,14 @@ namespace WebApplication.Controllers
                 UserName = _userStore.GetUserNameAsync(user).Result.ToString(),
                 FirstName = _userStore.GetFirstName(user),
                 LastName = _userStore.GetLastName(user),
-                Email = _userStore.GetEmailAsync(user),
+                Email = _userStore.GetEmailAsync(user).Result,
             };
 
             string result = engine.ParseString(message.Body, modelitem);
 
             await _emailSender.SendEmailGridAsync(model.Email, message.Subject, result);
             
-            return View();
+            return Ok();
         }
         public async Task<string> Index1()
         {
