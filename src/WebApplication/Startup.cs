@@ -14,6 +14,7 @@ using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using MongoDB.Bson.Serialization;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WebApplication
 {
@@ -25,7 +26,10 @@ namespace WebApplication
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                //.AddJsonFile("statusTypedataservice.json", optional: true, reloadOnChange: true)
+                //.AddJsonFile("dataservice.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
@@ -40,7 +44,7 @@ namespace WebApplication
             })
            .AddDefaultTokenProviders();
 
-            services.AddSingleton <UserStore<IdentityUser, IdentityRole>>();
+            services.AddSingleton<UserStore<IdentityUser, IdentityRole>>();
             
             services.AddAuthorization(options =>
             {
@@ -53,8 +57,7 @@ namespace WebApplication
             services.AddSingleton<IMessageRepository, MessageRepository>();
             services.AddSingleton<IViewModelService, ViewModelService>();
             services.AddSingleton<IDashboardViewModel, DashboardViewModel>();
-
-
+            
             services.AddSingleton<IUserStatusDataRepository,UserStatusDataRepository>();
 
             services.AddWebMarkupMin(
@@ -95,7 +98,13 @@ namespace WebApplication
                     item.SetIgnoreExtraElements(true);
                 });
             });
-         
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -158,18 +167,29 @@ namespace WebApplication
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
             });
-       
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUi(c =>
+            {
+                c.SwaggerEndpoint(" ", "My API V1");
+            });
+
             //app.UseStaticFiles(new StaticFileOptions
             //{
             //    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "node_modules")),
             //    RequestPath = "/node_modules"
             //});   
-                
-            app.UseMvc(routes =>
-            {
-                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
-            });
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapSpaFallbackRoute("spa-fallback", new { controller = "home", action = "index" });
+            //});
 
         }
     }

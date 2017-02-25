@@ -15,8 +15,7 @@ using WebApplication.Data;
 namespace WebApplication.Controllers
 {
     [Route("api/feed")]
-    [Authorize()]
-    public class StatusController : Controller
+       public class StatusController : Controller
     {
         private readonly UserStore<IdentityUser,IdentityRole> _userStore;
         private readonly IUserStatusDataRepository _userstatusRepository;
@@ -234,25 +233,34 @@ namespace WebApplication.Controllers
             var status = _userstatusRepository.Get(id);
             status.Result.LikesUserIDs.Remove(user);
 
-            return Ok();
-        }
+            return Ok();    
+        }   
 
-        [HttpPost("addcomments/{id}")]
-        public async Task<IActionResult> AddComments(string id,Comments comments)
+        [HttpPost("{id}/addcomments")]
+        public IActionResult AddComments(string id,Comments commentsString)
         {
             var status = _userstatusRepository.AddComments(id,
                 new Comments
             {
                 UserID = GetCurrentUserId(),
-                Text = comments.Text,
+                Text = commentsString.Text,
                 CommentTime = DateTime.UtcNow
                        
             }); 
                                    
             return Ok();
         }
+            
+        [HttpGet("{statusId}/comments")]
+            public IActionResult GetComments(string statusId)
+        {
+            var comments = _userstatusRepository.GetCommentsByStatusID(statusId);
 
-        [HttpGet("removecomments/{id}")]
+            return Ok(comments);
+        }   
+
+
+        [HttpGet("{id}/removecomments/")]
         public async Task<IActionResult> RemoveComments()
         {
             return Ok();

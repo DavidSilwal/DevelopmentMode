@@ -91,6 +91,18 @@ namespace WebApplication.Data
             await _context.UserStatusDataCollection.UpdateOneAsync(filter, update);
         }
 
+        public List<Comments> GetCommentsByStatusID(string statusID)
+        {
+            if (string.IsNullOrWhiteSpace(statusID)) Task.FromResult((Comments)null);
+
+            var status = Get(statusID);
+            var result = status.Result.Comments.ToList();
+
+            return result;
+
+        }
+
+
         public async  Task<List<UserStatusData>> FindAllByType(string Type)
         {
             if (string.IsNullOrWhiteSpace(Type))  Task.FromResult((UserStatusData)null);

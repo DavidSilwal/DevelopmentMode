@@ -17,6 +17,8 @@ namespace WebApplication.Data
 
         Task<List<UserStatusData>> GetStatusByID(string userID);
 
+        List<Comments> GetCommentsByStatusID(string statusID);
+
         Task AddLikes(string userID, string statusID);
 
         Task AddComments(string statusID, Comments Comment);

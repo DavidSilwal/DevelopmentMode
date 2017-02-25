@@ -10,10 +10,10 @@ namespace WebApplication.Data
     [BsonIgnoreExtraElements]
     public class Comments
     {
-        public Comments(): base()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
+        //public Comments(): base()
+        //{
+        //    Id = Guid.NewGuid().ToString();
+        //}
 
         public string Id { get; set; }
         public string UserID { get; set; }

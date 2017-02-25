@@ -18,7 +18,7 @@ require('rxjs/add/operator/toPromise');
 var UserStatusService = (function () {
     function UserStatusService(http) {
         this.http = http;
-        this.Url = "http://localhost:50353/api/feed";
+        this.Url = "http://localhost:50353/api/expert";
     }
     UserStatusService.prototype.getStatus = function () {
         return this.http.get(this.Url)
@@ -63,14 +63,13 @@ var UserStatusService = (function () {
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
     };
-    // Add a new comment
-    UserStatusService.prototype.addComment = function (id, comments) {
-        var commentsString = JSON.stringify(comments); // Stringify payload
+    UserStatusService.prototype.addComment = function (comment) {
+        var commentString = JSON.stringify(comment); // Stringify payload
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         var options = new http_1.RequestOptions({ headers: headers }); // Create a request option
-        return this.http.post(this.Url + '/' + id + '/addcomments/', comments, headers) // ...using post request
+        return this.http.post(this.Url + '/addcomments/', comment, options) // ...using post request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
-            .catch(this.handleError); //...errors if any
+            .catch(this.handleError);
     };
     UserStatusService = __decorate([
         core_1.Injectable(), 
@@ -79,4 +78,4 @@ var UserStatusService = (function () {
     return UserStatusService;
 }());
 exports.UserStatusService = UserStatusService;
-//# sourceMappingURL=userstatus.service.js.map
+//# sourceMappingURL=expert.service.js.map

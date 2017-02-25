@@ -16,8 +16,10 @@ var app_component_1 = require('./components/app/app.component');
 var home_component_1 = require('./components/home/home.component');
 var post_component_1 = require('./components/post/post.component');
 var feed_component_1 = require('./components/feed/feed.component');
-var comment_component_1 = require('./components/comment/comment.component');
 var feedbox_component_1 = require('./components/feedbox/feedbox.component');
+var comment_form_component_1 = require("./components/comment/comment-form.component");
+var comment_list_component_1 = require("./components/comment/comment-list.component");
+var comment_box_component_1 = require("./components/comment/comment-box.component");
 var date_format_pipe_1 = require('./pipes/date-format.pipe');
 var userstatus_service_1 = require('./services/userstatus.service');
 var emitter_service_1 = require('./services/emitter.service');
@@ -33,7 +35,9 @@ var AppModule = (function () {
                 post_component_1.PostComponent,
                 feed_component_1.FeedComponent,
                 feedbox_component_1.FeedBoxComponent,
-                comment_component_1.CommentComponent,
+                comment_list_component_1.CommentListComponent,
+                comment_box_component_1.CommentBoxComponent,
+                comment_form_component_1.CommentFormComponent,
                 date_format_pipe_1.DateFormatPipe,
             ],
             imports: [

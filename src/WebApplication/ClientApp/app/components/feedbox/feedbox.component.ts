@@ -22,6 +22,9 @@ export class FeedBoxComponent {
     @Input() listId: string;
     @Input() editId: string;
 
+    
+
+
     editStatus() {
         // Emit edit event
         EmitterService.get(this.editId).emit(this.status);
@@ -39,4 +42,5 @@ export class FeedBoxComponent {
                 console.log(err);
             });
     }
+
 }

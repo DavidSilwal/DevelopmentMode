@@ -7,9 +7,13 @@ import { AppComponent } from './components/app/app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PostComponent } from './components/post/post.component';
 import { FeedComponent } from './components/feed/feed.component';
-import { CommentComponent } from './components/comment/comment.component';
 
 import { FeedBoxComponent } from './components/feedbox/feedbox.component';
+
+import { CommentFormComponent } from "./components/comment/comment-form.component";
+import { CommentListComponent } from "./components/comment/comment-list.component";
+import { CommentBoxComponent } from "./components/comment/comment-box.component";
+
 
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
@@ -27,7 +31,9 @@ import { EmitterService } from './services/emitter.service';
         PostComponent,
         FeedComponent,
         FeedBoxComponent,
-        CommentComponent,
+        CommentListComponent,
+        CommentBoxComponent,
+        CommentFormComponent,
         DateFormatPipe,
 
     ],

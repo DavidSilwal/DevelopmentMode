@@ -1,19 +1,15 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { UserStatusService } from '../../services/userstatus.service'
+// import { Component } from "@angular/core";
 
-@Component({
-    selector: 'app-comment',
-    template: require('./comment.component.html'),
-})
-export class CommentComponent implements OnInit {
+// @Component({
+//     selector:"app-comment",
+//     template:`
+//         <app-comment-form></app-comment-form>
+//     `
+// })
 
-    constructor(private userStatusService: UserStatusService) { }
+// export class CommentComponent
+// {
+//     private listId: string;
+//     private editId: string; 
 
-    private comment: Comment;
-
-    submitComment(comment) {
-        this.userStatusService.addComment(comment);
-    }
-
-    ngOnInit() { }
-}
+// }

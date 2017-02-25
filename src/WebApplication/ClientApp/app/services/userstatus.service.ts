@@ -71,15 +71,16 @@ export class UserStatusService {
             .catch(this.handleError); //...errors if any
     }
     
-    addComment(comment: Comment): Observable<Comments[]> {
-        let commentString = JSON.stringify(comment); // Stringify payload
+    // Add a new comment
+    addComment(id: string, comments: Comments): Observable<Comments[]> {
+        let commentsString = JSON.stringify(comments); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options = new RequestOptions({ headers: headers }); // Create a request option
 
-        return this.http.post(this.Url + '/addcomments/', comment, options) // ...using post request
+        return this.http.post(this.Url + '/' + id + '/addcomments/', comments, headers) // ...using post request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
-            .catch(this.handleError);
-    }
+            .catch(this.handleError); //...errors if any
+    } 
 
   
     }
