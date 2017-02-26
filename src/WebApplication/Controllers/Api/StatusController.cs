@@ -237,13 +237,13 @@ namespace WebApplication.Controllers
         }   
 
         [HttpPost("{id}/addcomments")]
-        public IActionResult AddComments(string id,Comments commentsString)
+        public IActionResult AddComments(string id,Comments comments)
         {
             var status = _userstatusRepository.AddComments(id,
                 new Comments
             {
                 UserID = GetCurrentUserId(),
-                Text = commentsString.Text,
+                Text = comments.Text,
                 CommentTime = DateTime.UtcNow
                        
             }); 
@@ -259,6 +259,7 @@ namespace WebApplication.Controllers
             return Ok(comments);
         }   
 
+        //edit comment
 
         [HttpGet("{id}/removecomments/")]
         public async Task<IActionResult> RemoveComments()

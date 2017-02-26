@@ -14,7 +14,7 @@ export class CommentFormComponent
 {
     constructor (private commentService: UserStatusService){}
 
-    private model = new Comments('', '', new Date,'');
+    private model = new Comments();
     private editing : boolean = false ;
 
     // @Input() listId;
@@ -49,7 +49,7 @@ export class CommentFormComponent
          commentOperation.subscribe(
             comments=>{
                 EmitterService.get(this.statusId).emit(comments);
-                this.model = new Comments('', '', new Date, 'David');
+                this.model = new Comments();
                 if(this.editing) 
                     this.editing = !this.editing;
             },

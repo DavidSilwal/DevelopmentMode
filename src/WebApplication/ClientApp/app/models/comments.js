@@ -1,19 +1,16 @@
-//export class Comments
-//{
-//    id: string;
-//    userID: string
-//    commentTime: Date;
-//    text: string;
 "use strict";
-//}
 var Comments = (function () {
-    function Comments(id, userID, commentTime, text) {
-        this.id = id;
-        this.userID = userID;
-        this.commentTime = commentTime;
-        this.text = text;
+    function Comments() {
     }
     return Comments;
 }());
 exports.Comments = Comments;
+//export class Comments {
+//    constructor(
+//        public id: string,
+//        public userID: string,
+//        public commentTime: Date,
+//        public text: string
+//    ) { }
+//} 
 //# sourceMappingURL=comments.js.map

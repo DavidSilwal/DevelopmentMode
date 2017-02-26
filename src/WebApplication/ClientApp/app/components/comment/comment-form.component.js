@@ -15,7 +15,7 @@ var emitter_service_1 = require("../../services/emitter.service");
 var CommentFormComponent = (function () {
     function CommentFormComponent(commentService) {
         this.commentService = commentService;
-        this.model = new comments_1.Comments('', '', new Date, '');
+        this.model = new comments_1.Comments();
         this.editing = false;
     }
     CommentFormComponent.prototype.submitComment = function () {
@@ -39,7 +39,7 @@ var CommentFormComponent = (function () {
         //     });
         commentOperation.subscribe(function (comments) {
             emitter_service_1.EmitterService.get(_this.statusId).emit(comments);
-            _this.model = new comments_1.Comments('', '', new Date, 'David');
+            _this.model = new comments_1.Comments();
             if (_this.editing)
                 _this.editing = !_this.editing;
         }, function (err) {
