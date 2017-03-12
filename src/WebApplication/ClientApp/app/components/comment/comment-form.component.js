@@ -54,18 +54,18 @@ var CommentFormComponent = (function () {
             _this.editing = true;
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], CommentFormComponent.prototype, "statusId", void 0);
-    CommentFormComponent = __decorate([
-        core_1.Component({
-            selector: 'app-comment-form',
-            template: require('./comment-form.component.html')
-        }), 
-        __metadata('design:paramtypes', [userstatus_service_1.UserStatusService])
-    ], CommentFormComponent);
     return CommentFormComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], CommentFormComponent.prototype, "statusId", void 0);
+CommentFormComponent = __decorate([
+    core_1.Component({
+        selector: 'app-comment-form',
+        template: require('./comment-form.component.html')
+    }),
+    __metadata("design:paramtypes", [userstatus_service_1.UserStatusService])
+], CommentFormComponent);
 exports.CommentFormComponent = CommentFormComponent;
 //# sourceMappingURL=comment-form.component.js.map

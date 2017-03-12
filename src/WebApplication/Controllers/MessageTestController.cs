@@ -36,15 +36,7 @@ namespace WebApplication.Controllers
             _userStore = userStore;
             _userManager = userManager;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    var message = await _messageRepository.FindByMessageTemplateTypeByID("  ");
-
-        //    await _emailSender.SendEmailAsync("de.davidsilwal@gmail.com", message.Subject, message.Body);
-
-        //    return View();
-        //}
-
+   
        public async Task<IActionResult> Index()
         {
             var message = _messageRepository.FindAll();

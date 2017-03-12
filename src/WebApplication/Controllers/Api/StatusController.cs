@@ -39,42 +39,17 @@ namespace WebApplication.Controllers
         [HttpGet]
         public async Task<List<UserStatusData>> GetAll()
         {
-
             return await _userstatusRepository.FindAll();
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Get()
-        //{
-        //    var userID = GetCurrentUserId();
-        //    var status = _userstatusRepository.GetStatusByID(userID).Result;//.AsQueryable();
-
-        //    var s = status.Select(x => x.Status).ToList();
-
-        //    var model = new
-        //    {
-        //        _id = status.Select(x=>x._id).ToList(),
-        //        status = status.Select(x => x.Status).ToList(),
-        //        // userName 
-        //        updateTime = status.Select(x => x.UpdateTime).ToList(),
-        //        type = status.Select(x => x.Type).ToList(),
-        //        isHidden = status.Select(x => x.IsHidden).ToList(),
-        //        Likes = status.Select(x => x.LikesUserIDs).ToList(),
-        //        comments = status.Select(x => x.Comments).ToList()
-        //    };
-
-        //    return Ok(model);
-        //}
-
-
+        
         [HttpGet("{id}", Name = "GetSingleStatus")]
-        public IActionResult GetSingle(string id)
+        public IActionResult GetStatus(string id)
         {
             try
             {
                 var status = _userstatusRepository.Get(id);
-
-                  
+                                  
                 if (status == null)
                 {
                     return NotFound();
@@ -151,7 +126,7 @@ namespace WebApplication.Controllers
                
                 _userstatusRepository.Save(userStatus);
 
-                return CreatedAtRoute("GetSingleStatus", new { id = userStatus._id }, userStatus);
+                return CreatedAtRoute("GetStatus", new { id = userStatus._id }, userStatus);
             }
             catch (Exception exception)
             {
@@ -183,7 +158,7 @@ namespace WebApplication.Controllers
                 }
 
 
-               var result =  _userstatusRepository.Update(status.Result);
+                var result =  _userstatusRepository.Update(userStatus);
 
                 return Ok(result);
             }
@@ -221,7 +196,7 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> Likes(string id)
         {
             string userID = GetCurrentUserId();
-            await _userstatusRepository.AddLikes(userID,id);
+            await _userstatusRepository.AddLikes(userID,id);  // id= status id
                
             return Ok();
         }   
@@ -230,14 +205,15 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> UnLikes(string id)
         {
             var user = GetCurrentUserId();
-            var status = _userstatusRepository.Get(id);
-            status.Result.LikesUserIDs.Remove(user);
+            var status = await _userstatusRepository.Get(id);
 
+            status.LikesUserIDs.Remove(user);
+            
             return Ok();    
         }   
 
         [HttpPost("{id}/addcomments")]
-        public IActionResult AddComments(string id,Comments comments)
+        public IActionResult AddComments(string id,[FromBody]Comments comments)
         {
             var status = _userstatusRepository.AddComments(id,
                 new Comments
@@ -261,12 +237,13 @@ namespace WebApplication.Controllers
 
         //edit comment
 
-        [HttpGet("{id}/removecomments/")]
-        public async Task<IActionResult> RemoveComments()
+        [HttpGet("{id}/removecomments")]
+        public IActionResult RemoveComments(string commentId)
         {
+            //_userstatusRepository.RemoveComment(commentId);
             return Ok();
         }
-
+        
         protected async Task<IdentityUser> GetCurrentUserAsync()
         {
             return await _userManager.GetUserAsync(HttpContext.User);

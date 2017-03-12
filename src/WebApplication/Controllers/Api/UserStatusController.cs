@@ -48,26 +48,25 @@ namespace WebApplication.Controllers.Api
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] UserStatusData item)
+        public async Task<IActionResult> CreateAsync([FromBody] UserStatusData item)
         {
             if (item == null)
             {
-                
+
                 return BadRequest();
             }
-        
-            _UserStatusDataRepository.Save(
-                new UserStatusData
-            {
-                UserID = GetCurrentUserId(),
-                Status = item.Status,
-                UpdateTime = item.UpdateTime,
 
-            });
+           await _UserStatusDataRepository.Save(
+               new  UserStatusData
+                {
+                    UserID = await GetCurrentUserIdAsync(),
+                    Status = item.Status,
+                    UpdateTime = item.UpdateTime,
 
-            // return CreatedAtRoute("GetById", new { id = item._id }, item);
-            //return RedirectToAction("index", "home");
-            return Ok();
+                });
+
+              return CreatedAtRoute("GetById", new { id = item._id }, item);
+              //return Ok();
         }
 
         [HttpPut("{id}")]
@@ -109,11 +108,9 @@ namespace WebApplication.Controllers.Api
             return await _UserManager.GetUserAsync(HttpContext.User);
         }
 
-        protected string GetCurrentUserId()
+        protected async Task<string> GetCurrentUserIdAsync()
         {
-            var task = GetCurrentUserAsync();
-
-            var user = task.Result;
+            var user = await GetCurrentUserAsync();
 
             if (user == null)
             {
@@ -123,7 +120,6 @@ namespace WebApplication.Controllers.Api
             return user.Id;
         }
 
-       
 
     }
 }

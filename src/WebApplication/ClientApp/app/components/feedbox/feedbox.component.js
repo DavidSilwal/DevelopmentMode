@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var emitter_service_1 = require('../../services/emitter.service');
-var userstatus_service_1 = require('../../services/userstatus.service');
-var userstatus_1 = require('../../models/userstatus');
+var core_1 = require("@angular/core");
+var emitter_service_1 = require("../../services/emitter.service");
+var userstatus_service_1 = require("../../services/userstatus.service");
+var userstatus_1 = require("../../models/userstatus");
 var FeedBoxComponent = (function () {
     function FeedBoxComponent(statusService) {
         this.statusService = statusService;
@@ -30,27 +30,27 @@ var FeedBoxComponent = (function () {
             console.log(err);
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', userstatus_1.UserStatus)
-    ], FeedBoxComponent.prototype, "status", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], FeedBoxComponent.prototype, "listId", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], FeedBoxComponent.prototype, "editId", void 0);
-    FeedBoxComponent = __decorate([
-        core_1.Component({
-            selector: 'app-feedbox',
-            template: require('./feedbox.component.html'),
-            styleUrls: [require('./feedbox.component.css')]
-        }), 
-        __metadata('design:paramtypes', [userstatus_service_1.UserStatusService])
-    ], FeedBoxComponent);
     return FeedBoxComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", userstatus_1.UserStatus)
+], FeedBoxComponent.prototype, "status", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], FeedBoxComponent.prototype, "listId", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], FeedBoxComponent.prototype, "editId", void 0);
+FeedBoxComponent = __decorate([
+    core_1.Component({
+        selector: 'app-feedbox',
+        template: require('./feedbox.component.html'),
+        styleUrls: [require('./feedbox.component.css')]
+    }),
+    __metadata("design:paramtypes", [userstatus_service_1.UserStatusService])
+], FeedBoxComponent);
 exports.FeedBoxComponent = FeedBoxComponent;
 //# sourceMappingURL=feedbox.component.js.map

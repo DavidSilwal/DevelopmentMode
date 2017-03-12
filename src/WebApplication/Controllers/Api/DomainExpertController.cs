@@ -30,9 +30,9 @@ namespace WebApplication.Controllers
         [HttpGet()]
         public async Task<IActionResult> Index()
         {
-            var user = GetCurrentUserAsync();
+            var user = await GetCurrentUserAsync();
 
-            var domainExpertType = await _userManager.GetRolesAsync(user.Result);
+            var domainExpertType = await _userManager.GetRolesAsync(user);
 
             var statusByType = new List<UserStatusData>();
 
@@ -54,9 +54,9 @@ namespace WebApplication.Controllers
         [HttpGet("{page:int?}")]
         public async Task<IActionResult> Default(int? page)
         {                        
-            var user = GetCurrentUserAsync();
+            var user = await GetCurrentUserAsync();
 
-            var domainExpertType = await _userManager.GetRolesAsync(user.Result);
+            var domainExpertType = await _userManager.GetRolesAsync(user);
 
             var statusByType = new List<UserStatusData>();
 

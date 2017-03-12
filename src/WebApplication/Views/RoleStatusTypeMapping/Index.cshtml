@@ -1,0 +1,74 @@
+﻿@model List<WebApplication.Data.RoleStatusTypeMapping>
+
+@{
+    ViewData["Title"] = "Role and Status Type Mapping";
+}
+
+
+
+
+<div class="panel">
+    <div class="panel-heading">
+        <span>Status Type</span>
+        <span class="pull-right">
+            <a asp-action="Create">Create New</a>
+        </span>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped mb0">
+                <thead>
+                    <tr>
+                        <th> Name</th>
+
+
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @foreach (var item in Model)
+                    {
+
+
+
+                    <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
+
+
+
+
+
+                            @*@foreach (var type in item.StatusType)
+                                {
+                                  <td>@Html.DisplayFor(modelItem=>type )</td>
+
+                                }*@
+
+
+                            @*<td>
+                                            <a asp-action="Edit" asp-route-id="@item._id" data-toggle=tooltip data-placement=top title="Edit"><i class="fa fa-edit"></i></a>
+                                            &nbsp;
+                                            <a asp-action="Details" asp-route-id="@item._id" data-toggle=tooltip data-placement=top title="Details"><i class="fa fa-eye"></i></a>
+                                            &nbsp;
+                                            <a asp-action="Delete" asp-route-id="@item._id" data-toggle=tooltip data-placement=top title="Delete"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                </tr>*@
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @*@section Breadcrumbs {
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-controller="Dashboard" asp-action="Index">Home</a>
+                </li>
+
+                <li class="active">
+                    <a href="javascript:;">Status Type</a>
+                </li>
+            </ol>
+        }*@

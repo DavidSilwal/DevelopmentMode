@@ -8,13 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var Rx_1 = require('rxjs/Rx');
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var Rx_1 = require("rxjs/Rx");
 // Import RxJs required methods
-require('rxjs/add/operator/map');
-require('rxjs/add/operator/catch');
-require('rxjs/add/operator/toPromise');
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/catch");
+require("rxjs/add/operator/toPromise");
 var UserStatusService = (function () {
     function UserStatusService(http) {
         this.http = http;
@@ -73,11 +73,11 @@ var UserStatusService = (function () {
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
     };
-    UserStatusService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], UserStatusService);
     return UserStatusService;
 }());
+UserStatusService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], UserStatusService);
 exports.UserStatusService = UserStatusService;
 //# sourceMappingURL=userstatus.service.js.map

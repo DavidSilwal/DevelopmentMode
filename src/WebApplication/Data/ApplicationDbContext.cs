@@ -13,7 +13,9 @@ namespace WebApplication.Data
 
         public string MessageTemplateCollectionName { get; set; } = "MessageTemplates";
 
+        public string StatusTypeDataCollectionName { get; set; } = "StatusType";
         public string UserStatusDataCollectionName { get; set; } = "UserStatusData";
+        public string RoleStatusTypeMappingCollectionName { get; set; } = "RoleStatusTypeMapping";
 
 
         public virtual IMongoCollection<MessageTemplate> MessageTemplateCollection
@@ -48,8 +50,37 @@ namespace WebApplication.Data
         private IMongoCollection<UserStatusData> _UserStatusDataCollection;
 
 
+        public virtual IMongoCollection<StatusType> StatusTypeDataCollection
+        {
+            get
+            {
+                if (_statusTypeDataCollection == null)
+                {
+
+                    _statusTypeDataCollection = Database.GetCollection<StatusType>(StatusTypeDataCollectionName, CollectionSettings);
+                }
+                return _statusTypeDataCollection;
+            }
+            set { _statusTypeDataCollection = value; }
+        }
+        private IMongoCollection<StatusType> _statusTypeDataCollection;
 
 
+
+        public virtual IMongoCollection<RoleStatusTypeMapping> RoleStatusTypeMappingCollection
+        {
+            get
+            {
+                if (_roleStatusTypeMappingDataCollection == null)
+                {
+
+                    _roleStatusTypeMappingDataCollection = Database.GetCollection<RoleStatusTypeMapping>(StatusTypeDataCollectionName, CollectionSettings);
+                }
+                return _roleStatusTypeMappingDataCollection;
+            }
+            set { _roleStatusTypeMappingDataCollection = value; }
+        }
+        private IMongoCollection<RoleStatusTypeMapping> _roleStatusTypeMappingDataCollection;
 
 
     }

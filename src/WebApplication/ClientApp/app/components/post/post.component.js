@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var emitter_service_1 = require('../../services/emitter.service');
-var userstatus_service_1 = require('../../services/userstatus.service');
-var userstatus_1 = require('../../models/userstatus');
+var core_1 = require("@angular/core");
+var emitter_service_1 = require("../../services/emitter.service");
+var userstatus_service_1 = require("../../services/userstatus.service");
+var userstatus_1 = require("../../models/userstatus");
 var PostComponent = (function () {
     function PostComponent(statusService) {
         this.statusService = statusService;
@@ -59,23 +59,23 @@ var PostComponent = (function () {
             _this.editing = true;
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], PostComponent.prototype, "editId", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], PostComponent.prototype, "listId", void 0);
-    PostComponent = __decorate([
-        core_1.Component({
-            selector: 'app-post',
-            template: require('./post.component.html'),
-            providers: [userstatus_service_1.UserStatusService]
-        }), 
-        __metadata('design:paramtypes', [userstatus_service_1.UserStatusService])
-    ], PostComponent);
     return PostComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], PostComponent.prototype, "editId", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], PostComponent.prototype, "listId", void 0);
+PostComponent = __decorate([
+    core_1.Component({
+        selector: 'app-post',
+        template: require('./post.component.html'),
+        providers: [userstatus_service_1.UserStatusService]
+    }),
+    __metadata("design:paramtypes", [userstatus_service_1.UserStatusService])
+], PostComponent);
 exports.PostComponent = PostComponent;
 //# sourceMappingURL=post.component.js.map

@@ -8,11 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var router_1 = require('@angular/router');
+var router_1 = require("@angular/router");
 // Imports
-var core_1 = require('@angular/core');
-var emitter_service_1 = require('../../services/emitter.service');
-var userstatus_service_1 = require('../../services/userstatus.service');
+var core_1 = require("@angular/core");
+var emitter_service_1 = require("../../services/emitter.service");
+var userstatus_service_1 = require("../../services/userstatus.service");
 var FeedComponent = (function () {
     function FeedComponent(statusService, router) {
         this.statusService = statusService;
@@ -42,22 +42,23 @@ var FeedComponent = (function () {
         // with the event payload
         emitter_service_1.EmitterService.get(this.listId).subscribe(function (userstatus) { _this.userstatus = userstatus; });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], FeedComponent.prototype, "listId", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], FeedComponent.prototype, "editId", void 0);
-    FeedComponent = __decorate([
-        core_1.Component({
-            selector: 'app-feed',
-            template: require('./feed.component.html')
-        }), 
-        __metadata('design:paramtypes', [userstatus_service_1.UserStatusService, router_1.Router])
-    ], FeedComponent);
     return FeedComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], FeedComponent.prototype, "listId", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], FeedComponent.prototype, "editId", void 0);
+FeedComponent = __decorate([
+    core_1.Component({
+        selector: 'app-feed',
+        template: require('./feed.component.html')
+    }),
+    __metadata("design:paramtypes", [userstatus_service_1.UserStatusService,
+        router_1.Router])
+], FeedComponent);
 exports.FeedComponent = FeedComponent;
 //# sourceMappingURL=feed.component.js.map
