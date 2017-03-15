@@ -43,7 +43,7 @@ namespace WebApplication.Controllers
             ViewBag.Roles = _roleManager.Roles.ToList().ToListViewModel();
 
             ViewBag.StatusType = _statusType.FindAll().Result.ToList();
-
+            
             var statustype = await _roleStatusTypeMappingRepository.FindAll();
 
             return View();

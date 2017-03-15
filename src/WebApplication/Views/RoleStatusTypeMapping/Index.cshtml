@@ -4,7 +4,17 @@
     ViewData["Title"] = "Role and Status Type Mapping";
 }
 
+@*@foreach(var item in Model)
+{
+    @await Component.InvokeAsync("StatusTypeRoleMapping", item)
+}*@
 
+
+
+
+<vc:StatusTypeRoleMapping>
+
+</vc:StatusTypeRoleMapping>
 
 
 <div class="panel">

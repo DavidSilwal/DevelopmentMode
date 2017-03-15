@@ -15,15 +15,14 @@ namespace WebApplication.Controllers.Api
 
         private readonly IStatusTypeRepository _statusTypeRepository;
 
-        public StatusTypeController()
+        public StatusTypeController(IStatusTypeRepository statusTypeRepository)
         {
-
+            _statusTypeRepository = statusTypeRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-
             return Ok(await _statusTypeRepository.FindAll());
         }
 

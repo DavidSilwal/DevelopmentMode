@@ -1,0 +1,42 @@
+﻿@using WebApplication.Data
+@model StatusType
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="panel mb25">
+    <div class="panel-heading border">
+        Details
+    </div>
+    <div class="panel-body">
+        <div class="row no-margin">
+            <div class="col-lg-8">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                 
+
+                </dl>
+            </div>
+            <div class="col-lg-4">
+                <a asp-action="Edit" asp-route-id="@Model._id" class="btn btn-default">Edit</a>
+                <a asp-action="Delete" asp-route-id="@Model._id" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Breadcrumbs {
+    <ol class="breadcrumb">
+        <li>
+            <a asp-controller="Dashboard" asp-action="Index">Home</a>
+        </li>
+        <li>
+            <a asp-controller="StatusType" asp-action="Index">Status Type</a>
+        </li>
+        <li class="active">
+            <a href="javascript:;">Details</a>
+        </li>
+    </ol>
+}

@@ -15,6 +15,7 @@ using System.IO;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using MongoDB.Bson.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
+using WebApplication.Repositories;
 
 namespace WebApplication
 {
@@ -57,8 +58,11 @@ namespace WebApplication
             services.AddSingleton<IMessageRepository, MessageRepository>();
             services.AddSingleton<IViewModelService, ViewModelService>();
             services.AddSingleton<IDashboardViewModel, DashboardViewModel>();
-            
+            services.AddSingleton<IStatusTypeRepository, StatusTypeRepository>();
             services.AddSingleton<IUserStatusDataRepository,UserStatusDataRepository>();
+            services.AddScoped<IStatusTypeRepository, StatusTypeRepository>();
+            services.AddScoped<IRoleStatusTypeMappingRepository, RoleStatusTypeMappingRepository>();
+
 
             services.AddWebMarkupMin(
         options =>
@@ -84,7 +88,9 @@ namespace WebApplication
 
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddTransient<IViewModelService, ViewModelService>();
+          
+
+  
 
             services.AddCloudscribePagination();
 
@@ -159,7 +165,7 @@ namespace WebApplication
                     ConsumerKey = "tl0zTPXYqQRV969qVbXyCQsb8",
                     ConsumerSecret = "fF4cdlcMxeDrvZJFLRZAj7SDkQt7NYBetewCzbJzRxUUbPCMmO"
                 });
-
+                
             //app.UseInstaller();
            
             app.UseMvc(routes =>

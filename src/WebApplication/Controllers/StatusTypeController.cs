@@ -11,8 +11,7 @@ namespace WebApplication.Controllers
 {
     public class StatusTypeController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IStatusTypeRepository _statusTypeRepository;
+      private readonly IStatusTypeRepository _statusTypeRepository;
 
         public StatusTypeController(IStatusTypeRepository statusTypeRepository)
         {

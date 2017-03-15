@@ -1,0 +1,55 @@
+﻿@using WebApplication.Data
+@model StatusType
+@{
+    ViewData["Title"] = "Edit Status  Type";
+}
+
+
+<div class="panel mb25">
+    <div class="panel-heading border">
+        Edit Status Type
+    </div>
+    <div class="panel-body">
+        <div class="row no-margin">
+            <div class="col-lg-12">
+                <form asp-action="Edit" class="form-horizontal bordered-group" role="form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="_id" />
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger" />
+                        </div>
+                    </div>
+
+
+                 
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" value="Update" class="btn btn-default" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+  
+
+
+@section Breadcrumbs {
+    <ol class="breadcrumb">
+        <li>
+            <a asp-controller="Dashboard" asp-action="Index">Home</a>
+        </li>
+        <li>
+            <a asp-controller="StatusType" asp-action="Index">Status Type</a>
+        </li>
+        <li class="active">
+            <a href="javascript:;">Edit</a>
+        </li>
+    </ol>
+}
+

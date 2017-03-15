@@ -13,7 +13,6 @@ namespace WebApplication.Data
         [BsonId]
         public string RoleName { get; set; }
 
-        public string UserID { get; set; }
         public List<string> StatusType { get; set; }
 
     }
