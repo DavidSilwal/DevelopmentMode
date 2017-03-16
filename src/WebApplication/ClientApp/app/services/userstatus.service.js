@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+//import { Likes } from './../models/likes';
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var Rx_1 = require("rxjs/Rx");
@@ -20,11 +21,6 @@ var UserStatusService = (function () {
         this.http = http;
         this.Url = "http://localhost:50353/api/feed";
     }
-    UserStatusService.prototype.getStatus = function () {
-        return this.http.get(this.Url)
-            .map(function (res) { return res.json(); })
-            .catch(this.handleError);
-    };
     UserStatusService.prototype.handleError = function (error) {
         // In a real world app, we might use a remote logging infrastructure
         var errMsg;
@@ -39,6 +35,37 @@ var UserStatusService = (function () {
         console.error(errMsg);
         return Rx_1.Observable.throw(errMsg);
     };
+    UserStatusService.prototype.getStatus = function () {
+        return this.http.get(this.Url)
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    UserStatusService.prototype.statusDetail = function (_id) {
+        return this.http.get(this.Url + '/' + _id)
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    UserStatusService.prototype.disLike = function (_id) {
+        var bodyString = JSON.stringify(_id); // Stringify payload
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        var options = new http_1.RequestOptions({ headers: headers }); // Create a request option
+        return this.http.post(this.Url + '/' + _id + '/unlike', _id, options)
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    UserStatusService.prototype.addLike = function (_id) {
+        var bodyString = JSON.stringify(_id); // Stringify payload
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        var options = new http_1.RequestOptions({ headers: headers }); // Create a request option
+        return this.http.post(this.Url + '/' + _id + '/like', _id, options)
+            .map(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    // addLike(_id:string):Observable<likes[]>{
+    //         return this.http.get(this.likeUrl+'/'+ _id + '/like')
+    //                     .map((res: Response) => res.json())
+    //                     .catch(this.handleError);
+    //     }
     //add a new status
     UserStatusService.prototype.addStatus = function (body) {
         var bodyString = JSON.stringify(body); // Stringify payload
@@ -49,14 +76,21 @@ var UserStatusService = (function () {
             .catch(this.handleError);
     };
     // Update a status
-    UserStatusService.prototype.updateStatus = function (body) {
+    UserStatusService.prototype.updateStatus = function (id, body) {
+        console.log(id);
+        console.log('mahesh');
+        console.log(body);
+        console.log(body.Status);
         var bodyString = JSON.stringify(body); // Stringify payload
+        console.log(bodyString);
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         var options = new http_1.RequestOptions({ headers: headers }); // Create a request option
-        return this.http.put(this.Url + "/" + body['id'], body, options) // ...using put request
+        var editedText = body.Status;
+        return this.http.put(this.Url + '/edit' + '/' + id + '/' + editedText, editedText) // ...using put request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); }); //...errors if any
     };
+    // detail of status 
     // Delete a status
     UserStatusService.prototype.removeStatus = function (_id) {
         return this.http.delete(this.Url + "/" + _id) // ...using put request
@@ -64,12 +98,17 @@ var UserStatusService = (function () {
             .catch(this.handleError); //...errors if any
     };
     // Add a new comment
-    UserStatusService.prototype.addComment = function (id, comments) {
-        var commentsString = JSON.stringify(comments); // Stringify payload
+    UserStatusService.prototype.addComment = function (id, body) {
+        console.log(id);
+        console.log(body);
+        var commentsString = JSON.stringify(body); // Stringify payload
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         var options = new http_1.RequestOptions({ headers: headers }); // Create a request option
-        console.log(comments);
-        return this.http.post(this.Url + '/' + id + '/addcomments', comments, headers) // ...using post request
+        console.log(body);
+        console.log(id);
+        console.log("mahesh");
+        var commentText = body.text;
+        return this.http.post(this.Url + '/' + id + '/' + commentText, commentText, headers) // ...using post request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
     };

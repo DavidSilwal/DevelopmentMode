@@ -1,4 +1,4 @@
-
+import { FormGroup, FormControl } from "@angular/forms"
 import { Component, Input } from "@angular/core";
 import { UserStatusService } from "../../services/userstatus.service";
 import { Comments } from "../../models/comments";
@@ -14,7 +14,7 @@ export class CommentFormComponent
 {
     constructor (private commentService: UserStatusService){}
 
-    private model = new Comments();
+  
     private editing : boolean = false ;
 
     // @Input() listId;
@@ -22,12 +22,22 @@ export class CommentFormComponent
 
     @Input() statusId;
 
-    submitComment()
+    
+
+    submitComment(value: any)
     {
+        console.log(this.statusId);
+        console.log(value);
+        console.log("mahesh");
 
-        let commentOperation : Observable<Comments[]>;
 
-        commentOperation = this.commentService.addComment(this.statusId, this.model)
+        let commentOperation: Observable<Comments[]>;
+        this.commentService
+           .addComment(this.statusId, value)
+        
+            .subscribe(comments => comments)
+             
+
 
           // if(!this.editing)
         //     commentOperation = this.commentService.addComment(this.model.ID, this.model)
@@ -46,23 +56,23 @@ export class CommentFormComponent
         //         console.log(err);
         //     });
 
-         commentOperation.subscribe(
-            comments=>{
-                EmitterService.get(this.statusId).emit(comments);
-                this.model = new Comments();
-                if(this.editing) 
-                    this.editing = !this.editing;
-            },
-            err=>{
-                console.log(err);
-            });
+        //  .subscribe(
+        //     comments=>{
+        //         EmitterService.get(this.statusId).emit(comments);
+        //         this.model = new Comments();
+        //         if(this.editing) 
+        //             this.editing = !this.editing;
+        //     },
+        //     err=>{
+        //         console.log(err);
+        //     });
         
     }  
       
     ngOnChanges() {
         EmitterService.get(this.statusId)
             .subscribe((comment : Comments) => {
-                this.model = comment
+                
                 this.editing = true;
         });
     }

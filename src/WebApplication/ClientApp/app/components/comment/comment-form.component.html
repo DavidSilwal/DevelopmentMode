@@ -1,10 +1,7 @@
-﻿<form class="form-horizontal" (ngSubmit)='submitComment()'>
-    <div>
-        submit
-        <input type="text" [(ngModel)]="model.text" placeholder="Write a Comment" name="text"/>
-        <button *ngIf="!editing" type="submit" class="btn btn-primary btn-xs">Add Comment</button>
-        <button *ngIf="editing" type="submit" class="btn btn-warning btn-xs">Update </button>
+﻿<form #form="ngForm" (ngSubmit)="submitComment(form.value)">
+    <div class="form-group">
+        <input type="text" name="text" ngModel />
+        <button type="submit">Comment</button>
     </div>
 </form>
-
 

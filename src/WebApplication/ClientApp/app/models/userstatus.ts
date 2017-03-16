@@ -2,7 +2,7 @@
 
 export class UserStatus {
     _id: string;
-    status: string;
+    Status: string;
     updateTime: Date;
     type: StatusType;
     isHidden: boolean

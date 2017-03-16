@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var router_1 = require("@angular/router");
 // Imports
 var core_1 = require("@angular/core");
-var emitter_service_1 = require("../../services/emitter.service");
 var userstatus_service_1 = require("../../services/userstatus.service");
 var FeedComponent = (function () {
     function FeedComponent(statusService, router) {
@@ -37,10 +36,12 @@ var FeedComponent = (function () {
     //     this.router.navigate(link);
     //   }
     FeedComponent.prototype.ngOnChanges = function (changes) {
-        var _this = this;
         // Listen to the 'list'emitted event so as populate the model
         // with the event payload
-        emitter_service_1.EmitterService.get(this.listId).subscribe(function (userstatus) { _this.userstatus = userstatus; });
+        if (changes['status']) {
+            this.loadStatuss();
+        }
+        // EmitterService.get(this.listId).subscribe((userstatus: UserStatus[]) => { this.userstatus = userstatus });
     };
     return FeedComponent;
 }());

@@ -1,4 +1,4 @@
-﻿<form (ngSubmit)="submitStatus()" class="form-horizontal bordered-group">
+﻿<form #form="ngForm" (ngSubmit)="submitStatus()" class="form-horizontal bordered-group">
     <div class="panel border">
         <div class="panel-heading nomargint">
             <a href="#" class="btn btn-default noborder "><i class="fa fa-camera"></i> Photo/Video</a> |
@@ -19,20 +19,25 @@
                     <hr />
                     <div class="form-group nomarginb">
                         <div class="col-xs-6">
+                            asdfasdfasdf
+                            <ul *ngFor="let statusType of statusTypes">
+                                <li>
+                                    1
+                                    {{statusType.type}}
+                                </li>
+                            </ul>
+                            <!--<select class="form-control pull-left" [(ngModel)]="model.type" name="type" required>
+                                <option *ngFor="let statusType of statusTypes" >{{statusType | json}}</option>
+                            </select>-->
                             <select class="form-control pull-left" [(ngModel)]="model.type" name="type" required>
-                                <option> Love Guru </option>
-                                <option> Psychologist </option>
-                                <option> Doctor </option>
-                                <option> Other </option>
+                                <option *ngFor="let type of statusTypes">{{type.name}}</option>
                             </select>
                         </div>
                         <div class="col-xs-6">
-                            <button type="submit" class="btn btn-primary pull-right btn-sm">Post</button>
+                            
+                            <button type="submit" [disabled]="form.invalid" class="btn btn-primary pull-right btn-sm">Post</button>
                         </div>
-                        
-
-                        </div>
-                   
+                    </div>
                 </div>
             </div>
         </div>

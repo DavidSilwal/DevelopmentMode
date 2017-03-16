@@ -212,21 +212,24 @@ namespace WebApplication.Controllers
             return Ok();    
         }   
 
+
         [HttpPost("{id}/addcomments")]
-        public IActionResult AddComments(string id,[FromBody]Comments comments)
+        public IActionResult AddComments(string id, string text)
         {
-            var status = _userstatusRepository.AddComments(id,
+             var status = _userstatusRepository.AddComments(id,
                 new Comments
-            {
-                UserID = GetCurrentUserId(),
-                Text = comments.Text,
-                CommentTime = DateTime.UtcNow
-                       
-            }); 
-                                   
+                {
+                    Id = id,
+                    UserID = GetCurrentUserId(),
+                    Text = text,
+                    CommentTime = DateTime.UtcNow
+
+                });
+
             return Ok();
         }
-            
+
+
         [HttpGet("{statusId}/comments")]
             public IActionResult GetComments(string statusId)
         {

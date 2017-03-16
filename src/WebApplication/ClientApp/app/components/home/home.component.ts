@@ -4,6 +4,8 @@ import { PostComponent } from '../post/post.component';
 
 import { FeedComponent } from '../feed/feed.component';
 
+
+
 @Component({
     selector: 'home',
     template: require('./home.component.html'),
@@ -11,6 +13,9 @@ import { FeedComponent } from '../feed/feed.component';
 
 export class HomeComponent
 {
+    types = [
+        'Doctor', 'Psychologist', 'Other'
+    ];
 }
 
 interface StatusData {

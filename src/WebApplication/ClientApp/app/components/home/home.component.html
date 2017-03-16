@@ -1,4 +1,9 @@
 <!--<p *ngIf="!status"><em>Loading...</em></p>-->
+<nav>
+    <a [routerLink]="['']">Home</a>
+    <a [routerLink]="['/home/domainexpert']">Domain Expert</a>
+</nav>
+
 
 <div class="container">
     <div class="row">
@@ -10,6 +15,7 @@
             </div>
             <div>
                 <app-feed>
+                    
                 </app-feed>
             </div>
         </div>

@@ -16,6 +16,7 @@ import { UserStatusService } from '../../services/userstatus.service';
 })
 
 export class FeedComponent implements OnInit, OnChanges {
+   
 
     constructor(
         private statusService: UserStatusService,
@@ -52,8 +53,16 @@ export class FeedComponent implements OnInit, OnChanges {
     ngOnChanges(changes: any) {
         // Listen to the 'list'emitted event so as populate the model
         // with the event payload
-        EmitterService.get(this.listId).subscribe((userstatus: UserStatus[]) => { this.userstatus = userstatus });
-    }
+        
+        if(changes['status']){
+             this.loadStatuss();
+        }
+       // EmitterService.get(this.listId).subscribe((userstatus: UserStatus[]) => { this.userstatus = userstatus });
+       
+    
+}
 
+
+   
 }
 

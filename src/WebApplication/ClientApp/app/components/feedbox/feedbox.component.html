@@ -1,4 +1,7 @@
-﻿<div class="panel panel-default">
+﻿
+<a [routerLink]="['/domainexpert']">domain expert</a>
+
+<div class="panel panel-default">
     <div class="panel-heading mi-hi-40">
         <span class="pull-left">
             {{status.type}}
@@ -7,25 +10,78 @@
             {{status.updateTime| dateFormat | date:'medium'}}
             <!--|{{status.updatedAgo | dateFormat }} ago-->
 
+            
+
         </span>
+        <div ngClass="dropdown">
+            <button class="dropdown-toggle statusdrop" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul  ngClass="dropdown-menu">
+                <li><a href="">Edit</a></li>
+                <li><a href="">Delete</a></li>
+                <li><a href="">Detail</a></li>
+            </ul>
+        </div>
+        
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-12">
-                {{status.status}}
+            <div class="col-md-12"  >
+
+                <span *ngIf="!edit">
+                    {{status.status}}
+                </span>
+
+                <span *ngIf="edit">
+                   
+                        <form #updateForm="ngForm" (ngSubmit)="updateStatus(updateForm.value);edit=!edit;">
+                           <div>
+                               <textarea name="Status" ngModel>{{status.status}}</textarea>
+                               <button type="submit">Update</button>
+                           </div>
+                       </form>
+                       {{updateForm.value | json}}
+                   
+                </span>
+                
             </div>
+
+            
         </div>
+
+        <!--<div *ngFor="let comments of status.comments">
+            {{comments.commentTime}}
+        </div>-->
         <div class="row">
             <div class="col-md-12">
                 {{status.likesCounts}} likes | {{status.commentsCounts}} Comments Delete Edit
             </div>
+
+            <div class="col-md-12">
+                <a [routerLink]="['/home/edit', status._id]" class="btn btn-primary btn-xs " (click)="edit = !edit">
+
+                    <span *ngIf="!edit">Edit</span>
+                </a>
+                <a [routerLink]="[ '/home/detail', status._id]" class="btn btn-primary btn-xs">Detail</a>
+            </div>
+            
+
+            
+
+            
         </div>
     </div>
     <div class="panel-footer mi-hi-40">
-        <div class="col-xs-1">
-            <i class="fa fa-heart"></i>
+        <div class="col-xs-2">
+           <a (click)="toggleLike = !toggleLike; liketoggle = !liketoggle; " [ngClass]="getClass()" class="like" >
+                <i class="fa fa-heart"></i>
+                <span  *ngIf="!liketoggle" (click)="increaseLike();" class="btn btn-info btn-xs" >like</span>
+                <span *ngIf="liketoggle" (click)="decreaseLike();"  class="btn btn-danger btn-xs">unlike</span>
+               
+            </a> 
         </div>
-        <div class="col-xs-11">
+        <div class="col-xs-10">
             <app-comment-form [statusId]="status._id"></app-comment-form>
         </div>
 

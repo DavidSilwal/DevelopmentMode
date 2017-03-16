@@ -1,1 +1,16 @@
-﻿<app-feedbox [editId]="editId" [listId]="listId" *ngFor="let status of userstatus" [status]="status"></app-feedbox>
+﻿<!--<div *ngIf="loading" class="loader">Loading...</div>-->
+
+<app-feedbox 
+[listId]="listId" 
+*ngFor="let status of userstatus" 
+[status]="status" >
+   
+</app-feedbox>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <a href="" class="btn btn-block"> load more stories</a>
+    </div>
+    
+</div>
+
+

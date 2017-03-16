@@ -14,11 +14,14 @@ var home_component_1 = require("./components/home/home.component");
 var post_component_1 = require("./components/post/post.component");
 var feed_component_1 = require("./components/feed/feed.component");
 var feedbox_component_1 = require("./components/feedbox/feedbox.component");
-var comment_form_component_1 = require("./components/comment/comment-form.component");
+//import { EditStatusComponent } from './components/feedbox/editstatus/editstatus.component';
+var detailstatus_component_1 = require("./components/feedbox/detailstatus/detailstatus.component");
 var comment_list_component_1 = require("./components/comment/comment-list.component");
-var comment_box_component_1 = require("./components/comment/comment-box.component");
+var comment_form_component_1 = require("./components/comment/comment-form.component");
+var domainexpert_component_1 = require("./components/domainexpert/domainexpert.component");
 var date_format_pipe_1 = require("./pipes/date-format.pipe");
 var userstatus_service_1 = require("./services/userstatus.service");
+var statusType_sevice_1 = require("./services/statusType.sevice");
 var emitter_service_1 = require("./services/emitter.service");
 var AppModule = (function () {
     function AppModule() {
@@ -35,9 +38,10 @@ AppModule = __decorate([
             feed_component_1.FeedComponent,
             feedbox_component_1.FeedBoxComponent,
             comment_list_component_1.CommentListComponent,
-            comment_box_component_1.CommentBoxComponent,
             comment_form_component_1.CommentFormComponent,
             date_format_pipe_1.DateFormatPipe,
+            domainexpert_component_1.DomainExpertComponent,
+            detailstatus_component_1.DetailStatusComponent
         ],
         imports: [
             angular2_universal_1.UniversalModule,
@@ -45,10 +49,13 @@ AppModule = __decorate([
             router_1.RouterModule.forRoot([
                 { path: '', redirectTo: 'home', pathMatch: 'full' },
                 { path: 'home', component: home_component_1.HomeComponent },
+                { path: 'home/domainexpert', component: domainexpert_component_1.DomainExpertComponent },
+                //detail 
+                { path: 'home/detail/:id', component: detailstatus_component_1.DetailStatusComponent },
                 { path: '**', redirectTo: 'home' }
             ])
         ],
-        providers: [userstatus_service_1.UserStatusService, emitter_service_1.EmitterService]
+        providers: [userstatus_service_1.UserStatusService, emitter_service_1.EmitterService, statusType_sevice_1.StatusTypeService]
     })
 ], AppModule);
 exports.AppModule = AppModule;

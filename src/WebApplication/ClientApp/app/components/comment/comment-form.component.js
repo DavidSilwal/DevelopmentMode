@@ -10,18 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var userstatus_service_1 = require("../../services/userstatus.service");
-var comments_1 = require("../../models/comments");
 var emitter_service_1 = require("../../services/emitter.service");
 var CommentFormComponent = (function () {
     function CommentFormComponent(commentService) {
         this.commentService = commentService;
-        this.model = new comments_1.Comments();
         this.editing = false;
     }
-    CommentFormComponent.prototype.submitComment = function () {
-        var _this = this;
+    CommentFormComponent.prototype.submitComment = function (value) {
+        console.log(this.statusId);
+        console.log(value);
+        console.log("mahesh");
         var commentOperation;
-        commentOperation = this.commentService.addComment(this.statusId, this.model);
+        this.commentService
+            .addComment(this.statusId, value)
+            .subscribe(function (comments) { return comments; });
         // if(!this.editing)
         //     commentOperation = this.commentService.addComment(this.model.ID, this.model)
         // } else {
@@ -37,20 +39,21 @@ var CommentFormComponent = (function () {
         //     err=>{
         //         console.log(err);
         //     });
-        commentOperation.subscribe(function (comments) {
-            emitter_service_1.EmitterService.get(_this.statusId).emit(comments);
-            _this.model = new comments_1.Comments();
-            if (_this.editing)
-                _this.editing = !_this.editing;
-        }, function (err) {
-            console.log(err);
-        });
+        //  .subscribe(
+        //     comments=>{
+        //         EmitterService.get(this.statusId).emit(comments);
+        //         this.model = new Comments();
+        //         if(this.editing) 
+        //             this.editing = !this.editing;
+        //     },
+        //     err=>{
+        //         console.log(err);
+        //     });
     };
     CommentFormComponent.prototype.ngOnChanges = function () {
         var _this = this;
         emitter_service_1.EmitterService.get(this.statusId)
             .subscribe(function (comment) {
-            _this.model = comment;
             _this.editing = true;
         });
     };

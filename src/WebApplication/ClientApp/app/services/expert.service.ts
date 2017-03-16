@@ -14,7 +14,9 @@ import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()
-export class UserStatusService {
+export class ExpertService {
+
+    
 
     constructor(private http: Http) { }
 

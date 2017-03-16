@@ -16,9 +16,32 @@ var FeedBoxComponent = (function () {
     function FeedBoxComponent(statusService) {
         this.statusService = statusService;
     }
+    FeedBoxComponent.prototype.increaseLike = function () {
+        var a = this.status._id;
+        this.statusService
+            .addLike(a)
+            .subscribe(function (status) { return status; });
+        console.log(a);
+    };
+    FeedBoxComponent.prototype.decreaseLike = function () {
+        var a = this.status._id;
+        this.statusService
+            .disLike(a)
+            .subscribe(function (status) { return status; });
+        console.log(this.status.Status);
+    };
+    FeedBoxComponent.prototype.getClass = function () {
+        if (this.toggleLike) {
+            return 'likeheart';
+        }
+        else {
+            return '';
+        }
+    };
     FeedBoxComponent.prototype.editStatus = function () {
         // Emit edit event
-        emitter_service_1.EmitterService.get(this.editId).emit(this.status);
+        console.log('mahesh');
+        // EmitterService.get(this.editId).emit(this.status);
     };
     FeedBoxComponent.prototype.deleteStatus = function (_id) {
         var _this = this;
@@ -29,6 +52,14 @@ var FeedBoxComponent = (function () {
             // Log errors if any
             console.log(err);
         });
+    };
+    FeedBoxComponent.prototype.updateStatus = function (value) {
+        console.log(value);
+        console.log('update Clicked');
+        var statusId = this.status._id;
+        this.statusService
+            .updateStatus(statusId, value)
+            .subscribe(function (status) { return status; });
     };
     return FeedBoxComponent;
 }());

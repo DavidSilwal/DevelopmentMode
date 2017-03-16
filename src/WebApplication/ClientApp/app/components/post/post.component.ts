@@ -5,27 +5,22 @@ import { Observable } from 'rxjs/Rx';
 
 import { EmitterService } from '../../services/emitter.service';
 import { UserStatusService } from '../../services/userstatus.service';
+import { StatusTypeService } from '../../services/statusType.sevice';
 
-import { UserStatus, StatusType } from '../../models/userstatus';
+import { UserStatus } from '../../models/userstatus';
 
 @Component({
     selector: 'app-post',
     template: require('./post.component.html'),
-    providers: [UserStatusService]
+    providers: [UserStatusService, StatusTypeService]
 
 })
-export class PostComponent implements OnChanges {
+export class PostComponent {
 
-    selectedType: StatusType; //= new IStatusType(1, 'select value' ); 
-    Types = [
-        new StatusType(1,'Feeling sad'),
-        new StatusType(2, 'Feeling happy'),
-        new StatusType(3, 'Feeling awesome'),
-        new StatusType(4, 'Feeling exhausted')
+   
+    statusTypes = [];
 
-    ];
-
-    constructor(private statusService: UserStatusService) { }
+    constructor(private statusService: UserStatusService, private _statusTypeService: StatusTypeService) { }
     // Local properties
     private model = new UserStatus();
     private editing = false;
@@ -33,7 +28,8 @@ export class PostComponent implements OnChanges {
     // Input properties
     @Input() editId: string;
     @Input() listId: string;
-
+    
+   
 
     submitStatus() {
         // Variable to hold a reference of addComment/updateComment
@@ -64,8 +60,16 @@ export class PostComponent implements OnChanges {
                 console.log(err);
             });
     }
-
+    
+    ngOnInit() {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        this._statusTypeService.getStatusType()
+                        .subscribe(resStatusTypeData=>this.statusTypes=resStatusTypeData);
+    }
     ngOnChanges() {
+
+       
         // Listen to the 'edit'emitted event so as populate the model
         // with the event payload
         EmitterService.get(this.editId).subscribe((status: UserStatus) => {

@@ -1,5 +1,9 @@
 ﻿import { UserStatus } from './../models/userstatus';
-import { Comments } from './../models/comments'
+import { Comments } from './../models/comments';
+//import { Likes } from './../models/likes';
+
+
+
 
 import { Injectable } from '@angular/core';
 
@@ -19,16 +23,10 @@ export class UserStatusService {
     constructor(private http: Http) { }
 
     private Url = "http://localhost:50353/api/feed";
+   
+    
 
-
-   getStatus(): Observable<UserStatus[]> {
-
-        return this.http.get(this.Url)
-            .map((res: Response) => res.json())
-            .catch(this.handleError);
-    }
-
-    private handleError(error: Response | any) {
+private handleError(error: Response | any) {
         // In a real world app, we might use a remote logging infrastructure
         let errMsg: string;
         if (error instanceof Response) {
@@ -41,6 +39,49 @@ export class UserStatusService {
         console.error(errMsg);
         return Observable.throw(errMsg);
     }
+
+   getStatus(): Observable<UserStatus[]> {
+
+        return this.http.get(this.Url)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+    statusDetail(_id: string): Observable<UserStatus[]> {
+        return this.http.get(this.Url+ '/' + _id)
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+
+    disLike(_id:string):Observable<UserStatus[]>{
+          let bodyString = JSON.stringify(_id); // Stringify payload
+        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        let options = new RequestOptions({ headers: headers }); // Create a request option
+
+        return this.http.post(this.Url+'/'+ _id + '/unlike',_id,options)
+                    .map((res: Response) => res.json())
+                    .catch(this.handleError);
+    }
+
+    addLike(_id: string): Observable<UserStatus[]>{
+         let bodyString = JSON.stringify(_id); // Stringify payload
+        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+        let options = new RequestOptions({ headers: headers }); // Create a request option
+
+        return this.http.post(this.Url+'/'+ _id + '/like',_id,options)
+                    .map((res: Response) => res.json())
+                    .catch(this.handleError);
+    
+    }
+// addLike(_id:string):Observable<likes[]>{
+        
+
+//         return this.http.get(this.likeUrl+'/'+ _id + '/like')
+//                     .map((res: Response) => res.json())
+//                     .catch(this.handleError);
+//     }
+  
+    
 
 
     //add a new status
@@ -55,15 +96,24 @@ export class UserStatusService {
     }
 
     // Update a status
-    updateStatus(body: UserStatus): Observable<UserStatus[]> {
+    updateStatus(id:string, body: UserStatus): Observable<UserStatus[]> {
+        console.log(id);
+        console.log('mahesh');
+        console.log(body);
+        console.log(body.Status);
         let bodyString = JSON.stringify(body); // Stringify payload
+        console.log(bodyString);
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options = new RequestOptions({ headers: headers }); // Create a request option
-
-        return this.http.put(`${this.Url}/${body['id']}`, body, options) // ...using put request
+        var editedText = body.Status;
+        return this.http.put(this.Url + '/edit' + '/' + id + '/' + editedText, editedText) // ...using put request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch((error: Response) => Observable.throw(error.json().error || 'Server error')); //...errors if any
     }
+
+    // detail of status 
+  
+   
     // Delete a status
     removeStatus(_id: string): Observable<UserStatus[]> {
         return this.http.delete(`${this.Url}/${_id}`) // ...using put request
@@ -72,17 +122,25 @@ export class UserStatusService {
     }
     
     // Add a new comment
-    addComment(id: string, comments: Comments): Observable<Comments[]> {
-        let commentsString = JSON.stringify(comments); // Stringify payload
+    addComment(id: string, body: Comments): Observable<Comments[]> {
+        console.log(id);
+        console.log(body);
+        let commentsString = JSON.stringify(body); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options = new RequestOptions({ headers: headers }); // Create a request option
 
-        console.log(comments);
+        console.log(body);
+        console.log(id);
+        console.log("mahesh");
+        var commentText = body.text;
 
-        return this.http.post(this.Url + '/' + id + '/addcomments', comments, headers) // ...using post request
+        return this.http.post(this.Url + '/' + id +'/'+ commentText, commentText, headers) // ...using post request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
     } 
+
+   
+
 
   
     }
