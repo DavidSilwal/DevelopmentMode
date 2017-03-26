@@ -19,10 +19,13 @@ var detailstatus_component_1 = require("./components/feedbox/detailstatus/detail
 var comment_list_component_1 = require("./components/comment/comment-list.component");
 var comment_form_component_1 = require("./components/comment/comment-form.component");
 var domainexpert_component_1 = require("./components/domainexpert/domainexpert.component");
+var feedexpert_component_1 = require("./components/feedExpert/feedexpert.component");
+var feedboxexpert_component_1 = require("./components/feedboxExpert/feedboxexpert.component");
 var date_format_pipe_1 = require("./pipes/date-format.pipe");
 var userstatus_service_1 = require("./services/userstatus.service");
 var statusType_sevice_1 = require("./services/statusType.sevice");
 var emitter_service_1 = require("./services/emitter.service");
+var expert_service_1 = require("./services/expert.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -41,7 +44,9 @@ AppModule = __decorate([
             comment_form_component_1.CommentFormComponent,
             date_format_pipe_1.DateFormatPipe,
             domainexpert_component_1.DomainExpertComponent,
-            detailstatus_component_1.DetailStatusComponent
+            detailstatus_component_1.DetailStatusComponent,
+            feedboxexpert_component_1.FeedBoxExpertComponent,
+            feedexpert_component_1.FeedExpertComponent
         ],
         imports: [
             angular2_universal_1.UniversalModule,
@@ -55,7 +60,7 @@ AppModule = __decorate([
                 { path: '**', redirectTo: 'home' }
             ])
         ],
-        providers: [userstatus_service_1.UserStatusService, emitter_service_1.EmitterService, statusType_sevice_1.StatusTypeService]
+        providers: [userstatus_service_1.UserStatusService, emitter_service_1.EmitterService, statusType_sevice_1.StatusTypeService, expert_service_1.ExpertService]
     })
 ], AppModule);
 exports.AppModule = AppModule;

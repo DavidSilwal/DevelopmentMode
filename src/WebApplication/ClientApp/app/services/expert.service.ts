@@ -18,16 +18,19 @@ export class ExpertService {
 
     
 
-    constructor(private http: Http) { }
+    constructor(private _http: Http) { }
 
     private Url = "http://localhost:50353/api/expert";
 
 
     getStatus(): Observable<UserStatus[]> {
-
-        return this.http.get(this.Url)
+        console.log(this.Url);
+        var a = this._http.get(this.Url)
             .map((res: Response) => res.json())
-            .catch(this.handleError);
+        .catch(this.handleError);
+        console.log(a);
+        
+        return a;
     }
 
     private handleError(error: Response | any) {
@@ -51,7 +54,7 @@ export class ExpertService {
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options = new RequestOptions({ headers: headers }); // Create a request option
 
-        return this.http.post(this.Url, body, options) // ...using post request
+        return this._http.post(this.Url, body, options) // ...using post request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch(this.handleError);
     }
@@ -62,13 +65,13 @@ export class ExpertService {
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options = new RequestOptions({ headers: headers }); // Create a request option
 
-        return this.http.put(`${this.Url}/${body['id']}`, body, options) // ...using put request
+        return this._http.put(`${this.Url}/${body['id']}`, body, options) // ...using put request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch((error: Response) => Observable.throw(error.json().error || 'Server error')); //...errors if any
     }
     // Delete a status
     removeStatus(_id: string): Observable<UserStatus[]> {
-        return this.http.delete(`${this.Url}/${_id}`) // ...using put request
+        return this._http.delete(`${this.Url}/${_id}`) // ...using put request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
     }
@@ -78,7 +81,7 @@ export class ExpertService {
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         let options = new RequestOptions({ headers: headers }); // Create a request option
 
-        return this.http.post(this.Url + '/addcomments/', comment, options) // ...using post request
+        return this._http.post(this.Url + '/addcomments/', comment, options) // ...using post request
             .map((res: Response) => res.json()) // ...and calling .json() on the response to return data
             .catch(this.handleError);
     }

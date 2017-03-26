@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApplication</title>
+    <title>@ViewData["Title"] - BrainApp</title>
 
     <environment names="Development">
 
-        <link href="~/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
      
@@ -16,7 +16,7 @@
        
         <link rel="stylesheet" href="~/lib/Font-Awesome/css/font-awesome.min.css" />
 
-        <link href="~/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
         <base href="/" />
 
@@ -55,14 +55,12 @@
     </div>
 
     <environment names="Development">
-        @*<script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>*@
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/dropzone.js" asp-append-version="true"></script>
 
-
-        <script src="~/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/bower_components/jquery/dist/jquery.js"></script>
+       
 
     </environment>
     <environment names="Staging,Production">

@@ -17,6 +17,8 @@ import { CommentListComponent } from './components/comment/comment-list.componen
 import { CommentFormComponent } from './components/comment/comment-form.component';
 
 import { DomainExpertComponent } from './components/domainexpert/domainexpert.component';
+import { FeedExpertComponent } from './components/feedExpert/feedexpert.component';
+import { FeedBoxExpertComponent } from './components/feedboxExpert/feedboxexpert.component';
 
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
@@ -25,6 +27,7 @@ import { UserStatus } from './models/userstatus';
 import { UserStatusService } from './services/userstatus.service';
 import { StatusTypeService } from './services/statusType.sevice';
 import { EmitterService } from './services/emitter.service';
+import { ExpertService } from './services/expert.service';
 
 
 @NgModule({
@@ -39,8 +42,9 @@ import { EmitterService } from './services/emitter.service';
         CommentFormComponent,
         DateFormatPipe,
         DomainExpertComponent,
-        DetailStatusComponent
-        
+        DetailStatusComponent,
+        FeedBoxExpertComponent,
+        FeedExpertComponent
 
     ],
     imports: [
@@ -59,7 +63,7 @@ import { EmitterService } from './services/emitter.service';
             
         ])
     ],
-    providers: [UserStatusService, EmitterService,StatusTypeService]
+    providers: [UserStatusService, EmitterService, StatusTypeService, ExpertService]
 })
 export class AppModule {
 }

@@ -16,14 +16,17 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/toPromise");
 var ExpertService = (function () {
-    function ExpertService(http) {
-        this.http = http;
+    function ExpertService(_http) {
+        this._http = _http;
         this.Url = "http://localhost:50353/api/expert";
     }
     ExpertService.prototype.getStatus = function () {
-        return this.http.get(this.Url)
+        console.log(this.Url);
+        var a = this._http.get(this.Url)
             .map(function (res) { return res.json(); })
             .catch(this.handleError);
+        console.log(a);
+        return a;
     };
     ExpertService.prototype.handleError = function (error) {
         // In a real world app, we might use a remote logging infrastructure
@@ -44,7 +47,7 @@ var ExpertService = (function () {
         var bodyString = JSON.stringify(body); // Stringify payload
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         var options = new http_1.RequestOptions({ headers: headers }); // Create a request option
-        return this.http.post(this.Url, body, options) // ...using post request
+        return this._http.post(this.Url, body, options) // ...using post request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(this.handleError);
     };
@@ -53,13 +56,13 @@ var ExpertService = (function () {
         var bodyString = JSON.stringify(body); // Stringify payload
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         var options = new http_1.RequestOptions({ headers: headers }); // Create a request option
-        return this.http.put(this.Url + "/" + body['id'], body, options) // ...using put request
+        return this._http.put(this.Url + "/" + body['id'], body, options) // ...using put request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(function (error) { return Rx_1.Observable.throw(error.json().error || 'Server error'); }); //...errors if any
     };
     // Delete a status
     ExpertService.prototype.removeStatus = function (_id) {
-        return this.http.delete(this.Url + "/" + _id) // ...using put request
+        return this._http.delete(this.Url + "/" + _id) // ...using put request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(this.handleError); //...errors if any
     };
@@ -67,7 +70,7 @@ var ExpertService = (function () {
         var commentString = JSON.stringify(comment); // Stringify payload
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
         var options = new http_1.RequestOptions({ headers: headers }); // Create a request option
-        return this.http.post(this.Url + '/addcomments/', comment, options) // ...using post request
+        return this._http.post(this.Url + '/addcomments/', comment, options) // ...using post request
             .map(function (res) { return res.json(); }) // ...and calling .json() on the response to return data
             .catch(this.handleError);
     };
