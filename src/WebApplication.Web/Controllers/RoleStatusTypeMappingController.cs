@@ -1,5 +1,4 @@
-﻿using Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
+using WebApplication.Identity;
 using WebApplication.Models;
 using WebApplication.Models.Extensions;
 using WebApplication.Repositories;

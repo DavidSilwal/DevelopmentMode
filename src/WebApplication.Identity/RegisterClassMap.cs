@@ -2,7 +2,7 @@
 //using MongoDB.Bson.Serialization.Conventions;
 //using Identity;
 
-//namespace Identity
+//namespace WebApplication.Identity
 //{
 //	public class RegisterClassMap<TUser, TRole, TKey>
 //		where TUser : IdentityUser<TKey>

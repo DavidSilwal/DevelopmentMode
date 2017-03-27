@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApplication.Data;
 
-namespace Identity
+namespace WebApplication.Identity
 {
     [BsonIgnoreExtraElements]
     public class IdentityUser : IdentityUser<string>

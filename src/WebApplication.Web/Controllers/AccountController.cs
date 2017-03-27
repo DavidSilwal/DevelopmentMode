@@ -1,5 +1,4 @@
-﻿using Identity;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebApplication.Data;
+using WebApplication.Identity;
 using WebApplication.Models.AccountViewModels;
 using WebApplication.Services;
 

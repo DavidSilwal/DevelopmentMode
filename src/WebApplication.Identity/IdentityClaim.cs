@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Identity
+namespace WebApplication.Identity
 {
     [BsonIgnoreExtraElements]
     public class IdentityClaim : IEquatable<IdentityClaim>

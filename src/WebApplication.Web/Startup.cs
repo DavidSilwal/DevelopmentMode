@@ -3,19 +3,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WebApplication.Identity;
 using WebApplication.Data;
 using WebApplication.Services;
 using Microsoft.AspNetCore.Identity;
 using WebMarkupMin.AspNetCore1;
 using WebApplication.Models;
-using WebApplication.Middlewares;
-using Microsoft.Extensions.FileProviders;
-using System.IO;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using MongoDB.Bson.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApplication.Repositories;
+using WebApplication.Identity;
 
 namespace WebApplication
 {

@@ -1,5 +1,4 @@
-﻿using Identity;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +7,7 @@ using Microsoft.Net.Http.Headers;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication.Identity;
 using WebApplication.Models;
 using WebApplication.Models.ProfileViewModels;
 

@@ -1,10 +1,10 @@
-﻿using Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
+using WebApplication.Identity;
 
 namespace WebApplication.Models.Extensions
 {

@@ -1,18 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6825968C-91BB-4F81-B65D-E483AD060389}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6886C07F-B947-497C-BD57-C6A71B6F6CE0}"
-	ProjectSection(SolutionItems) = preProject
-		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
-	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication", "src\WebApplication\WebApplication.csproj", "{8689424F-4200-4E0A-971D-B61DF39A5D72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication.Infrastrcture", "src\WebApplication.Infrastrcture\WebApplication.Infrastrcture.csproj", "{B1974762-8450-4B51-9521-D063CA71B387}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity", "src\Identity\Identity.csproj", "{D89E66DA-3C8B-431A-BD16-132BC319350F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication.Identity", "src\WebApplication.Identity\WebApplication.Identity.csproj", "{BCB6F5CB-53AD-48C9-B703-481144F5C70C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication.WebAPI", "src\WebApplication.WebAPI\WebApplication.WebAPI.csproj", "{EF1EC9A0-82E1-4A78-8504-E8DBF61D0DF4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication", "src\WebApplication.Web\WebApplication.csproj", "{6EF5A4AF-C168-47EE-BE54-87CD311E55D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,20 +21,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8689424F-4200-4E0A-971D-B61DF39A5D72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8689424F-4200-4E0A-971D-B61DF39A5D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8689424F-4200-4E0A-971D-B61DF39A5D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8689424F-4200-4E0A-971D-B61DF39A5D72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D89E66DA-3C8B-431A-BD16-132BC319350F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D89E66DA-3C8B-431A-BD16-132BC319350F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D89E66DA-3C8B-431A-BD16-132BC319350F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D89E66DA-3C8B-431A-BD16-132BC319350F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1974762-8450-4B51-9521-D063CA71B387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1974762-8450-4B51-9521-D063CA71B387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1974762-8450-4B51-9521-D063CA71B387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1974762-8450-4B51-9521-D063CA71B387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCB6F5CB-53AD-48C9-B703-481144F5C70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCB6F5CB-53AD-48C9-B703-481144F5C70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCB6F5CB-53AD-48C9-B703-481144F5C70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCB6F5CB-53AD-48C9-B703-481144F5C70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF1EC9A0-82E1-4A78-8504-E8DBF61D0DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF1EC9A0-82E1-4A78-8504-E8DBF61D0DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF1EC9A0-82E1-4A78-8504-E8DBF61D0DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF1EC9A0-82E1-4A78-8504-E8DBF61D0DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF5A4AF-C168-47EE-BE54-87CD311E55D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF5A4AF-C168-47EE-BE54-87CD311E55D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF5A4AF-C168-47EE-BE54-87CD311E55D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF5A4AF-C168-47EE-BE54-87CD311E55D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8689424F-4200-4E0A-971D-B61DF39A5D72} = {6825968C-91BB-4F81-B65D-E483AD060389}
-		{D89E66DA-3C8B-431A-BD16-132BC319350F} = {6825968C-91BB-4F81-B65D-E483AD060389}
+		{B1974762-8450-4B51-9521-D063CA71B387} = {6825968C-91BB-4F81-B65D-E483AD060389}
+		{BCB6F5CB-53AD-48C9-B703-481144F5C70C} = {6825968C-91BB-4F81-B65D-E483AD060389}
+		{EF1EC9A0-82E1-4A78-8504-E8DBF61D0DF4} = {6825968C-91BB-4F81-B65D-E483AD060389}
+		{6EF5A4AF-C168-47EE-BE54-87CD311E55D4} = {6825968C-91BB-4F81-B65D-E483AD060389}
 	EndGlobalSection
 EndGlobal

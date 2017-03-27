@@ -1,5 +1,4 @@
-﻿using Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
-
+using WebApplication.Identity;
 
 namespace WebApplication.Controllers.Api
 {

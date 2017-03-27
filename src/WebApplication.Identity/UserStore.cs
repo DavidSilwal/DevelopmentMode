@@ -14,7 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using WebApplication.Data;
 
-namespace Identity
+namespace WebApplication.Identity
 {
     public class UserStore<TUser, TRole> : UserStore<TUser, TRole, string>
            where TUser : IdentityUser<string>

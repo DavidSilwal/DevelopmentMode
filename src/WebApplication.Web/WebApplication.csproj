@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Identity\Identity.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="5.2.0" />
     <PackageReference Include="MailKit" Version="1.6.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.0.4" />
@@ -76,6 +72,10 @@
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.2.301" />
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebApplication.Identity\WebApplication.Identity.csproj" />
   </ItemGroup>
 
 </Project>

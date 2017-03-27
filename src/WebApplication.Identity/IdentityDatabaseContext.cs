@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Identity
+namespace WebApplication.Identity
 {
     public interface IIdentityDatabaseContext<TUser, TRole, TKey>
            where TRole : IdentityRole<TKey>

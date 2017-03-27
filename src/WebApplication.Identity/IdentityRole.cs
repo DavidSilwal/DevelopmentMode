@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Identity
+namespace WebApplication.Identity
 {
     /// <summary>
     /// Represents a Role entity

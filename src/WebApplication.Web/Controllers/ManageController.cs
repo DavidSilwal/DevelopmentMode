@@ -1,9 +1,9 @@
-﻿using Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication.Identity;
 using WebApplication.Models.ManageViewModels;
 using WebApplication.Services;
 

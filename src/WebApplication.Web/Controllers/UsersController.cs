@@ -1,5 +1,4 @@
-﻿using Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
@@ -12,6 +11,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using WebApplication.Identity;
 
 namespace WebApplication.Controllers
 {

@@ -1,12 +1,11 @@
-﻿using Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebApplication.Data;
+using WebApplication.Identity;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
